@@ -1,0 +1,381 @@
+
+header.masthead {
+  margin-bottom: 50px;
+  background: no-repeat center center;
+  background-color: #777;
+  background-attachment: scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-image: url('/images/start_img/start-bg60.png');
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+}
+
+
+h1 hr {
+    max-width: 50px;
+    border-width: 3px;
+    border-color: #0954A0;
+}
+
+
+header.masthead hr{
+  margin-top:30px;
+  margin-bottom: 30px;
+}
+
+.text-faded {
+    color: rgba(255,255,255,.7);
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #0954A0;
+    border-color: #0954A0;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 300px;
+    font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
+}
+.row{
+  text-align: center!important;
+}
+
+header.masthead .page-heading, header.masthead .post-heading, header.masthead .site-heading {
+  padding: 200px 0 150px 0;
+  color: rgba(255, 255, 255, 1.0);
+}
+
+@media only screen and (min-width:768px) {
+  header.masthead .page-heading, header.masthead .post-heading, header.masthead .site-heading {
+    padding: 200px 0;
+  }
+}
+
+header.masthead .page-heading, header.masthead .site-heading {
+  text-align: center;
+}
+
+header.masthead .page-heading h1, header.masthead .site-heading h1 {
+  font-size: 50px;
+  margin-top: 0;
+}
+
+header.masthead .page-heading .subheading, header.masthead .site-heading .subheading {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.1;
+  display: block;
+  margin: 10px 0 0;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+@media only screen and (min-width:768px) {
+  header.masthead .page-heading h1, header.masthead .site-heading h1 {
+    font-size: 80px
+  }
+}
+
+header.masthead .post-heading h1 {
+  font-size: 35px
+}
+
+header.masthead .post-heading .meta, header.masthead .post-heading .subheading {
+  line-height: 1.1;
+  display: block;
+}
+
+header.masthead .post-heading .subheading {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 10px 0 30px;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif
+}
+
+header.masthead .post-heading .meta {
+  font-size: 20px;
+  font-weight: 300;
+  font-style: italic;
+  font-family: Lora, 'Times New Roman', serif
+}
+
+header.masthead .post-heading .meta a {
+  color: #fff
+}
+
+@media only screen and (min-width:768px) {
+  header.masthead .post-heading h1 {
+    font-size: 55px;
+  }
+  header.masthead .post-heading .subheading {
+    font-size: 30px;
+  }
+}
+
+@media (min-width: 768px) {
+  header.masthead p {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 992px) {
+  header.masthead {
+    height: 100vh;
+    min-height: 650px;
+    padding-top: 0;
+    padding-bottom: 0;
+
+  }
+  header.masthead h1 {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  header.masthead h1 {
+    font-size: 4rem;
+  }
+}
+
+body {
+  font-family: 'Bree Serif', serif;
+}
+.text-center{
+  margin : auto;
+}
+
+#page_title {
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+}
+
+#sub-title {
+  font-weight: 500;
+  font-size: 1.3em;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif
+}
+
+#contentNav {
+  width: 50%;
+  margin: auto;
+  text-align: center;
+}
+
+#contentNav_table {
+  width: 90%;
+  margin: auto;
+  text-align: center;
+}
+
+#introduceWeb1 {
+  text-align: left;
+  width: 100%;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#introduceWeb2 {
+  text-align: right;
+  width: 100%;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#who {
+  font-weight: bold;
+  color: black;
+}
+
+.fixed_left {
+  text-align: left;
+  padding-left: 10pt;
+}
+
+#fixed_right {
+  text-align: right;
+}
+
+.sign_button {
+  border-radius: .5em;
+  background-color: #0954A0;
+  color: white;
+}
+
+.img_intro{
+  width: 100%;
+  padding: .8em;
+}
+
+.comment{
+  background-color: #F2F2F2;
+}
+
+.img_intro{
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@media all and (max-width:576px) {
+  .container {
+    max-width: 540px;
+  }
+  #header_title{
+    font-size:1.4em;
+  }
+  h1 {
+    font-weight: 600;
+    font-size: 1em;
+  }
+  h2{
+    font-size: 1em;
+  }
+  p{
+    font-size: 0.7em;
+    text-align: center;
+  }
+  #who{
+    font-size: 20px;
+  }
+  .btn-log{
+    font-size: 0.8em;
+    padding:5px 7px 5px 7px;
+  }
+  .btn-xl{
+    font-size: 0.7em;
+    padding: 7px 10px 7px 10px;
+  }
+  section{
+    padding : 2rem 0!important;
+  }
+}
+
+@media all and (min-width:576px) and (max-width:767px){
+  .container {
+    max-width: 540px;
+  }
+  #header_title{
+    font-size:1.7em;
+  }
+  h1 {
+    font-weight: 600;
+    font-size: 1.3em;
+  }
+  h2{
+    font-size: 0.8em;
+  }
+  p{
+    font-size: 0.6em;
+  }
+  #who{
+    font-size: 18px;
+  }
+  .btn-log{
+    font-size: 0.9em;
+    padding:5px 7px 5px 7px;
+  }
+  .btn-xl{
+    font-size: 0.7em;
+    padding: 7px 10px 7px 10px;
+  }
+  section{
+    padding : 2rem 0!important;
+  }
+}
+
+@media all and (min-width:768px) and (max-width:991px){
+  .container {
+    max-width: 720px;
+  }
+  #header_title{
+    font-size:2.5em;
+  }
+  h1{
+    font-weight: 600;
+    font-size: 1.7em;
+  }
+  h2{
+    font-size: 1em;
+  }
+  p{
+    font-size: 0.8em;
+  }
+  #who{
+    font-size: 20px;
+  }
+
+  .btn-log{
+    font-size: 13px;
+    padding:5px 7px 5px 7px;
+  }
+
+  .btn-xl{
+    font-size: 0.8em;
+    padding: 10px 20px 10px 20px;
+  }
+  section{
+    padding : 2.5rem 0!important;
+  }
+}
+
+@media all and (min-width:992px) and (max-width:1199px) {
+  .container {
+    max-width: 960px;
+  }
+  #header_title{
+    font-size:2.8em;
+  }
+  h1{
+    font-weight: 600;
+    font-size: 2em;
+  }
+  h2{
+    font-size: 1.1em;
+  }
+  p{
+    font-size: 0.9em;
+  }
+  #who{
+    font-size: 27px;
+  }
+  section{
+    padding : 4rem 0!important;
+  }
+  .btn-log{
+    font-size: 17px;
+    padding:5px 7px 5px 7px;
+  }
+  section{
+    padding : 4rem 0!important;
+  }
+}
+@media all and (min-width:1200px) {
+  .container {
+    max-width: 1140px;
+  }
+  #header_title{
+    font-size:3em;
+  }
+
+  h1{
+    font-weight: 600;
+    font-size: 2.5em;
+  }
+  h2{
+    font-size: 1.5em;
+  }
+  p{
+    font-size: 1em;
+  }
+  #who{
+    font-size: 30px;
+  }
+  section{
+    padding : 5rem 0!important;
+  }
+}

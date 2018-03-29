@@ -1,0 +1,17 @@
+{
+  "name": "dognose",
+  "version": "1.0.0",
+  "description": "recognize dog nose",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "gilbert paeng",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^2.5.8",
+    "express": "^4.16.3",
+    "nodemon": "^1.17.2",
+    "python-shell": "^0.5.0"
+  }
+}
