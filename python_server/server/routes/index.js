@@ -8,7 +8,7 @@ var options = {
   mode: 'text',
   pythonPath: '',
   pythonOptions: ['-u'],
-  scriptPath: './DogNoseRec',
+  scriptPath: './python-code',
   args: ['value1', 'value2', 'value3']
 };
 
