@@ -1,16 +1,17 @@
 var express = require('express');
 var router = express.Router();
 var PythonShell = require('python-shell');
+var resultPython;
 
 var options = {
 
   mode: 'text',
-  pythonPath: './python-code',
+  pythonPath: '',
   pythonOptions: ['-u'],
-  scriptPath: '',
+  scriptPath: './python-code',
   args: ['value1', 'value2', 'value3']
-
 };
+
 router.get('/', function(req,res){
   res.render('start',{
     title: 'global cau',
@@ -19,14 +20,15 @@ router.get('/', function(req,res){
 });
 
 router.get('/python', function(req, res) {
-  PythonShell.run('test.py', options, function (err, results) {
+
+  PythonShell.run('test.py', options, function (err, resultPython) {
 
     if (err) throw err;
-
-
-    console.log('results: %j', results);
-
+    console.log('Results: %j', resultPython);
+    console.log('Errors: %j', err);
   });
+  res.send('python code is sent! Check out the log');
+
 
 });
 
