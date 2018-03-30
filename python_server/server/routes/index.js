@@ -8,7 +8,7 @@ var options = {
   mode: 'text',
   pythonPath: '',
   pythonOptions: ['-u'],
-  scriptPath: './python-code',
+  scriptPath: './DogNoseRec',
   args: ['value1', 'value2', 'value3']
 };
 
@@ -27,8 +27,8 @@ router.get('/python', function(req, res) {
     console.log('Results: %j', resultPython);
     console.log('Errors: %j', err);
   });
-  res.send('python code is sent! Check out the log');
 
+  res.send('python code is sent! Check out the log');
 
 });
 

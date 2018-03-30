@@ -1,0 +1,3 @@
+[submodule "python_server/DogNoseRec"]
+	path = python_server/DogNoseRec
+	url = https://github.com/csm-kr/DogNoseRec
