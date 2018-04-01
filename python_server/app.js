@@ -1,3 +1,6 @@
+// import mongooseConnect from './util/mongoose.util';
+// import mongoose from 'mongoose';
+
 var express = require('express');
 var path = require('path');
 var index = require('./server/routes/index');
@@ -11,6 +14,11 @@ app.use('/python', index);
 
 module.exports = app;
 
+<<<<<<< HEAD
 var server = app.listen(8080, function() {
     console.log('Express server listening on port 8080');
+=======
+var server = app.listen(3000, function() {
+    console.log('Express server listening on port 3000');
+>>>>>>> db
 });

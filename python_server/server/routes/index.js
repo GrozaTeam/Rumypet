@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var PythonShell = require('python-shell');
 var resultPython;
-
+var mongoose = require ('mongoose');
 var options = {
 
   mode: 'text',
@@ -28,7 +28,7 @@ router.get('/python', function(req, res) {
     console.log('Errors: %j', err);
   });
 
-  res.send('python code is sent! Check out the log');
+  res.send('python code is sent!Check out the log');
 
 });
 
