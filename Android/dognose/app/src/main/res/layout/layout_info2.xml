@@ -54,7 +54,7 @@
                 android:id="@+id/image_info"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.55"
+                android:layout_weight="0.4"
                 app:srcCompat="@drawable/imageview_round" />
 
             <ImageButton
