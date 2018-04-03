@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -54,6 +55,11 @@ public class Main extends AppCompatActivity {
                 case R.id.btn_find:
                     Intent intentFind = new Intent(getApplicationContext(), CameraActivity.class);
                     startActivity(intentFind);
+                    break;
+                case R.id.btn_list:
+                    Log.d("paeng", "hi");
+                    Intent intentList = new Intent(getApplicationContext(), DBChecker.class);
+                    startActivity(intentList);
                     break;
             }
         }

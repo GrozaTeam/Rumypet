@@ -20,6 +20,7 @@
         <activity android:name=".CameraActivity"/>
         <activity android:name=".InformationDogListActivity"/>
         <activity android:name=".RegisterActivity"/>
+        <activity android:name=".DBChecker"/>
     </application>
 
 </manifest>

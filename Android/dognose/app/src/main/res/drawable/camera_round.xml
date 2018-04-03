@@ -13,10 +13,7 @@
     <!-- 테두리 설정: 두께, 색상 -->
     <stroke
         android:width="5dp"
-<<<<<<< HEAD
-=======
         android:color="#ff0000"
->>>>>>> a6f409f99337351550e835bbb867192fd9fc7e91
         />
 
 </shape>

@@ -38,13 +38,18 @@
                 android:orientation="vertical"
                 android:background="#F9F9F1">
 
+                <!-- empty -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
-                    android:orientation="horizontal"></LinearLayout>
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+
+                <!-- ID -->
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="0.1"
                     android:orientation="horizontal">
 
@@ -60,10 +65,10 @@
                         android:inputType="textPersonName"
                         android:text="ID"
                         android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"/>
 
                     <EditText
-                        android:id="@+id/reg_id"
+                        android:id="@+id/et_id"
                         android:layout_width="0dp"
                         android:layout_height="42dp"
                         android:layout_weight="0.5"
@@ -72,7 +77,7 @@
                         android:textSize="25sp" />
 
                     <Button
-                        android:id="@+id/btn_doublecheck"
+                        android:id="@+id/btn_check_id"
                         android:layout_width="0dp"
                         android:layout_height="45dp"
                         android:layout_gravity="center"
@@ -85,9 +90,10 @@
 
                 </LinearLayout>
 
+                <!-- PW -->
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="0.1"
                     android:orientation="horizontal">
 
@@ -106,7 +112,7 @@
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/reg_pw"
+                        android:id="@+id/et_pw"
                         android:layout_width="0dp"
                         android:layout_height="42dp"
                         android:layout_weight="0.7"
@@ -118,9 +124,10 @@
 
                 </LinearLayout>
 
+                <!-- PW2 -->
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="0.1"
                     android:orientation="horizontal">
 
@@ -139,7 +146,7 @@
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/reg_pw2"
+                        android:id="@+id/et_pw2"
                         android:layout_width="0dp"
                         android:layout_height="42dp"
                         android:layout_weight="0.7"
@@ -153,7 +160,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="0.1"
                     android:orientation="horizontal">
 
@@ -172,7 +179,7 @@
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/reg_dogname"
+                        android:id="@+id/et_dogname"
                         android:layout_width="0dp"
                         android:layout_height="42dp"
                         android:layout_weight="0.7"
@@ -186,7 +193,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="0.1"
                     android:orientation="horizontal">
 
@@ -205,7 +212,7 @@
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/reg_species"
+                        android:id="@+id/et_species"
                         android:layout_width="0dp"
                         android:layout_height="42dp"
                         android:layout_weight="0.7"
@@ -219,7 +226,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="0.1"
                     android:orientation="horizontal">
 
@@ -238,7 +245,7 @@
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/reg_gender"
+                        android:id="@+id/et_gender"
                         android:layout_width="0dp"
                         android:layout_height="42dp"
                         android:layout_weight="0.7"
@@ -252,7 +259,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="0.1"
                     android:orientation="horizontal">
 
@@ -271,7 +278,7 @@
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/reg_birth"
+                        android:id="@+id/et_birth"
                         android:layout_width="0dp"
                         android:layout_height="42dp"
                         android:layout_weight="0.7"
@@ -283,41 +290,55 @@
 
                 </LinearLayout>
 
+                <!-- empty -->
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="10dp"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+
+                <!--select picture-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
                     android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.6">
+                        android:layout_weight="1.5">
 
                     </LinearLayout>
 
-                    <ImageButton
-                        android:id="@+id/imageButton2"
+                    <Button
+                        android:id="@+id/btn_photo"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="#F9F9F1"
-                        app:srcCompat="@drawable/imageview_round" />
+                        android:text="Register Photo"
+                        android:background="@drawable/bg_roundcorner_main_dark" />
 
 
                     <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.6">
+                        android:layout_width="20dp"
+                        android:layout_height="match_parent">
 
                     </LinearLayout>
 
                 </LinearLayout>
 
+                <!-- empty -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:orientation="horizontal">
 
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="0.1"
                     android:orientation="horizontal">
 
@@ -336,7 +357,7 @@
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/reg_ownername"
+                        android:id="@+id/et_owner_name"
                         android:layout_width="0dp"
                         android:layout_height="42dp"
                         android:layout_weight="0.7"
@@ -350,7 +371,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="0.1"
                     android:orientation="horizontal">
 
@@ -369,7 +390,7 @@
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/reg_ownerphone"
+                        android:id="@+id/et_owner_phone"
                         android:layout_width="0dp"
                         android:layout_height="42dp"
                         android:layout_weight="0.5"
@@ -378,7 +399,7 @@
                         android:textSize="25sp" />
 
                     <Button
-                        android:id="@+id/btn_regCertification"
+                        android:id="@+id/btn_check_phone"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -391,15 +412,22 @@
 
                 </LinearLayout>
 
+                <!-- empty -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+
                 <Button
                     android:id="@+id/btn_register"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_weight="0.1"
                     android:text="REGISTER"
                     android:background="@color/colorMainButton"
                     android:textSize="18sp" />

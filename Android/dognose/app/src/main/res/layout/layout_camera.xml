@@ -5,12 +5,22 @@
     android:layout_height="fill_parent"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Camera View"
+        android:gravity="center"/>
+
+
+    <!--
     <SurfaceView
         android:id="@+id/cameraView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@drawable/camera_round"/>
+
+    -->
 
 </LinearLayout>
 

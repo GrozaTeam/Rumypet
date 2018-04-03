@@ -248,7 +248,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="5"
                 android:text="More Information"
-                android:background="@drawable/bg_roundcorner_background"
+                android:background="@drawable/bg_roundcorner_main"
                 android:textStyle="bold"/>
 
 
