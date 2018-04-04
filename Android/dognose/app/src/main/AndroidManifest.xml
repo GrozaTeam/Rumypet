@@ -21,6 +21,7 @@
         <activity android:name=".InformationDogListActivity"/>
         <activity android:name=".RegisterActivity"/>
         <activity android:name=".DBChecker"/>
+        <activity android:name=".LoginActivity"/>
     </application>
 
 </manifest>

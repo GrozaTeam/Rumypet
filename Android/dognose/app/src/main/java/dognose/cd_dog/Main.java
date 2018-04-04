@@ -48,7 +48,7 @@ public class Main extends AppCompatActivity {
                     break;
 
                 case R.id.btn_inf:
-                    Intent intentInf = new Intent(getApplicationContext(), InformationDogListActivity.class);
+                    Intent intentInf = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(intentInf);
                     break;
 
