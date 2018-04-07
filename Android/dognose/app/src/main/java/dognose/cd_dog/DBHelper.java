@@ -89,4 +89,59 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return resultList;
     }
+
+    public String getPwById(String OwnerId){
+        SQLiteDatabase db = getReadableDatabase();
+        String result;
+        Cursor cursor = db.rawQuery("SELECT * FROM OWNERLIST WHERE loginId = '"+OwnerId+"';", null);
+        cursor.moveToFirst();
+        result = cursor.getString(2);
+
+
+        return result;
+    }
+    public String[] getResultOwnerDogList(String ownerId){
+
+        SQLiteDatabase db = getReadableDatabase();
+        String result = "";
+        String[] resultList = new String[1000];
+
+        Cursor cursor = db.rawQuery("SELECT * FROM DOGLIST WHERE ownerId = '"+ownerId+"';", null);
+        int i = 0;
+        while (cursor.moveToNext()) {
+            result = cursor.getString(0)
+                    + "/"
+                    + cursor.getString(1)
+                    + "/"
+                    + cursor.getString(2)
+                    + "/"
+                    + cursor.getString(3)
+                    + "/"
+                    + cursor.getString(4)
+                    + "/"
+                    + cursor.getString(5);
+
+            resultList[i] = result;
+            i++;
+        }
+        return resultList;
+    }
+
+
+    public String[] getAllIdForDoubleCheck(){
+        SQLiteDatabase db = getReadableDatabase();
+        String result = "";
+        String[] resultList = new String[1000];
+
+        Cursor cursor = db.rawQuery("SELECT * FROM OWNERLIST", null);
+
+        int i = 0;
+        while (cursor.moveToNext()) {
+            result = cursor.getString(1);
+
+            resultList[i] = result;
+            i++;
+        }
+        return resultList;
+    }
 }

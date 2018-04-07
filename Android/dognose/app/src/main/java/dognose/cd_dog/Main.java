@@ -57,7 +57,6 @@ public class Main extends AppCompatActivity {
                     startActivity(intentFind);
                     break;
                 case R.id.btn_list:
-                    Log.d("paeng", "hi");
                     Intent intentList = new Intent(getApplicationContext(), DBChecker.class);
                     startActivity(intentList);
                     break;

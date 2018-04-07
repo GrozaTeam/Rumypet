@@ -56,7 +56,8 @@
                     android:gravity="center"
                     android:text="ID"
                     android:textSize="18sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:focusable="false"/>
 
                 <EditText
                     android:id="@+id/et_id"
@@ -91,12 +92,12 @@
                     android:layout_weight="0.3"
                     android:layout_marginLeft="20dp"
                     android:background="@color/colorMainDark"
-                    android:ems="10"
                     android:gravity="center"
                     android:inputType="textPersonName"
                     android:text="PW"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:focusable="false"/>
 
                 <EditText
                     android:id="@+id/et_pw"
