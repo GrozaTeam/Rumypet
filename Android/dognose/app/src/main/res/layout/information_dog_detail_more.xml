@@ -55,7 +55,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
-                app:srcCompat="@drawable/imageview_round" />
+                app:srcCompat="@drawable/img_dog_example" />
 
             <ImageButton
                 android:id="@+id/btn_nextinfo"

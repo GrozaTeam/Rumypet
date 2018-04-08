@@ -41,12 +41,12 @@ public class InformationDogListDetail extends AppCompatActivity {
         tvBirth = (TextView)findViewById(R.id.info_birth);
         tvSpecies = (TextView)findViewById(R.id.info_species);
 
-
-
         tvName.setText(dogDatas[2]);
         tvSpecies.setText(dogDatas[3]);
         tvGender.setText(dogDatas[4]);
         tvBirth.setText(dogDatas[5]);
+
+
 
 
     }
