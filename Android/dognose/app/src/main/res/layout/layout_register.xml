@@ -117,6 +117,7 @@
                         android:layout_height="42dp"
                         android:layout_weight="0.7"
                         android:layout_marginRight="20dp"
+                        android:password="true"
 
                         android:background="@android:color/background_light"
                         android:gravity="center_vertical|center"
@@ -151,6 +152,7 @@
                         android:layout_height="42dp"
                         android:layout_weight="0.7"
                         android:layout_marginRight="20dp"
+                        android:password="true"
 
                         android:background="@android:color/background_light"
                         android:gravity="center_vertical|center"
