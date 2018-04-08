@@ -44,17 +44,17 @@ public class LoginActivity extends AppCompatActivity {
                 try{
                     comparePw = dbHelper.getPwById(id);
                     if (comparePw.equals(pw)){
-                        Toast.makeText(LoginActivity.this, "Sign In Complete", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, "Sign In Complete", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), InformationDogListActivity.class);
                         intent.putExtra("id",id);
                         startActivity(intent);
                     }
                     else{
-                        Toast.makeText(LoginActivity.this, "Checkout your password", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, "Checkout your password", Toast.LENGTH_SHORT).show();
                     }
 
                 }catch (Exception CursorIndexOutOfBoundsException){
-                    Toast.makeText(LoginActivity.this, "Cannot find ID", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Cannot find ID", Toast.LENGTH_SHORT).show();
                 }
 
 

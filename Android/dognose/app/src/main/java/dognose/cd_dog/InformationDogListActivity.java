@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -25,8 +26,7 @@ public class InformationDogListActivity extends AppCompatActivity {
 
     // Dog list 들을 위한 ListView
 
-    private ArrayList<String> dogList;
-    private ArrayList<String> items;
+    private ArrayList<String> dogArrayList;
     ListViewAdapter adapter;
     private String[] dataDog;
     private ListView listViewDog;
@@ -43,6 +43,19 @@ public class InformationDogListActivity extends AppCompatActivity {
         btnSet = (LinearLayout) findViewById(R.id.btn_set_user);
         btnAdd.setOnClickListener(listener);
         btnSet.setOnClickListener(listener);
+
+        listViewDog.setOnItemClickListener(new ListView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView parent, View view, int position, long id) {
+
+
+                Intent intent = new Intent(getApplicationContext(), InformationDogListDetail.class);
+                intent.putExtra("data", dogArrayList.get(position));
+
+                startActivity(intent);
+
+            }
+        });
 
 
         Intent intent = getIntent();
@@ -62,8 +75,7 @@ public class InformationDogListActivity extends AppCompatActivity {
     public void UpdatingList(){
         final DBHelper dbHelper = new DBHelper(getApplicationContext(), "RumyPet.db", null, 1);
 
-        dogList = new ArrayList();
-        items = new ArrayList();
+        dogArrayList = new ArrayList();
 
         dataDog = dbHelper.getResultOwnerDogList(ownerId);
 
@@ -72,7 +84,9 @@ public class InformationDogListActivity extends AppCompatActivity {
         for (String data : dataDog){
             if(data!=null){
                 Log.d("paengData", data);
+                dogArrayList.add(data);
                 String data_element[] = data.split("/");
+
 
 
                 adapter.addItemDog(null, data_element[2], data_element[3], data_element[4], data_element[5]);
@@ -84,6 +98,8 @@ public class InformationDogListActivity extends AppCompatActivity {
 
 
     }
+
+
 
     Button.OnClickListener listener = new Button.OnClickListener() {
         @Override
