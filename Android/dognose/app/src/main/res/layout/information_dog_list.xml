@@ -42,14 +42,14 @@
             android:background="@color/colorMainDark">
 
             <LinearLayout
-                android:id="@+id/btn_list"
+                android:id="@+id/btn_add_dog"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center">
 
 
-                <Button
+                <ImageView
                     android:layout_width="70dp"
                     android:layout_height="70dp"
 
@@ -58,13 +58,13 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/btn_set"
+                android:id="@+id/btn_set_user"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center">
 
-                <Button
+                <ImageView
                     android:layout_width="75dp"
                     android:layout_height="75dp"
 

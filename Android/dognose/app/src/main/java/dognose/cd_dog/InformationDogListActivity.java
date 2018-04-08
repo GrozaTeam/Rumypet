@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -26,8 +29,9 @@ public class InformationDogListActivity extends AppCompatActivity {
     private ArrayList<String> items;
     ListViewAdapter adapter;
     private String[] dataDog;
-
     private ListView listViewDog;
+
+    private LinearLayout btnAdd, btnSet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,16 +39,23 @@ public class InformationDogListActivity extends AppCompatActivity {
         setContentView(R.layout.information_dog_list);
         tvOwnerId = (TextView)findViewById(R.id.tv_owner_id);
         listViewDog = (ListView)findViewById(R.id.lv_dog);
+        btnAdd = (LinearLayout) findViewById(R.id.btn_add_dog);
+        btnSet = (LinearLayout) findViewById(R.id.btn_set_user);
+        btnAdd.setOnClickListener(listener);
+        btnSet.setOnClickListener(listener);
 
 
         Intent intent = getIntent();
         ownerId = intent.getStringExtra("id");
-
         tvOwnerId.setText("Hello " + ownerId);
 
         UpdatingList();
+    }
 
-
+    @Override
+    protected void onResume(){
+        super.onResume();
+        UpdatingList();
 
     }
 
@@ -73,5 +84,21 @@ public class InformationDogListActivity extends AppCompatActivity {
 
 
     }
+
+    Button.OnClickListener listener = new Button.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.btn_add_dog:
+                    Intent intentAdd = new Intent(getApplicationContext(), RegisterAdditionalDogActivity.class);
+                    intentAdd.putExtra("id", ownerId);
+                    startActivity(intentAdd);
+                    break;
+
+                case R.id.btn_set_user:
+                    break;
+            }
+        }
+    };
 
 }

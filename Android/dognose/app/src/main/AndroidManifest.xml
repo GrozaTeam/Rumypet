@@ -38,6 +38,7 @@
         <activity android:name=".RegisterActivity"/>
         <activity android:name=".DBChecker"/>
         <activity android:name=".LoginActivity"/>
+        <activity android:name=".RegisterAdditionalDogActivity"/>
 
     </application>
 

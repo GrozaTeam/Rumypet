@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -19,7 +18,7 @@
             android:layout_height="50dp"
             android:background="@color/colorMainDark"
 
-            android:text="Register of my dog"
+            android:text="Register Additional Dog"
             android:gravity="center"
 
             android:textColor="@android:color/black"
@@ -46,121 +45,7 @@
 
                 </LinearLayout>
 
-                <!-- ID -->
-                <LinearLayout
-                    android:id="@+id/OR_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.1"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:focusable="false"
-                        android:layout_width="0dp"
-                        android:layout_height="45dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_weight="0.3"
-                        android:background="@color/colorMainDark"
-                        android:ems="10"
-                        android:gravity="center"
-                        android:inputType="textPersonName"
-                        android:text="ID"
-                        android:textSize="18sp"
-                        android:textStyle="bold"/>
-
-                    <EditText
-                        android:id="@+id/et_id"
-                        android:layout_width="0dp"
-                        android:layout_height="42dp"
-                        android:layout_weight="0.5"
-                        android:background="@android:color/background_light"
-                        android:gravity="center_vertical|center"
-                        android:textSize="25sp" />
-
-                    <Button
-                        android:id="@+id/btn_check_id"
-                        android:layout_width="0dp"
-                        android:layout_height="45dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.2"
-                        android:layout_marginRight="20dp"
-
-                        android:background="@color/colorMainDark"
-                        android:text="DoubleCheck"
-                        android:textSize="8sp" />
-
-                </LinearLayout>
-
-                <!-- PW -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.1"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:focusable="false"
-                        android:layout_width="0dp"
-                        android:layout_height="45dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_weight="0.3"
-                        android:background="@color/colorMainDark"
-                        android:ems="10"
-                        android:gravity="center"
-                        android:inputType="textPersonName"
-                        android:text="PW"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/et_pw"
-                        android:layout_width="0dp"
-                        android:layout_height="42dp"
-                        android:layout_weight="0.7"
-                        android:layout_marginRight="20dp"
-                        android:password="true"
-
-                        android:background="@android:color/background_light"
-                        android:gravity="center_vertical|center"
-                        android:textSize="25sp" />
-
-                </LinearLayout>
-
-                <!-- PW2 -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.1"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:focusable="false"
-                        android:layout_width="0dp"
-                        android:layout_height="45dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_weight="0.3"
-                        android:background="@color/colorMainDark"
-                        android:ems="10"
-                        android:gravity="center"
-                        android:inputType="textPersonName"
-                        android:text="PW2"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/et_pw2"
-                        android:layout_width="0dp"
-                        android:layout_height="42dp"
-                        android:layout_weight="0.7"
-                        android:layout_marginRight="20dp"
-                        android:password="true"
-
-                        android:background="@android:color/background_light"
-                        android:gravity="center_vertical|center"
-                        android:textSize="25sp" />
-
-                </LinearLayout>
-
+                <!-- Dog Name -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -194,6 +79,7 @@
 
                 </LinearLayout>
 
+                <!-- Species -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -227,6 +113,7 @@
 
                 </LinearLayout>
 
+                <!-- Gender -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -260,6 +147,7 @@
 
                 </LinearLayout>
 
+                <!-- Birth -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -394,90 +282,6 @@
                         android:layout_height="match_parent">
 
                     </LinearLayout>
-
-                </LinearLayout>
-
-                <!-- empty -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"
-                    android:orientation="horizontal">
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.1"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:focusable="false"
-                        android:layout_width="0dp"
-                        android:layout_height="45dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_weight="0.3"
-                        android:background="@color/colorMainDark"
-                        android:ems="10"
-                        android:gravity="center"
-                        android:inputType="textPersonName"
-                        android:text="Owner Name"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/et_owner_name"
-                        android:layout_width="0dp"
-                        android:layout_height="42dp"
-                        android:layout_weight="0.7"
-                        android:layout_marginRight="20dp"
-
-                        android:background="@android:color/background_light"
-                        android:gravity="center_vertical|center"
-                        android:textSize="25sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.1"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:focusable="false"
-                        android:layout_width="0dp"
-                        android:layout_height="45dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_weight="0.3"
-                        android:background="@color/colorMainDark"
-                        android:ems="10"
-                        android:gravity="center"
-                        android:inputType="textPersonName"
-                        android:text="Owner Phone"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/et_owner_phone"
-                        android:layout_width="0dp"
-                        android:layout_height="42dp"
-                        android:layout_weight="0.5"
-                        android:background="@android:color/background_light"
-                        android:gravity="center_vertical|center"
-                        android:textSize="25sp" />
-
-                    <Button
-                        android:id="@+id/btn_check_phone"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.2"
-                        android:text="Certification"
-                        android:layout_marginRight="20dp"
-
-                        android:background="@color/colorMainDark"
-                        android:textSize="8sp" />
 
                 </LinearLayout>
 
