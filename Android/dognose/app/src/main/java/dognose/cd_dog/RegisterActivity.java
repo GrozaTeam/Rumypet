@@ -1,19 +1,7 @@
 package dognose.cd_dog;
 
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.media.ExifInterface;
-import android.net.Uri;
+
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.support.v4.content.FileProvider;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -21,18 +9,24 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import dognose.cd_dog.R;
+import dognose.cd_dog.model.Response;
+import dognose.cd_dog.model.User;
+import dognose.cd_dog.network.NetworkUtil;
+
+import retrofit2.adapter.rxjava.HttpException;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
+
+import static dognose.cd_dog.utils.Validation.validateEmail;
+import static dognose.cd_dog.utils.Validation.validateFields;
+import static java.lang.System.err;
 
 /**
  * Created by paeng on 2018. 3. 26..
@@ -40,18 +34,14 @@ import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private static final int PICK_FROM_CAMERA = 0;
-    private static final int PICK_FROM_ALBUM = 1;
-    private static final int CROP_FROM_IMAGE = 2;
-    private Uri mImageCaptureUri;
-    private String absolutePath;
-
     private EditText etId, etPw, etPw2, etOwnerName, etOwnerPhone;
     private Button btnRegister, btnCheckId, btnCheckPhone;
     // For database
     private String id="", pw="", pw2="", ownerName, ownerPhone;
     private boolean idDulplicated = false;
     private boolean duplicateCheck = false;
+
+    private ProgressBar mProgressbar;
 
 
 
@@ -70,6 +60,11 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(RegisterActivity.this, "ID를 입력해주세요.", Toast.LENGTH_SHORT).show();
 
             return false;
+        }else if(!validateEmail(id)){
+            Toast.makeText(RegisterActivity.this, "ID를 E-mail형태로 입력해주세요.", Toast.LENGTH_SHORT).show();
+
+            return false;
+
         } else if (pw.equals("")) {
             Toast.makeText(RegisterActivity.this, "패스워드를 입력해주세요.", Toast.LENGTH_SHORT).show();
             return false;
@@ -92,8 +87,18 @@ public class RegisterActivity extends AppCompatActivity {
                 case R.id.btn_register:
 
                     if (checkjoin()) {
+                        //내부 DB 이용하여 Register 할 때
                         DBHelper dbHelper = new DBHelper(getApplicationContext(), "RumyPet.db", null, 1);
                         dbHelper.insertOwner(id, pw, ownerName, ownerPhone);
+
+                        User user = new User();
+                        user.setName(ownerName);
+                        user.setEmail(id);
+                        user.setPassword(pw);
+                        user.setPhone(ownerPhone);
+
+
+
 
                         Toast.makeText(RegisterActivity.this, "Register Complete.", Toast.LENGTH_SHORT).show();
                         finish();
