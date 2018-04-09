@@ -46,11 +46,10 @@ public class RegisterActivity extends AppCompatActivity {
     private Uri mImageCaptureUri;
     private String absolutePath;
 
-    private EditText etId, etPw, etPw2, etDogName, etSpecies, etGender, etBirth, etOwnerName, etOwnerPhone;
-    private Button btnRegister, btnCheckId, btnCheckPhone, btnPhoto, btnPhotoNose;
+    private EditText etId, etPw, etPw2, etOwnerName, etOwnerPhone;
+    private Button btnRegister, btnCheckId, btnCheckPhone;
     // For database
-    private String id="", pw="", pw2="", dogName, species, gender, birth, ownerName, ownerPhone , registerMode;
-    private ImageView imgDog, imgDogNose;
+    private String id="", pw="", pw2="", ownerName, ownerPhone;
     private boolean idDulplicated = false;
     private boolean duplicateCheck = false;
 
@@ -63,56 +62,7 @@ public class RegisterActivity extends AppCompatActivity {
         bindingView();
 
     }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode!= RESULT_OK)
-
-        switch (requestCode)
-        {
-            case PICK_FROM_ALBUM:
-            {
-                try{
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData());
-                    imgDog.setImageBitmap(bitmap);
-                }catch (Exception e){
-                }
-
-
-
-            }
-            case PICK_FROM_CAMERA:
-            {
-
-
-            }
-            case CROP_FROM_IMAGE:
-            {
-
-            }
-        }
-    }
-
-
-
-
-
-    public void doTakePhotoAction(){
-
-
-    }
-
-    public void doTakeAlbumAction(){
-
-
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
-        intent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(intent, PICK_FROM_ALBUM);
-
-
-    }
 
     private boolean checkjoin() {
 
@@ -144,12 +94,11 @@ public class RegisterActivity extends AppCompatActivity {
                     if (checkjoin()) {
                         DBHelper dbHelper = new DBHelper(getApplicationContext(), "RumyPet.db", null, 1);
                         dbHelper.insertOwner(id, pw, ownerName, ownerPhone);
-                        dbHelper.insertDog(id, dogName, species, gender, birth);
 
                         Toast.makeText(RegisterActivity.this, "Register Complete.", Toast.LENGTH_SHORT).show();
                         finish();
-
                     }
+
                     break;
 
                 case R.id.btn_check_id:
@@ -176,47 +125,6 @@ public class RegisterActivity extends AppCompatActivity {
 
                     }
 
-                    break;
-
-                case R.id.btn_photo:
-
-                    DialogInterface.OnClickListener cameraListener = new DialogInterface.OnClickListener(){
-
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            doTakePhotoAction();
-                        }
-                    };
-
-                    DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener(){
-
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            doTakeAlbumAction();
-                        }
-                    };
-
-                    DialogInterface.OnClickListener cancelListener = new DialogInterface.OnClickListener(){
-
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    };
-
-                    new AlertDialog.Builder(RegisterActivity.this)
-                            .setTitle("Select Upload Image")
-                            .setPositiveButton("Take Photo", cameraListener)
-                            .setNeutralButton("Select Album", albumListener)
-                            .setNegativeButton("Cancel", cancelListener)
-                            .show();
-
-                    break;
-
-
-                case R.id.btn_photo_nose:
-                    Intent intentNosePhoto = new Intent(getApplicationContext(), CameraActivity.class);
-                    startActivity(intentNosePhoto);
                     break;
 
 
@@ -252,18 +160,6 @@ public class RegisterActivity extends AppCompatActivity {
                     case R.id.et_pw2:
                         pw2 = s.toString();
                         break;
-                    case R.id.et_dogname:
-                        dogName = s.toString();
-                        break;
-                    case R.id.et_species:
-                        species = s.toString();
-                        break;
-                    case R.id.et_gender:
-                        gender = s.toString();
-                        break;
-                    case R.id.et_birth:
-                        birth = s.toString();
-                        break;
                     case R.id.et_owner_name:
                         ownerName = s.toString();
                         break;
@@ -286,34 +182,19 @@ public class RegisterActivity extends AppCompatActivity {
         etId = (EditText) findViewById(R.id.et_id);
         etPw = (EditText) findViewById(R.id.et_pw);
         etPw2 = (EditText) findViewById(R.id.et_pw2);
-        etDogName = (EditText) findViewById(R.id.et_dogname);
-        etSpecies = (EditText) findViewById(R.id.et_species);
-        etGender = (EditText) findViewById(R.id.et_gender);
-        etBirth = (EditText) findViewById(R.id.et_birth);
         etOwnerName = (EditText) findViewById(R.id.et_owner_name);
         etOwnerPhone = (EditText) findViewById(R.id.et_owner_phone);
         btnRegister = (Button) findViewById(R.id.btn_register);
         btnCheckId = (Button) findViewById(R.id.btn_check_id);
         btnCheckPhone = (Button) findViewById(R.id.btn_check_phone);
-        btnPhoto = (Button) findViewById(R.id.btn_photo);
-        btnPhotoNose = (Button) findViewById(R.id.btn_photo_nose);
 
         btnRegister.setOnClickListener(listener);
         btnCheckId.setOnClickListener(listener);
         btnCheckPhone.setOnClickListener(listener);
-        btnPhoto.setOnClickListener(listener);
-        btnPhotoNose.setOnClickListener(listener);
-
-        imgDog = (ImageView) findViewById(R.id.img_photo);
-        imgDogNose = (ImageView) findViewById(R.id.img_photo_nose);
 
         textChangedListener(etId);
         textChangedListener(etPw);
         textChangedListener(etPw2);
-        textChangedListener(etDogName);
-        textChangedListener(etSpecies);
-        textChangedListener(etGender);
-        textChangedListener(etBirth);
         textChangedListener(etOwnerName);
         textChangedListener(etOwnerPhone);
 
