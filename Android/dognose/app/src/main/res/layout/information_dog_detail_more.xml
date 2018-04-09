@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F9F9F1"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#F3F3E6"
+            android:text="About Happy"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:orientation="horizontal">
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.15"
+
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btn_beforeinfo"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.55"
+                android:background="#F9F9F1"
+                 />
+
+            <ImageView
+                android:id="@+id/image_info"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                app:srcCompat="@drawable/img_dog_example" />
+
+            <ImageButton
+                android:id="@+id/btn_nextinfo"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.55"
+                android:background="#F9F9F1"
+                 />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:orientation="horizontal">
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.45"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:background="@color/colorMainLight"></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5"
+                    android:background="@null"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Name"
+                    android:textAlignment="center"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editText2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5"
+                    android:background="@null"
+
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Gender"
+                    android:textAlignment="center"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editText3"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5"
+                    android:background="@null"
+
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Age"
+                    android:textAlignment="center"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editText4"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5"
+                    android:background="@null"
+
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Species"
+                    android:textAlignment="center"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editText5"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5"
+                    android:background="@null"
+
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Birth"
+                    android:textAlignment="center"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editText6"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5"
+                    android:background="@null"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Owner Name"
+                    android:textAlignment="center"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editText7"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5"
+                    android:background="@null"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Phone"
+                    android:textAlignment="center"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editText8"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5"
+                    android:background="@null"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="E-mail"
+                    android:textAlignment="center"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editText9"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5"
+                    android:background="@null"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:textAlignment="center"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editText18"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.2"
+                    android:background="@null"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:textAlignment="center"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/info3_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5" />
+
+                <TextView
+                    android:id="@+id/info3_gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5" />
+
+                <TextView
+                    android:id="@+id/info3_age"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5" />
+
+                <TextView
+                    android:id="@+id/info3_species"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5" />
+
+                <TextView
+                    android:id="@+id/info3_birth"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5" />
+
+                <TextView
+                    android:id="@+id/info3_ownername"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5" />
+
+                <TextView
+                    android:id="@+id/info3_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5" />
+
+                <TextView
+                    android:id="@+id/info3_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.85" />
+
+                    <android.support.design.widget.FloatingActionButton
+                        android:id="@+id/floatingActionButton"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.15"
+                        android:clickable="true"
+                        android:layout_marginRight="10dp"
+                        app:srcCompat="@drawable/bt_img_add" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.2" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:background="@color/colorMainLight">
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:orientation="horizontal">
+
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

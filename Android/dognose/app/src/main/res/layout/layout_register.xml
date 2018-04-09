@@ -8,16 +8,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/colorMainLight"
+
+        >
 
         <TextView
-            android:id="@+id/EditText"
+            android:id="@+id/tv_title"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.1"
+            android:layout_height="50dp"
             android:background="@color/colorMainDark"
+
             android:text="Register of my dog"
             android:gravity="center"
+
             android:textColor="@android:color/black"
             android:textSize="30sp"
             android:textStyle="bold" />
@@ -34,294 +38,465 @@
                 android:orientation="vertical"
                 android:background="#F9F9F1">
 
+                <!-- empty -->
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="25dp"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+
+                <!-- ID -->
+                <LinearLayout
+                    android:id="@+id/OR_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="0.1"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/editText11"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.1"
-                        android:background="@null"
+                        android:focusable="false"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="0.3"
+                        android:background="@color/colorMainDark"
                         android:ems="10"
+                        android:gravity="center"
                         android:inputType="textPersonName"
                         android:text="ID"
-                        android:textSize="25sp" />
+                        android:textSize="18sp"
+                        android:textStyle="bold"/>
 
                     <EditText
-                        android:id="@+id/reg_id"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.1"
-                        android:text="EditText"
+                        android:id="@+id/et_id"
+                        android:layout_width="0dp"
+                        android:layout_height="42dp"
+                        android:layout_weight="0.5"
+                        android:background="@android:color/background_light"
+                        android:gravity="center_vertical|center"
                         android:textSize="25sp" />
+
+                    <Button
+                        android:id="@+id/btn_check_id"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.2"
+                        android:layout_marginRight="20dp"
+
+                        android:background="@color/colorMainDark"
+                        android:text="DoubleCheck"
+                        android:textSize="8sp" />
 
                 </LinearLayout>
 
+                <!-- PW -->
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="0.1"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/editText12"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.1"
-                        android:background="@null"
+                        android:focusable="false"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="0.3"
+                        android:background="@color/colorMainDark"
                         android:ems="10"
+                        android:gravity="center"
                         android:inputType="textPersonName"
                         android:text="PW"
-                        android:textSize="25sp" />
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/reg_pw"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.1"
-                        android:text="EditText"
+                        android:id="@+id/et_pw"
+                        android:layout_width="0dp"
+                        android:layout_height="42dp"
+                        android:layout_weight="0.7"
+                        android:layout_marginRight="20dp"
+                        android:password="true"
+
+                        android:background="@android:color/background_light"
+                        android:gravity="center_vertical|center"
                         android:textSize="25sp" />
 
                 </LinearLayout>
 
+                <!-- PW2 -->
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="0.1"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/editText14"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.1"
-                        android:background="@null"
+                        android:focusable="false"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="0.3"
+                        android:background="@color/colorMainDark"
                         android:ems="10"
+                        android:gravity="center"
                         android:inputType="textPersonName"
                         android:text="PW2"
-                        android:textSize="25sp" />
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/reg_pw2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.1"
-                        android:text="EditText"
+                        android:id="@+id/et_pw2"
+                        android:layout_width="0dp"
+                        android:layout_height="42dp"
+                        android:layout_weight="0.7"
+                        android:layout_marginRight="20dp"
+                        android:password="true"
+
+                        android:background="@android:color/background_light"
+                        android:gravity="center_vertical|center"
                         android:textSize="25sp" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="0.1"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/editText15"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.1"
-                        android:background="@null"
+                        android:focusable="false"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="0.3"
+                        android:background="@color/colorMainDark"
                         android:ems="10"
+                        android:gravity="center"
                         android:inputType="textPersonName"
                         android:text="Dog Name"
-                        android:textSize="25sp" />
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/reg_dogname"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.1"
-                        android:text="EditText"
+                        android:id="@+id/et_dogname"
+                        android:layout_width="0dp"
+                        android:layout_height="42dp"
+                        android:layout_weight="0.7"
+                        android:layout_marginRight="20dp"
+
+                        android:background="@android:color/background_light"
+                        android:gravity="center_vertical|center"
                         android:textSize="25sp" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="0.1"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/editText13"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.1"
-                        android:background="@null"
+                        android:focusable="false"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="0.3"
+                        android:background="@color/colorMainDark"
                         android:ems="10"
+                        android:gravity="center"
                         android:inputType="textPersonName"
                         android:text="Species"
-                        android:textSize="25sp" />
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/reg_species"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.1"
-                        android:text="EditText"
+                        android:id="@+id/et_species"
+                        android:layout_width="0dp"
+                        android:layout_height="42dp"
+                        android:layout_weight="0.7"
+                        android:layout_marginRight="20dp"
+
+                        android:background="@android:color/background_light"
+                        android:gravity="center_vertical|center"
                         android:textSize="25sp" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="0.1"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/editText10"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.1"
-                        android:background="@null"
+                        android:focusable="false"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="0.3"
+                        android:background="@color/colorMainDark"
                         android:ems="10"
+                        android:gravity="center"
                         android:inputType="textPersonName"
                         android:text="Gender"
-                        android:textSize="25sp" />
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/reg_gender"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.1"
-                        android:text="EditText"
+                        android:id="@+id/et_gender"
+                        android:layout_width="0dp"
+                        android:layout_height="42dp"
+                        android:layout_weight="0.7"
+                        android:layout_marginRight="20dp"
+
+                        android:background="@android:color/background_light"
+                        android:gravity="center_vertical|center"
                         android:textSize="25sp" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="0.1"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/editText99"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.1"
-                        android:background="@null"
+                        android:focusable="false"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="0.3"
+                        android:background="@color/colorMainDark"
                         android:ems="10"
+                        android:gravity="center"
                         android:inputType="textPersonName"
                         android:text="Birth"
-                        android:textSize="25sp" />
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/reg_birth"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.1"
-                        android:text="EditText"
+                        android:id="@+id/et_birth"
+                        android:layout_width="0dp"
+                        android:layout_height="42dp"
+                        android:layout_weight="0.7"
+                        android:layout_marginRight="20dp"
+
+                        android:background="@android:color/background_light"
+                        android:gravity="center_vertical|center"
                         android:textSize="25sp" />
 
                 </LinearLayout>
 
+                <!-- empty -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+
+                <!-- show picture -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.6">
+                        android:layout_width="20dp"
+                        android:layout_height="match_parent">
 
                     </LinearLayout>
 
-                    <ImageButton
-                        android:id="@+id/imageButton2"
+                    <ImageView
+                        android:id="@+id/img_photo"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="#F9F9F1"
-                        app:srcCompat="@drawable/imageview_round" />
+                        android:background="@drawable/img_dog" />
 
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.6">
+                        android:layout_weight="0.5">
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/img_photo_nose"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/img_dognose" />
+
+                    <LinearLayout
+                        android:layout_width="20dp"
+                        android:layout_height="match_parent">
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <!-- empty -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+
+                <!--select picture-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="20dp"
+                        android:layout_height="match_parent">
+
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btn_photo"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Register Photo"
+                        android:background="@drawable/bg_roundcorner_main_dark" />
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5">
+
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btn_photo_nose"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Register Nose"
+                        android:background="@drawable/bg_roundcorner_main_dark" />
+
+
+                    <LinearLayout
+                        android:layout_width="20dp"
+                        android:layout_height="match_parent">
 
                     </LinearLayout>
 
                 </LinearLayout>
 
+                <!-- empty -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:orientation="horizontal">
 
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="0.1"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/editText16"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.1"
-                        android:background="@null"
+                        android:focusable="false"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="0.3"
+                        android:background="@color/colorMainDark"
                         android:ems="10"
+                        android:gravity="center"
                         android:inputType="textPersonName"
                         android:text="Owner Name"
-                        android:textSize="25sp" />
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/reg_ownername"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.1"
-                        android:text="EditText"
+                        android:id="@+id/et_owner_name"
+                        android:layout_width="0dp"
+                        android:layout_height="42dp"
+                        android:layout_weight="0.7"
+                        android:layout_marginRight="20dp"
+
+                        android:background="@android:color/background_light"
+                        android:gravity="center_vertical|center"
                         android:textSize="25sp" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="0.1"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/editText17"
+                        android:focusable="false"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.5"
-                        android:background="@null"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="0.3"
+                        android:background="@color/colorMainDark"
                         android:ems="10"
+                        android:gravity="center"
                         android:inputType="textPersonName"
                         android:text="Owner Phone"
-                        android:textSize="25sp" />
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/reg_ownerphone"
+                        android:id="@+id/et_owner_phone"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.3"
-                        android:text="EditText"
+                        android:layout_height="42dp"
+                        android:layout_weight="0.5"
+                        android:background="@android:color/background_light"
+                        android:gravity="center_vertical|center"
                         android:textSize="25sp" />
 
                     <Button
-                        android:id="@+id/btn_regCertification"
+                        android:id="@+id/btn_check_phone"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="0.2"
                         android:text="Certification"
+                        android:layout_marginRight="20dp"
+
+                        android:background="@color/colorMainDark"
                         android:textSize="8sp" />
+
+                </LinearLayout>
+
+                <!-- empty -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:orientation="horizontal">
 
                 </LinearLayout>
 
                 <Button
                     android:id="@+id/btn_register"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.1"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
                     android:text="REGISTER"
                     android:background="@color/colorMainButton"
                     android:textSize="18sp" />

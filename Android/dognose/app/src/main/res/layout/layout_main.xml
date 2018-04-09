@@ -10,6 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#F3F3E6"
         android:orientation="vertical">
 
 
@@ -27,15 +28,17 @@
         <LinearLayout
             android:id="@+id/btn_add"
             android:layout_width="match_parent"
+            android:layout_marginBottom="3dp"
             android:layout_height="0dp"
             android:layout_weight="1">
 
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:gravity="center"
-                android:background="@color/colorMainLight">
+                android:background="@drawable/btn_line_differentcolor_for_main"
+                >
 
                 <ImageView
                     android:layout_width="70dp"
@@ -48,13 +51,13 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="5"
                 android:background="@drawable/btn_line_differentcolor"
+                android:gravity="center|left"
                 android:text="Register My Dog"
                 android:textColor="@android:color/black"
                 android:textSize="24dp"
-                android:textStyle="bold"
-                android:gravity="center|left"/>
+                android:textStyle="bold" />
 
 
         </LinearLayout>
@@ -65,13 +68,14 @@
         <LinearLayout
             android:id="@+id/btn_inf"
             android:layout_width="match_parent"
+            android:layout_marginBottom="3dp"
             android:layout_height="0dp"
             android:layout_weight="1">
 
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:gravity="center"
                 android:background="@color/colorMainLight">
 
@@ -86,13 +90,13 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="5"
                 android:background="@drawable/btn_line_differentcolor"
+                android:gravity="center|left"
                 android:text="Information of my Dog"
                 android:textColor="@android:color/black"
                 android:textSize="24dp"
-                android:textStyle="bold"
-                android:gravity="center|left"/>
+                android:textStyle="bold" />
 
 
         </LinearLayout>
@@ -106,7 +110,7 @@
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:gravity="center"
                 android:background="@color/colorMainLight">
 
@@ -121,13 +125,13 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="5"
                 android:background="@drawable/btn_line_differentcolor"
-                android:text="Find the Dog"
+                android:gravity="center|left"
+                android:text="Find the Dog    "
                 android:textColor="@android:color/black"
                 android:textSize="24dp"
-                android:textStyle="bold"
-                android:gravity="center|left"/>
+                android:textStyle="bold" />
 
 
         </LinearLayout>
@@ -136,17 +140,19 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:orientation="horizontal"
-            android:background="@color/colorMainDark">
+            android:background="@color/colorMainLight">
 
             <LinearLayout
                 android:id="@+id/btn_list"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@color/colorMainDark"
+                android:layout_marginRight="1.5dp"
                 android:gravity="center">
 
 
-                <Button
+                <ImageView
                     android:layout_width="70dp"
                     android:layout_height="70dp"
 
@@ -158,10 +164,12 @@
                 android:id="@+id/btn_set"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:background="@color/colorMainDark"
                 android:layout_weight="1"
+                android:layout_marginLeft="1.5dp"
                 android:gravity="center">
 
-                <Button
+                <ImageView
                     android:layout_width="75dp"
                     android:layout_height="75dp"
 
