@@ -42,7 +42,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText etId, etPw, etPw2, etOwnerName, etOwnerPhone;
     private Button btnRegister, btnCheckId, btnCheckPhone;
     // For database
-    private String id="", pw="", pw2="", ownerName, ownerPhone;
+    private String id="", pw="", pw2="", ownerName="", ownerPhone="";
     private boolean idDulplicated = false;
     private boolean duplicateCheck = false;
 
@@ -99,6 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
                         //내부 DB 이용하여 Register 할 때
                         DBHelper dbHelper = new DBHelper(getApplicationContext(), "RumyPet.db", null, 1);
                         dbHelper.insertOwner(id, pw, ownerName, ownerPhone);
+                        dbHelper.insertDog("id","dogname","species","gender", "birth");
 
                         User user = new User();
                         user.setName(ownerName);
@@ -107,8 +108,6 @@ public class RegisterActivity extends AppCompatActivity {
 
                         mProgressbar.setVisibility(View.VISIBLE);
                         registerProcess(user);
-
-
 
 
                         Toast.makeText(RegisterActivity.this, "Register Complete.", Toast.LENGTH_SHORT).show();

@@ -2,6 +2,7 @@ package dognose.cd_dog;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -24,13 +25,16 @@ public class DBChecker extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.checkout_database);
 
+
         listOwner = (ListView) findViewById(R.id.list_owner) ;
         listDog = (ListView) findViewById(R.id.list_dog) ;
 
+
         final DBHelper dbHelper = new DBHelper(getApplicationContext(), "RumyPet.db", null, 1);
 
-
         dbstringOwner = dbHelper.getAllDataOwnerForChecker();
+
+
         itemsOwner = new ArrayList();
         int i=0;
         while(dbstringOwner[i]!=null){
@@ -47,11 +51,15 @@ public class DBChecker extends AppCompatActivity {
             j++;
         }
 
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, itemsOwner) ;
+
+
+        ArrayAdapter adapter = new ArrayAdapter(DBChecker.this, android.R.layout.simple_list_item_1, itemsOwner);
         listOwner.setAdapter(adapter) ;
 
-        ArrayAdapter adapterFolder = new ArrayAdapter(this, android.R.layout.simple_list_item_1, itemsDog);
+
+        ArrayAdapter adapterFolder = new ArrayAdapter(DBChecker.this, android.R.layout.simple_list_item_1, itemsDog);
         listDog.setAdapter(adapterFolder);
+
 
     }
 }
