@@ -7,15 +7,14 @@ exports.registerUser = (name, email, password) =>
 
 	new Promise((resolve,reject) => {
 
-	  var salt = bcrypt.genSaltSync(10);
-		var hash = bcrypt.hashSync(password, salt);
+	    const salt = bcrypt.genSaltSync(10);
+		const hash = bcrypt.hashSync(password, salt);
 
-		var newUser = new user({
+		const newUser = new user({
 
 			name: name,
 			email: email,
 			hashed_password: hash,
-      phone: phone,
 			created_at: new Date()
 		});
 
