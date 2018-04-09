@@ -4,7 +4,6 @@ public class User {
 
     private String name;
     private String email;
-    private String phone;
     private String password;
     private String created_at;
     private String newPassword;
@@ -21,9 +20,6 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-    public void setPhone(String phone){
-        this.phone = phone;
-    }
 
     public String getName() {
         return name;
@@ -31,10 +27,6 @@ public class User {
 
     public String getEmail() {
         return email;
-    }
-
-    public String getPhone() {
-        return phone;
     }
 
     public String getCreated_at() {

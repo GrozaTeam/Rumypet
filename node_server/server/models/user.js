@@ -1,19 +1,21 @@
-var mongoose =  require('mongoose');
+'use strict';
 
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
 
-var userSchema = mongoose.Schema({
+const Schema = mongoose.Schema;
 
-  email: { type: String, unique: true },
-  hashed_password: { type: String, select: false },
-  name: {type : String},
-  phone: { type: String },
-  created_at		: String,
+const userSchema = mongoose.Schema({
+
+	name 			: String,
+	email			: {type: String, unique: true},
+	hashed_password	: String,
+	created_at		: String,
 	temp_password	: String,
 	temp_password_time: String
-  
+
 });
+
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/node-login');
 
-module.exports = mongoose.model('user',userSchema);
+module.exports = mongoose.model('user', userSchema);        

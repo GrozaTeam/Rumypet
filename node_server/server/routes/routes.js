@@ -1,19 +1,21 @@
-var auth = require('basic-auth');
-var jwt = require('jsonwebtoken');
+'use strict';
 
-var register = require('../functions/register');
-var login = require('../functions/login');
-var profile = require('../functions/profile');
-var password = require('../functions/password');
-var config = require('../config/config.json');
+const auth = require('basic-auth');
+const jwt = require('jsonwebtoken');
+
+const register = require('../functions/register');
+const login = require('../functions/login');
+const profile = require('../functions/profile');
+const password = require('../functions/password');
+const config = require('../config/config.json');
 
 module.exports = router => {
 
-	router.get('/', (req, res) => res.end('Welcome to RumyPet!'));
+	router.get('/', (req, res) => res.end('Welcome to Rumypet !'));
 
 	router.post('/authenticate', (req, res) => {
 
-		var credentials = auth(req);
+		const credentials = auth(req);
 
 		if (!credentials) {
 
@@ -25,7 +27,7 @@ module.exports = router => {
 
 			.then(result => {
 
-				var token = jwt.sign(result, config.secret, { expiresIn: 1440 });
+				const token = jwt.sign(result, config.secret, { expiresIn: 1440 });
 
 				res.status(result.status).json({ message: result.message, token: token });
 
@@ -37,18 +39,17 @@ module.exports = router => {
 
 	router.post('/users', (req, res) => {
 
-		var name = req.body.name;
-		var email = req.body.email;
-		var password = req.body.password;
-    var phone = req.body.phone;
+		const name = req.body.name;
+		const email = req.body.email;
+		const password = req.body.password;
 
-		if (!name || !email || !password || !name.trim() || !email.trim() || !password.trim() || !phone.trim()) {
+		if (!name || !email || !password || !name.trim() || !email.trim() || !password.trim()) {
 
 			res.status(400).json({message: 'Invalid Request !'});
 
 		} else {
 
-			register.registerUser(name, email, password, phone)
+			register.registerUser(name, email, password)
 
 			.then(result => {
 

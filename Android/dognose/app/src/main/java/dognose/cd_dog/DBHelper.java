@@ -53,7 +53,7 @@ public class DBHelper extends SQLiteOpenHelper {
                     + cursor.getString(2)
                     + "\n || Name: "
                     + cursor.getString(3)
-                    + " || Phone"
+                    + " || Phone: "
                     + cursor.getString(4);
 
             resultList[i] = result;
@@ -79,9 +79,9 @@ public class DBHelper extends SQLiteOpenHelper {
                     + cursor.getString(2)
                     + "\n || Species: "
                     + cursor.getString(3)
-                    + " || Gender "
+                    + " || Gender: "
                     + cursor.getString(4)
-                    + " || Birth "
+                    + " || Birth: "
                     + cursor.getString(5);
 
             resultList[i] = result;

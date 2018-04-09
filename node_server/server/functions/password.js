@@ -1,8 +1,10 @@
-var user = require('../models/user');
-var bcrypt = require('bcryptjs');
-var nodemailer = require('nodemailer');
-var randomstring = require("randomstring");
-var config = require('../config/config.json');
+'use strict';
+
+const user = require('../models/user');
+const bcrypt = require('bcryptjs');
+const nodemailer = require('nodemailer');
+const randomstring = require("randomstring");
+const config = require('../config/config.json');
 
 exports.changePassword = (email, password, newPassword) =>
 
@@ -13,12 +15,12 @@ exports.changePassword = (email, password, newPassword) =>
 		.then(users => {
 
 			let user = users[0];
-			var hashed_password = user.hashed_password;
+			const hashed_password = user.hashed_password;
 
 			if (bcrypt.compareSync(password, hashed_password)) {
 
-				var salt = bcrypt.genSaltSync(10);
-				var hash = bcrypt.hashSync(newPassword, salt);
+				const salt = bcrypt.genSaltSync(10);
+				const hash = bcrypt.hashSync(newPassword, salt);
 
 				user.hashed_password = hash;
 
@@ -110,8 +112,8 @@ exports.resetPasswordFinish = (email, token, password) =>
 
 			let user = users[0];
 
-			var diff = new Date() - new Date(user.temp_password_time);
-			var seconds = Math.floor(diff / 1000);
+			const diff = new Date() - new Date(user.temp_password_time);
+			const seconds = Math.floor(diff / 1000);
 			console.log(`Seconds : ${seconds}`);
 
 			if (seconds < 120) {
@@ -128,8 +130,8 @@ exports.resetPasswordFinish = (email, token, password) =>
 
 			if (bcrypt.compareSync(token, user.temp_password)) {
 
-				var salt = bcrypt.genSaltSync(10);
-				var hash = bcrypt.hashSync(password, salt);
+				const salt = bcrypt.genSaltSync(10);
+				const hash = bcrypt.hashSync(password, salt);
 				user.hashed_password = hash;
 				user.temp_password = undefined;
 				user.temp_password_time = undefined;

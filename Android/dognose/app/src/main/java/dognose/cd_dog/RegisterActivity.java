@@ -2,6 +2,8 @@ package dognose.cd_dog;
 
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,6 +16,9 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.io.IOException;
+
 import dognose.cd_dog.R;
 import dognose.cd_dog.model.Response;
 import dognose.cd_dog.model.User;
@@ -41,7 +46,13 @@ public class RegisterActivity extends AppCompatActivity {
     private boolean idDulplicated = false;
     private boolean duplicateCheck = false;
 
+    private TextInputLayout mTiName;
+    private TextInputLayout mTiEmail;
+    private TextInputLayout mTiPassword;
+
     private ProgressBar mProgressbar;
+
+    private CompositeSubscription mSubscriptions;
 
 
 
@@ -86,6 +97,8 @@ public class RegisterActivity extends AppCompatActivity {
             switch (v.getId()) {
                 case R.id.btn_register:
 
+                    setError();
+
                     if (checkjoin()) {
                         //내부 DB 이용하여 Register 할 때
                         DBHelper dbHelper = new DBHelper(getApplicationContext(), "RumyPet.db", null, 1);
@@ -96,6 +109,8 @@ public class RegisterActivity extends AppCompatActivity {
                         user.setEmail(id);
                         user.setPassword(pw);
                         user.setPhone(ownerPhone);
+                        mProgressbar.setVisibility(View.VISIBLE);
+                        registerProcess(user);
 
 
 
@@ -144,6 +159,53 @@ public class RegisterActivity extends AppCompatActivity {
         }
     };
 
+    private void setError() {
+
+        mTiName.setError(null);
+        mTiEmail.setError(null);
+        mTiPassword.setError(null);
+    }
+
+    private void registerProcess(User user) {
+
+        mSubscriptions.add(NetworkUtil.getRetrofit().register(user)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handleResponse,this::handleError));
+    }
+    private void handleResponse(Response response) {
+
+        mProgressbar.setVisibility(View.GONE);
+        showSnackBarMessage(response.getMessage());
+    }
+
+    private void handleError(Throwable error) {
+
+        mProgressbar.setVisibility(View.GONE);
+
+        if (error instanceof HttpException) {
+
+            Gson gson = new GsonBuilder().create();
+
+            try {
+
+                String errorBody = ((HttpException) error).response().errorBody().string();
+                Response response = gson.fromJson(errorBody,Response.class);
+                showSnackBarMessage(response.getMessage());
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+
+            showSnackBarMessage("Network Error !");
+        }
+    }
+
+    private void showSnackBarMessage(String message) {
+
+
+    }
 
 
     private void textChangedListener(final EditText etInput){
@@ -192,6 +254,7 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister = (Button) findViewById(R.id.btn_register);
         btnCheckId = (Button) findViewById(R.id.btn_check_id);
         btnCheckPhone = (Button) findViewById(R.id.btn_check_phone);
+        mProgressbar = (ProgressBar) findViewById(R.id.progress);
 
         btnRegister.setOnClickListener(listener);
         btnCheckId.setOnClickListener(listener);
