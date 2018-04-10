@@ -15,6 +15,9 @@ app.use(logger('dev'));
 app.set('views', path.join(__dirname, 'server/views/pages'));
 app.set('view engine', 'ejs');
 
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost:27017/node-login');
+
 
 require('./server/routes/routes')(router);
 app.use('/api/v1',router);

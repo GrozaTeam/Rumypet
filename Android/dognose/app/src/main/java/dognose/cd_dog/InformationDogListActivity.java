@@ -154,6 +154,7 @@ public class InformationDogListActivity extends AppCompatActivity {
             }
         } else {
             showSnackBarMessage("Network Error !");
+            Log.d("paengResultError", String.valueOf(error));
         }
     }
     private void handleErrorDog(Throwable error) {
@@ -187,10 +188,7 @@ public class InformationDogListActivity extends AppCompatActivity {
         //final DBHelper dbHelper = new DBHelper(getApplicationContext(), "RumyPet.db", null, 1);
 
 
-        Log.d("paengResult", "4");
-
         loadDogProfile();
-        Log.d("paengResult", "3");
 
 /*
 
