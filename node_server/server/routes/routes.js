@@ -72,7 +72,7 @@ module.exports = router => {
 		const dogSpecies = req.body.dogSpecies;
 		const dogBirth = req.body.dogBirth;
 
-		register.registerDog(dogId, ownerId, dogName, dogGender, dogSpecies, dogBirth);
+		registerDog.registerDog(dogId, ownerId, dogName, dogGender, dogSpecies, dogBirth);
 
 
 	});
