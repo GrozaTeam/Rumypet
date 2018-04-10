@@ -46,7 +46,7 @@ public class InformationDogListActivity extends AppCompatActivity {
     ListViewAdapter adapter;
     private String[] dataDog;
     private ListView listViewDog;
-    private LinearLayout btnAdd, btnSet;
+    private LinearLayout btnAdd, btnProfile;
 
 
     private SharedPreferences mSharedPreferences;
@@ -131,14 +131,6 @@ public class InformationDogListActivity extends AppCompatActivity {
     }
 
 
-
-
-
-
-
-
-
-
     public void UpdatingList(){
         final DBHelper dbHelper = new DBHelper(getApplicationContext(), "RumyPet.db", null, 1);
 
@@ -170,9 +162,9 @@ public class InformationDogListActivity extends AppCompatActivity {
         tvOwnerId = (TextView)findViewById(R.id.tv_owner_id);
         listViewDog = (ListView)findViewById(R.id.lv_dog);
         btnAdd = (LinearLayout) findViewById(R.id.btn_add_dog);
-        btnSet = (LinearLayout) findViewById(R.id.btn_set_user);
+        btnProfile = (LinearLayout) findViewById(R.id.btn_profile);
         btnAdd.setOnClickListener(listener);
-        btnSet.setOnClickListener(listener);
+        btnProfile.setOnClickListener(listener);
     }
 
 
@@ -187,7 +179,9 @@ public class InformationDogListActivity extends AppCompatActivity {
                     startActivity(intentAdd);
                     break;
 
-                case R.id.btn_set_user:
+                case R.id.btn_profile:
+                    Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                    startActivity(intent);
                     break;
             }
         }
