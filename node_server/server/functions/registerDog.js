@@ -1,7 +1,6 @@
 'use strict';
 
 const dog = require('../models/dog');
-const bcrypt = require('bcryptjs');
 
 exports.registerDog = (dogId, ownerId, dogName, dogGender, dogSpecies, dogBirth) =>
 
@@ -19,9 +18,17 @@ exports.registerDog = (dogId, ownerId, dogName, dogGender, dogSpecies, dogBirth)
 
 		newDog.save()
 
-		.then(() => resolve({ status: 201, message: 'Dog Registered Sucessfully !' }))
+		.then(() => {
+
+			console.log('register complete');
+
+			resolve({ status: 201, message: 'Dog Registered Sucessfully !' });
+
+		})
 
 		.catch(err => {
+
+			console.log('register error : ' + err);
 
 			if (err.code == 11000) {
 
