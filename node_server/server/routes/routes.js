@@ -9,6 +9,8 @@ const profile = require('../functions/profile');
 const password = require('../functions/password');
 const config = require('../config/config.json');
 
+const registerDog = require('../functions/registerDog');
+
 module.exports = router => {
 
 	router.get('/', (req, res) => res.end('Welcome to Rumypet !'));
@@ -60,6 +62,19 @@ module.exports = router => {
 
 			.catch(err => res.status(err.status).json({ message: err.message }));
 		}
+	});
+
+	router.post('/dogs', (req, res) => {
+		const dogId = req.body.dogId;
+		const ownerId = req.body.ownerId;
+		const dogName = req.body.dogName;
+		const dogGender = req.body.dogGender;
+		const dogSpecies = req.body.dogSpecies;
+		const dogBirth = req.body.dogBirth;
+
+		register.registerDog(dogId, ownerId, dogName, dogGender, dogSpecies, dogBirth);
+
+
 	});
 
 	router.get('/users/:id', (req,res) => {

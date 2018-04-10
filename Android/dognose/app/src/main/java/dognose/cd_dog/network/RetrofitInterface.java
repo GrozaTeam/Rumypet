@@ -1,5 +1,6 @@
 package dognose.cd_dog.network;
 
+import dognose.cd_dog.model.Dog;
 import dognose.cd_dog.model.Response;
 import dognose.cd_dog.model.User;
 
@@ -15,11 +16,17 @@ public interface RetrofitInterface {
     @POST("users")
     Observable<Response> register(@Body User user);
 
+    @POST("dogs")
+    Observable<Response> registerDog(@Body Dog dog);
+
     @POST("authenticate")
     Observable<Response> login();
 
     @GET("users/{email}")
     Observable<User> getProfile(@Path("email") String email);
+
+    @GET("dogs/{ownerId}")
+    Observable<Dog> getProfileDog(@Path("ownerId") String ownerId);
 
     @PUT("users/{email}")
     Observable<Response> changePassword(@Path("email") String email, @Body User user);

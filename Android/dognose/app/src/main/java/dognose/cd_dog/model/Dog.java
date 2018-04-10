@@ -5,42 +5,55 @@ package dognose.cd_dog.model;
  */
 
 public class Dog {
-
-    private String name;
-    private String email;
-    private String password;
-    private String phone;
+    private String dogId;
+    private String ownerId;
+    private String dogName;
+    private String dogGender;
+    private String dogBirth;
+    private String dogSpecies;
     private String created_at;
     private String newPassword;
     private String token;
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDogId(String dogId){this.dogId = dogId; }
+
+    public void setOwnerId(String ownerId){
+        this.ownerId = ownerId;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setName(String dogName) {
+        this.dogName = dogName;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setGender(String dogGender) {
+        this.dogGender = dogGender;
     }
 
-    public void setPhone(String phone){
-        this.phone = phone;
+    public void setBirth(String dogBirth) {
+        this.dogBirth = dogBirth;
     }
+
+    public void setSpecies(String dogSpecies){
+        this.dogSpecies = dogSpecies;
+    }
+
+    public String getDogId() { return dogId; }
+
+    public String getOwnerId() { return ownerId; }
 
     public String getName() {
-        return name;
+        return dogName;
     }
 
-    public String getEmail() {
-        return email;
+    public String getGender() {
+        return dogGender;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getBirth() {
+        return dogBirth;
     }
+
+    public String getSpecies() { return dogSpecies; }
 
     public String getCreated_at() {
         return created_at;

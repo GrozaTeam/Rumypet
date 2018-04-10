@@ -105,6 +105,8 @@ public class InformationDogListActivity extends AppCompatActivity {
     private void handleResponse(User user) {
 
         tvOwnerId.setText("Hi " + user.getName() + "!");
+        ownerId = user.getName();
+
     }
 
     private void handleError(Throwable error) {

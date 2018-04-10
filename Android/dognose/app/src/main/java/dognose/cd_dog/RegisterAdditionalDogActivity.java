@@ -2,10 +2,12 @@ package dognose.cd_dog;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -16,6 +18,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.IOException;
+import java.util.Random;
+
+import dognose.cd_dog.model.Dog;
+import dognose.cd_dog.model.Response;
+import dognose.cd_dog.network.NetworkUtil;
+import retrofit2.adapter.rxjava.HttpException;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by paeng on 2018. 3. 26..
@@ -37,6 +53,8 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
     private String ownerId;
 
+    private CompositeSubscription mSubscriptions;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +62,8 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         ownerId = intent.getStringExtra("id");
+
+        mSubscriptions = new CompositeSubscription();
 
         bindingView();
 
@@ -127,8 +147,21 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
                 case R.id.btn_register:
 
                     if (checkjoin()) {
-                        DBHelper dbHelper = new DBHelper(getApplicationContext(), "RumyPet.db", null, 1);
-                        dbHelper.insertDog(ownerId, dogName, species, gender, birth);
+                        // DBHelper dbHelper = new DBHelper(getApplicationContext(), "RumyPet.db", null, 1);
+                        // dbHelper.insertDog(ownerId, dogName, species, gender, birth);
+                        String dogId = getRandomString(8);
+                        Dog dogdb = new Dog();
+
+                        dogdb.setDogId(dogId);
+                        dogdb.setOwnerId(ownerId);
+                        dogdb.setName(dogName);
+                        dogdb.setGender(gender);
+                        dogdb.setBirth(birth);
+                        dogdb.setSpecies(species);
+
+                        registerProgress(dogdb);
+
+
 
                         Toast.makeText(RegisterAdditionalDogActivity.this, "Add Dog Complete.", Toast.LENGTH_SHORT).show();
                         finish();
@@ -181,6 +214,57 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
             }
         }
     };
+
+
+    private void registerProgress(Dog dogdb) {
+
+        mSubscriptions.add(NetworkUtil.getRetrofit().registerDog(dogdb)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handleResponse,this::handleError));
+    }
+
+    private void handleResponse(Response response) {
+
+        showSnackBarMessage(response.getMessage());
+    }
+
+    private void handleError(Throwable error) {
+
+
+        if (error instanceof HttpException) {
+
+            Gson gson = new GsonBuilder().create();
+
+            try {
+
+                String errorBody = ((HttpException) error).response().errorBody().string();
+                Response response = gson.fromJson(errorBody,Response.class);
+                showSnackBarMessage(response.getMessage());
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+
+            showSnackBarMessage("Network Error !");
+        }
+    }
+
+    private void showSnackBarMessage(String message) {
+
+        Toast.makeText(RegisterAdditionalDogActivity.this, message, Toast.LENGTH_SHORT);
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -240,5 +324,20 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
         textChangedListener(etBirth);
 
     }
+
+    private static String getRandomString(int length)
+    {
+        StringBuffer buffer = new StringBuffer();
+        Random random = new Random();
+
+        String chars[] = "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z".split(",");
+
+        for (int i=0 ; i<length ; i++)
+        {
+            buffer.append(chars[random.nextInt(chars.length)]);
+        }
+        return buffer.toString();
+    }
+
 
 }
