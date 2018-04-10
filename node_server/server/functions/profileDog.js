@@ -6,7 +6,7 @@ exports.getDogProfile = email =>
 
 	new Promise((resolve,reject) => {
 
-		dog.find({ ownerId: ownerId })
+		dog.find({ ownerId: email })
 
 		.then(dogs => resolve(dogs[0]))
 

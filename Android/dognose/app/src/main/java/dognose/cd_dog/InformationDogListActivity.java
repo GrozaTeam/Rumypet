@@ -54,6 +54,12 @@ public class InformationDogListActivity extends AppCompatActivity {
     private CompositeSubscription mSubscriptions;
     private String mToken;
     private String mEmail;
+    private String mTokenDog;
+    private String mTokenEmail;
+
+    private TextView tvCheckError;
+    private Button btnCheckError;
+
 
 
     @Override
@@ -65,13 +71,12 @@ public class InformationDogListActivity extends AppCompatActivity {
         initSharedPreferences();
         loadProfile();
 
-        UpdatingList();
+        // UpdatingList();
 
-
+/*
         listViewDog.setOnItemClickListener(new ListView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
-
 
                 Intent intent = new Intent(getApplicationContext(), InformationDogListDetail.class);
                 intent.putExtra("data", dogArrayList.get(position));
@@ -80,13 +85,14 @@ public class InformationDogListActivity extends AppCompatActivity {
 
             }
         });
+*/
 
     }
 
     @Override
     protected void onResume(){
         super.onResume();
-        UpdatingList();
+        // UpdatingList();
 
     }
     //
@@ -107,10 +113,11 @@ public class InformationDogListActivity extends AppCompatActivity {
     }
 
     private void loadDogProfile(){
+
         mSubscriptions.add(NetworkUtil.getRetrofit(mToken).getProfileDog(mEmail)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(this::handleResponse,this::handleError));
+                .subscribe(this::handleResponseDog,this::handleError));
 
     }
 
@@ -120,7 +127,12 @@ public class InformationDogListActivity extends AppCompatActivity {
         ownerId = user.getName();
 
     }
-    private void handleResponse(Dog dog) {
+    private void handleResponseTest(User user){
+        tvCheckError.setText("Phone: "+user.getPhone());
+    }
+    private void handleResponseDog(Dog dog) {
+
+        Log.d("paengResult", "1");
 
         String resultDogID = dog.getDogId();
         String resultDogName = dog.getName();
@@ -130,6 +142,23 @@ public class InformationDogListActivity extends AppCompatActivity {
     }
 
     private void handleError(Throwable error) {
+
+        if (error instanceof HttpException) {
+
+            Gson gson = new GsonBuilder().create();
+            try {
+                String errorBody = ((HttpException) error).response().errorBody().string();
+                Response response = gson.fromJson(errorBody,Response.class);
+                showSnackBarMessage(response.getMessage());
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            showSnackBarMessage("Network Error !");
+        }
+    }
+    private void handleErrorDog(Throwable error) {
 
         if (error instanceof HttpException) {
 
@@ -157,15 +186,15 @@ public class InformationDogListActivity extends AppCompatActivity {
 
 
     public void UpdatingList(){
-        final DBHelper dbHelper = new DBHelper(getApplicationContext(), "RumyPet.db", null, 1);
+        //final DBHelper dbHelper = new DBHelper(getApplicationContext(), "RumyPet.db", null, 1);
 
 
-
+        Log.d("paengResult", "4");
 
         loadDogProfile();
+        Log.d("paengResult", "3");
 
-
-
+/*
 
         dogArrayList = new ArrayList();
 
@@ -187,7 +216,7 @@ public class InformationDogListActivity extends AppCompatActivity {
         }
 
         listViewDog.setAdapter(adapter);
-
+*/
 
     }
 
@@ -196,8 +225,11 @@ public class InformationDogListActivity extends AppCompatActivity {
         listViewDog = (ListView)findViewById(R.id.lv_dog);
         btnAdd = (LinearLayout) findViewById(R.id.btn_add_dog);
         btnProfile = (LinearLayout) findViewById(R.id.btn_profile);
+        tvCheckError = (TextView) findViewById(R.id.tv_check_error);
+        btnCheckError = (Button) findViewById(R.id.btn_check_error);
         btnAdd.setOnClickListener(listener);
         btnProfile.setOnClickListener(listener);
+        btnCheckError.setOnClickListener(listener);
     }
 
 
@@ -215,6 +247,16 @@ public class InformationDogListActivity extends AppCompatActivity {
                 case R.id.btn_profile:
                     Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
                     startActivity(intent);
+                    break;
+
+                case R.id.btn_check_error:
+
+                    UpdatingList();
+
+                    break;
+
+                default:
+
                     break;
             }
         }
