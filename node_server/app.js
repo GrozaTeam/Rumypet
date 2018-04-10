@@ -6,6 +6,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 var index = require('./server/routes/index');
+var mongoose = require('mongoose');
 var app = express();
 var router = express.Router();
 
