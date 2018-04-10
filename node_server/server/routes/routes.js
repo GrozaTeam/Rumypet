@@ -85,11 +85,10 @@ module.exports = router => {
 			.then (result => {
 
 				res.setHeader('Location', '/dogs/' + ownerId);
-				res.status(result.status).json({ message: result.message })
+				res.status(result.status).json({ message: result.message });
 			})
 
 			.catch(err => {
-				console.log("errorPAENG: "+err)
 				res.status(err.status).json({ message: err.message });
 
 			});
@@ -103,9 +102,15 @@ module.exports = router => {
 
 			profile.getProfile(req.params.id)
 
-			.then(result => res.json(result))
+			.then(result => {
+				console.log('result : '+result);
+				res.json(result);
+			})
 
-			.catch(err => res.status(err.status).json({ message: err.message }));
+			.catch(err => {
+				console.log('err : '+err);
+				res.status(err.status).json({ message: err.message });
+			});
 
 		} else {
 
