@@ -74,21 +74,23 @@ module.exports = router => {
 		const dogSpecies = req.body.dogSpecies;
 		const dogBirth = req.body.dogBirth;
 
-		console.log(dogId+'/'+ownerId+dogName+dogGender+dogSpecies+dogBirth);
 
 		if(!dogId || !ownerId || !dogName || !dogGender || !dogSpecies || !dogBirth || !dogId.trim() || !ownerId.trim() || !dogName.trim() || !dogGender.trim() || !dogBirth.trim() || !dogSpecies.trim()) {
 			res.status(400).json({message: 'Invalid Request !'});
 
 		}else{
+			console.log('id: '+dogId+'/'+ownerId+'/'+dogName+'/'+dogGender+'/'+dogSpecies+'/'+dogBirth);
+
 			registerDog.registerDog(dogId, ownerId, dogName, dogGender, dogSpecies, dogBirth)
 
 			.then (result => {
-
+				console.log('post result: ' + result);
 				res.setHeader('Location', '/dogs/' + ownerId);
 				res.status(result.status).json({ message: result.message });
 			})
 
 			.catch(err => {
+				console.log('post error: ' + err);
 				res.status(err.status).json({ message: err.message });
 
 			});
@@ -103,12 +105,12 @@ module.exports = router => {
 			profile.getProfile(req.params.id)
 
 			.then(result => {
-				console.log('result : '+result);
+				console.log('user result : '+result);
 				res.json(result);
 			})
 
 			.catch(err => {
-				console.log('err : '+err);
+				console.log('user err : '+err);
 				res.status(err.status).json({ message: err.message });
 			});
 

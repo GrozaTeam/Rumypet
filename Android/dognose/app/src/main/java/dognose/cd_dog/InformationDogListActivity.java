@@ -114,7 +114,7 @@ public class InformationDogListActivity extends AppCompatActivity {
 
     private void loadDogProfile(){
 
-        mSubscriptions.add(NetworkUtil.getRetrofit().getProfileDog(mEmail)
+        mSubscriptions.add(NetworkUtil.getRetrofit(mToken).getProfileDog(mEmail)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponseDog,this::handleError));
