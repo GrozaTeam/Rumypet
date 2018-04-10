@@ -114,7 +114,7 @@ public class InformationDogListActivity extends AppCompatActivity {
 
     private void loadDogProfile(){
 
-        mSubscriptions.add(NetworkUtil.getRetrofit(mToken).getProfileDog(mEmail)
+        mSubscriptions.add(NetworkUtil.getRetrofit().getProfileDog(mEmail)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponseDog,this::handleError));
@@ -128,11 +128,9 @@ public class InformationDogListActivity extends AppCompatActivity {
 
     }
     private void handleResponseTest(User user){
-        tvCheckError.setText("Phone: "+user.getPhone());
+        tvCheckError.setText("Phone: " + user.getPhone());
     }
     private void handleResponseDog(Dog dog) {
-
-        Log.d("paengResult", "1");
 
         String resultDogID = dog.getDogId();
         String resultDogName = dog.getName();

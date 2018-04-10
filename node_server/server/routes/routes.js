@@ -10,6 +10,7 @@ const password = require('../functions/password');
 const config = require('../config/config.json');
 
 const registerDog = require('../functions/registerDog');
+const profileDog = require('../functions/profileDog');
 
 module.exports = router => {
 
@@ -74,7 +75,6 @@ module.exports = router => {
 
 		registerDog.registerDog(dogId, ownerId, dogName, dogGender, dogSpecies, dogBirth);
 
-
 	});
 
 	router.get('/users/:id', (req,res) => {
@@ -91,6 +91,10 @@ module.exports = router => {
 
 			res.status(401).json({ message: 'Invalid Token !' });
 		}
+	});
+
+	router.get('/dogs/:id', (req, res) => {
+		profileDog.getDogProfile(req.params.id);
 	});
 
 	router.put('/users/:id', (req,res) => {
