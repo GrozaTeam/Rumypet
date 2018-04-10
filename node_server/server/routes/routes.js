@@ -66,6 +66,7 @@ module.exports = router => {
 	});
 
 	router.post('/dogs', (req, res) => {
+
 		const dogId = req.body.dogId;
 		const ownerId = req.body.ownerId;
 		const dogName = req.body.dogName;
@@ -73,7 +74,19 @@ module.exports = router => {
 		const dogSpecies = req.body.dogSpecies;
 		const dogBirth = req.body.dogBirth;
 
-		registerDog.registerDog(dogId, ownerId, dogName, dogGender, dogSpecies, dogBirth);
+		if(!dogId || !ownerId || !dogName || !dogGender || !dogSpecies || !dogBirth || !dogId.trim() || !ownerId.trim() || !dogName.trim() || !dogGender.trim() || !dogBirth.trim() || !dogSpecies.trim()) {
+			res.status(400).json({message: 'Invalid Request !'});
+
+		}else{
+			registerDog.registerDog(dogId, ownerId, dogName, dogGender, dogSpecies, dogBirth)
+
+			.then (result => {
+
+				res.setHeader('Location', '/dogs/'+email);
+				res.status(result.status).json({message: result.message })
+			})
+			.catch(err => res.status(err.status).json({message: err.message}));
+		}
 
 	});
 
@@ -94,7 +107,14 @@ module.exports = router => {
 	});
 
 	router.get('/dogs/:id', (req, res) => {
-		profileDog.getDogProfile(req.params.id);
+		if (checkToken(req)){
+			profileDog.getDogProfile(req.params.id)
+			.then(result => res.json(result))
+			.catch(err => res.status(err.status).json({message:err.message}));
+		} else{
+			res.status(401).json({message: 'Invalid Token !'});
+		}
+
 	});
 
 	router.put('/users/:id', (req,res) => {
