@@ -56,7 +56,7 @@ module.exports = router => {
 			register.registerUser(name, email, password, phone)
 
 			.then(result => {
-
+				console.log('post result for user: '+ result);
 				res.setHeader('Location', '/users/'+email);
 				res.status(result.status).json({ message: result.message })
 			})
