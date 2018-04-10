@@ -162,8 +162,6 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
                         registerProgress(dogdb);
 
 
-
-                        Toast.makeText(RegisterAdditionalDogActivity.this, "Add Dog Complete.", Toast.LENGTH_SHORT).show();
                         finish();
                     }
                     break;
@@ -253,7 +251,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
     private void showSnackBarMessage(String message) {
 
-        Toast.makeText(RegisterAdditionalDogActivity.this, message, Toast.LENGTH_SHORT);
+        Toast.makeText(RegisterAdditionalDogActivity.this, message, Toast.LENGTH_SHORT).show();
     }
 
 

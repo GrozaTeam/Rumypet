@@ -26,7 +26,7 @@ public interface RetrofitInterface {
     Observable<User> getProfile(@Path("email") String email);
 
     @GET("dogs/{ownerId}")
-    Observable<Dog> getProfileDog(@Path("ownerId") String ownerId);
+    Observable<Dog> getDogProfile(@Path("ownerId") String ownerId);
 
     @PUT("users/{email}")
     Observable<Response> changePassword(@Path("email") String email, @Body User user);

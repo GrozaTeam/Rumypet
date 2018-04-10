@@ -122,6 +122,7 @@ module.exports = router => {
 
 	router.get('/dogs/:id', (req, res) => {
 		if (checkToken(req)){
+			console.log("id == " + req.params.id);
 			profileDog.getDogProfile(req.params.id)
 
 			.then(result => {
