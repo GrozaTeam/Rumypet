@@ -1,6 +1,6 @@
 'use strict';
 
-const user = require('../models/dog');
+const dog = require('../models/dog');
 const bcrypt = require('bcryptjs');
 
 exports.registerDog = (dogId, ownerId, dogName, dogGender, dogSpecies, dogBirth) =>
