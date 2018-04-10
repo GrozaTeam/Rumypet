@@ -22,6 +22,7 @@ import org.w3c.dom.Text;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import dognose.cd_dog.model.Dog;
 import dognose.cd_dog.model.Response;
 import dognose.cd_dog.model.User;
 import dognose.cd_dog.network.NetworkUtil;
@@ -63,6 +64,7 @@ public class InformationDogListActivity extends AppCompatActivity {
         bindingView();
         initSharedPreferences();
         loadProfile();
+
         UpdatingList();
 
 
@@ -87,6 +89,7 @@ public class InformationDogListActivity extends AppCompatActivity {
         UpdatingList();
 
     }
+    //
 
     private void initSharedPreferences() {
 
@@ -102,10 +105,27 @@ public class InformationDogListActivity extends AppCompatActivity {
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponse,this::handleError));
     }
+
+    private void loadDogProfile(){
+        mSubscriptions.add(NetworkUtil.getRetrofit(mToken).getProfileDog(mEmail)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handleResponse,this::handleError));
+
+    }
+
     private void handleResponse(User user) {
 
         tvOwnerId.setText("Hi " + user.getName() + "!");
         ownerId = user.getName();
+
+    }
+    private void handleResponse(Dog dog) {
+
+        String resultDogID = dog.getDogId();
+        String resultDogName = dog.getName();
+
+        Log.d("paengResult", resultDogID+"/"+resultDogName);
 
     }
 
@@ -131,10 +151,21 @@ public class InformationDogListActivity extends AppCompatActivity {
         Toast.makeText(InformationDogListActivity.this, "Network Error!", Toast.LENGTH_SHORT).show();
 
     }
+    //
+
+
 
 
     public void UpdatingList(){
         final DBHelper dbHelper = new DBHelper(getApplicationContext(), "RumyPet.db", null, 1);
+
+
+
+
+        loadDogProfile();
+
+
+
 
         dogArrayList = new ArrayList();
 
