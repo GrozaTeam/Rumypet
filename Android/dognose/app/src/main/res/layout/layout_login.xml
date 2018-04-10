@@ -67,7 +67,7 @@
                     android:layout_weight="0.7"
                     android:background="@android:color/background_light"
                     android:gravity="center_vertical|center"
-                    android:textSize="25sp"
+                    android:textSize="15dp"
                     android:layout_marginRight="20dp"/>
 
 
@@ -110,7 +110,7 @@
 
                     android:background="@android:color/background_light"
                     android:gravity="center_vertical|center"
-                    android:textSize="25sp" />
+                    android:textSize="18dp" />
 
             </LinearLayout>
 

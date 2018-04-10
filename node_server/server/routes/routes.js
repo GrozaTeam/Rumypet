@@ -42,14 +42,15 @@ module.exports = router => {
 		const name = req.body.name;
 		const email = req.body.email;
 		const password = req.body.password;
+		const phone = req.body.phone;
 
-		if (!name || !email || !password || !name.trim() || !email.trim() || !password.trim()) {
+		if (!name || !email || !password || !phone || !name.trim() || !email.trim() || !password.trim() || !phone.trim()) {
 
 			res.status(400).json({message: 'Invalid Request !'});
 
 		} else {
 
-			register.registerUser(name, email, password)
+			register.registerUser(name, email, password, phone)
 
 			.then(result => {
 

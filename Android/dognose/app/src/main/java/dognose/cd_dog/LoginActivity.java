@@ -27,8 +27,6 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
-
-
 /**
  * Created by paeng on 2018. 4. 5..
  */
@@ -66,29 +64,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                DBHelper dbHelper = new DBHelper(getApplicationContext(), "RumyPet.db", null, 1);
+                loginProcess(id,pw);
 
-                try{
-                    comparePw = dbHelper.getPwById(id);
-                    if (comparePw.equals(pw)){
-                        Toast.makeText(LoginActivity.this, "Sign In Complete", Toast.LENGTH_SHORT).show();
-                        loginProcess(id,pw);
-
-                        /*
-
-                        Intent intent = new Intent(getApplicationContext(), InformationDogListActivity.class);
-                        intent.putExtra("id",id);
-
-                        startActivity(intent);
-                        */
-                    }
-                    else{
-                        Toast.makeText(LoginActivity.this, "Checkout your password", Toast.LENGTH_SHORT).show();
-                    }
-
-                }catch (Exception CursorIndexOutOfBoundsException){
-                    Toast.makeText(LoginActivity.this, "Cannot find ID", Toast.LENGTH_SHORT).show();
-                }
             }
         });
     }
@@ -118,7 +95,6 @@ public class LoginActivity extends AppCompatActivity {
         editor.apply();
 
         Intent intent = new Intent(getApplicationContext(), InformationDogListActivity.class);
-        intent.putExtra("id",id);
         startActivity(intent);
 
 

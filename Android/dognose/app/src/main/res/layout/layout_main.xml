@@ -148,7 +148,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@color/colorMainDark"
-                android:layout_marginRight="1.5dp"
+                android:layout_marginRight="1dp"
                 android:gravity="center">
 
 
@@ -166,7 +166,7 @@
                 android:layout_height="match_parent"
                 android:background="@color/colorMainDark"
                 android:layout_weight="1"
-                android:layout_marginLeft="1.5dp"
+                android:layout_marginLeft="1dp"
                 android:gravity="center">
 
                 <ImageView

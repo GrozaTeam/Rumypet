@@ -39,14 +39,16 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:orientation="horizontal"
-            android:background="@color/colorMainDark">
+            android:background="@color/colorMainLight">
 
             <LinearLayout
                 android:id="@+id/btn_add_dog"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center">
+                android:gravity="center"
+                android:layout_marginRight="1dp"
+                android:background="@color/colorMainDark">
 
 
                 <ImageView
@@ -57,20 +59,24 @@
 
             </LinearLayout>
 
+
             <LinearLayout
                 android:id="@+id/btn_set_user"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center">
+                android:gravity="center"
+                android:layout_marginLeft="1dp"
+                android:background="@color/colorMainDark">
 
                 <ImageView
                     android:layout_width="75dp"
                     android:layout_height="75dp"
 
-                    android:background="@drawable/bt_img_set" />
+                    android:background="@drawable/profile_big" />
 
             </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
 

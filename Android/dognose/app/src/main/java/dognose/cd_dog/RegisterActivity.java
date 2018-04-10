@@ -46,11 +46,8 @@ public class RegisterActivity extends AppCompatActivity {
     private boolean idDulplicated = false;
     private boolean duplicateCheck = false;
 
-
     private ProgressBar mProgressbar;
-
     private CompositeSubscription mSubscriptions;
-
 
 
     @Override
@@ -66,19 +63,22 @@ public class RegisterActivity extends AppCompatActivity {
     private boolean checkjoin() {
 
         if (id.equals("")) {
-            Toast.makeText(RegisterActivity.this, "ID를 입력해주세요.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this, "Please input id", Toast.LENGTH_SHORT).show();
 
             return false;
         }else if(!validateEmail(id)){
-            Toast.makeText(RegisterActivity.this, "ID를 E-mail형태로 입력해주세요.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this, "Input ID into e-mail form", Toast.LENGTH_SHORT).show();
 
             return false;
 
         } else if (pw.equals("")) {
-            Toast.makeText(RegisterActivity.this, "패스워드를 입력해주세요.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this, "Please input password", Toast.LENGTH_SHORT).show();
             return false;
         } else if(!duplicateCheck){
             Toast.makeText(RegisterActivity.this, "Please Double Check ID.", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if(!pw.equals(pw2)){
+            Toast.makeText(RegisterActivity.this, "Password is not same", Toast.LENGTH_SHORT).show();
             return false;
         }else {
             return true;
@@ -105,6 +105,7 @@ public class RegisterActivity extends AppCompatActivity {
                         user.setName(ownerName);
                         user.setEmail(id);
                         user.setPassword(pw);
+                        user.setPhone(ownerPhone);
 
                         mProgressbar.setVisibility(View.VISIBLE);
                         registerProcess(user);

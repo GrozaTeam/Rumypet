@@ -1,7 +1,9 @@
 package dognose.cd_dog;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -10,10 +12,24 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.w3c.dom.Text;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import dognose.cd_dog.model.Response;
+import dognose.cd_dog.model.User;
+import dognose.cd_dog.network.NetworkUtil;
+import dognose.cd_dog.utils.Constants;
+import retrofit2.adapter.rxjava.HttpException;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by paeng on 2018. 3. 26..
@@ -30,19 +46,25 @@ public class InformationDogListActivity extends AppCompatActivity {
     ListViewAdapter adapter;
     private String[] dataDog;
     private ListView listViewDog;
-
     private LinearLayout btnAdd, btnSet;
+
+
+    private SharedPreferences mSharedPreferences;
+    private CompositeSubscription mSubscriptions;
+    private String mToken;
+    private String mEmail;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.information_dog_list);
-        tvOwnerId = (TextView)findViewById(R.id.tv_owner_id);
-        listViewDog = (ListView)findViewById(R.id.lv_dog);
-        btnAdd = (LinearLayout) findViewById(R.id.btn_add_dog);
-        btnSet = (LinearLayout) findViewById(R.id.btn_set_user);
-        btnAdd.setOnClickListener(listener);
-        btnSet.setOnClickListener(listener);
+        mSubscriptions = new CompositeSubscription();
+        bindingView();
+        initSharedPreferences();
+        loadProfile();
+        UpdatingList();
+
 
         listViewDog.setOnItemClickListener(new ListView.OnItemClickListener() {
             @Override
@@ -57,12 +79,6 @@ public class InformationDogListActivity extends AppCompatActivity {
             }
         });
 
-
-        Intent intent = getIntent();
-        ownerId = intent.getStringExtra("id");
-        tvOwnerId.setText("Hello " + ownerId);
-
-        UpdatingList();
     }
 
     @Override
@@ -71,6 +87,57 @@ public class InformationDogListActivity extends AppCompatActivity {
         UpdatingList();
 
     }
+
+    private void initSharedPreferences() {
+
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mToken = mSharedPreferences.getString(Constants.TOKEN,"");
+        mEmail = mSharedPreferences.getString(Constants.EMAIL,"");
+    }
+
+    private void loadProfile() {
+
+        mSubscriptions.add(NetworkUtil.getRetrofit(mToken).getProfile(mEmail)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handleResponse,this::handleError));
+    }
+    private void handleResponse(User user) {
+
+        tvOwnerId.setText("Hi " + user.getName() + "!");
+    }
+
+    private void handleError(Throwable error) {
+
+        if (error instanceof HttpException) {
+
+            Gson gson = new GsonBuilder().create();
+            try {
+                String errorBody = ((HttpException) error).response().errorBody().string();
+                Response response = gson.fromJson(errorBody,Response.class);
+                showSnackBarMessage(response.getMessage());
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            showSnackBarMessage("Network Error !");
+        }
+    }
+
+    private void showSnackBarMessage(String message){
+        Toast.makeText(InformationDogListActivity.this, "Network Error!", Toast.LENGTH_SHORT).show();
+
+    }
+
+
+
+
+
+
+
+
+
 
     public void UpdatingList(){
         final DBHelper dbHelper = new DBHelper(getApplicationContext(), "RumyPet.db", null, 1);
@@ -97,6 +164,15 @@ public class InformationDogListActivity extends AppCompatActivity {
         listViewDog.setAdapter(adapter);
 
 
+    }
+
+    private void bindingView(){
+        tvOwnerId = (TextView)findViewById(R.id.tv_owner_id);
+        listViewDog = (ListView)findViewById(R.id.lv_dog);
+        btnAdd = (LinearLayout) findViewById(R.id.btn_add_dog);
+        btnSet = (LinearLayout) findViewById(R.id.btn_set_user);
+        btnAdd.setOnClickListener(listener);
+        btnSet.setOnClickListener(listener);
     }
 
 
