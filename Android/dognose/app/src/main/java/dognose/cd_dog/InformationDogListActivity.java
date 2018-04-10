@@ -38,7 +38,7 @@ import rx.subscriptions.CompositeSubscription;
 
 public class InformationDogListActivity extends AppCompatActivity {
 
-    private String ownerId;
+    private String ownerId, ownerName;
     private TextView tvOwnerId;
 
     // Dog list 들을 위한 ListView
@@ -124,11 +124,9 @@ public class InformationDogListActivity extends AppCompatActivity {
     private void handleResponse(User user) {
 
         tvOwnerId.setText("Hi " + user.getName() + "!");
-        ownerId = user.getName();
+        ownerId = user.getEmail();
+        ownerName = user.getName();
 
-    }
-    private void handleResponseTest(User user){
-        tvCheckError.setText("Phone: " + user.getPhone());
     }
     private void handleResponseDog(Dog dog) {
 
@@ -237,6 +235,7 @@ public class InformationDogListActivity extends AppCompatActivity {
                 case R.id.btn_add_dog:
                     Intent intentAdd = new Intent(getApplicationContext(), RegisterAdditionalDogActivity.class);
                     intentAdd.putExtra("id", ownerId);
+                    intentAdd.putExtra("name", ownerName);
                     startActivity(intentAdd);
                     break;
 

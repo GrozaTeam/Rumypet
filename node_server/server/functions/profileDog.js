@@ -8,7 +8,7 @@ exports.getDogProfile = email =>
 
 		dog.find({ ownerId: email })
 
-		.then(dogs => resolve(dogs[0]))
+		.then(dogs => resolve(dogs))
 
 		.catch(err => reject({ status: 500, message: 'Internal Server Error !' }))
 

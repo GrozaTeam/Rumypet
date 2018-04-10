@@ -51,7 +51,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
     private String dogName="", species="", gender="", birth="";
     private ImageView imgDog, imgDogNose;
 
-    private String ownerId;
+    private String ownerId, ownerName;
 
     private CompositeSubscription mSubscriptions;
 
@@ -62,6 +62,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         ownerId = intent.getStringExtra("id");
+        ownerName = intent.getStringExtra("name");
 
         mSubscriptions = new CompositeSubscription();
 
