@@ -32,7 +32,7 @@ exports.loginUser = (email, password) =>
 
 			} else {
 
-				reject({ status: 401, message: 'Invalid Credentials !' });
+				reject({ status: 401, message: 'Wrong Password !' });
 			}
 		})
 
