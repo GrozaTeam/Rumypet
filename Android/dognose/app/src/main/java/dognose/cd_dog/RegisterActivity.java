@@ -42,13 +42,10 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText etId, etPw, etPw2, etOwnerName, etOwnerPhone;
     private Button btnRegister, btnCheckId, btnCheckPhone;
     // For database
-    private String id="", pw="", pw2="", ownerName, ownerPhone;
+    private String id="", pw="", pw2="", ownerName="", ownerPhone="";
     private boolean idDulplicated = false;
     private boolean duplicateCheck = false;
 
-    private TextInputLayout mTiName;
-    private TextInputLayout mTiEmail;
-    private TextInputLayout mTiPassword;
 
     private ProgressBar mProgressbar;
 
@@ -60,6 +57,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_register);
+        mSubscriptions = new CompositeSubscription();
         bindingView();
 
     }
@@ -97,22 +95,19 @@ public class RegisterActivity extends AppCompatActivity {
             switch (v.getId()) {
                 case R.id.btn_register:
 
-                    setError();
-
                     if (checkjoin()) {
                         //내부 DB 이용하여 Register 할 때
                         DBHelper dbHelper = new DBHelper(getApplicationContext(), "RumyPet.db", null, 1);
                         dbHelper.insertOwner(id, pw, ownerName, ownerPhone);
+                        dbHelper.insertDog("id","dogname","species","gender", "birth");
 
                         User user = new User();
                         user.setName(ownerName);
                         user.setEmail(id);
                         user.setPassword(pw);
-                        user.setPhone(ownerPhone);
+
                         mProgressbar.setVisibility(View.VISIBLE);
                         registerProcess(user);
-
-
 
 
                         Toast.makeText(RegisterActivity.this, "Register Complete.", Toast.LENGTH_SHORT).show();
@@ -159,12 +154,6 @@ public class RegisterActivity extends AppCompatActivity {
         }
     };
 
-    private void setError() {
-
-        mTiName.setError(null);
-        mTiEmail.setError(null);
-        mTiPassword.setError(null);
-    }
 
     private void registerProcess(User user) {
 
@@ -173,6 +162,7 @@ public class RegisterActivity extends AppCompatActivity {
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponse,this::handleError));
     }
+
     private void handleResponse(Response response) {
 
         mProgressbar.setVisibility(View.GONE);
@@ -203,6 +193,8 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void showSnackBarMessage(String message) {
+
+        Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_SHORT).show();
 
 
     }
@@ -266,6 +258,12 @@ public class RegisterActivity extends AppCompatActivity {
         textChangedListener(etOwnerName);
         textChangedListener(etOwnerPhone);
 
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        mSubscriptions.unsubscribe();
     }
 
 }

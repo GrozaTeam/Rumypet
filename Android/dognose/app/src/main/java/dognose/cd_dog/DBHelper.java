@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Created by paeng on 2018. 4. 2..
@@ -64,11 +65,16 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public String[] getAllDataDogForChecker(){
 
+
+
         SQLiteDatabase db = getReadableDatabase();
         String result = "";
         String[] resultList = new String[1000];
 
+
         Cursor cursor = db.rawQuery("SELECT * FROM DOGLIST", null);
+
+
         int i = 0;
         while (cursor.moveToNext()) {
             result ="id: "
@@ -87,6 +93,7 @@ public class DBHelper extends SQLiteOpenHelper {
             resultList[i] = result;
             i++;
         }
+
         return resultList;
     }
 
