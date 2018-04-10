@@ -12,7 +12,7 @@ var options = {
 };
 router.get('/', function(req,res){
   res.render('start',{
-    title: 'global cau',
+    title: 'RUMYPET',
     user: req.user
   });
 });
