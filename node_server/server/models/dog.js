@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const userSchema = mongoose.Schema({
+const dogSchema = mongoose.Schema({
 
   dogId : {type: String, unique: true},
   ownerId : String,
