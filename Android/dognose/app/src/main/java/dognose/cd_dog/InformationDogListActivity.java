@@ -42,7 +42,7 @@ public class InformationDogListActivity extends AppCompatActivity {
 
     // Dog list 들을 위한 ListView
 
-    private ArrayList<String> dogArrayList;
+    private ArrayList<Dog> dogArrayList;
     ListViewAdapter adapter;
     private String[] dataDog;
     private ListView listViewDog;
@@ -54,6 +54,8 @@ public class InformationDogListActivity extends AppCompatActivity {
 
     private String mToken;
     private String mEmail;
+
+    private int dogNum = 0;
 
 
     private ArrayList<ListViewItem> data;
@@ -117,12 +119,15 @@ public class InformationDogListActivity extends AppCompatActivity {
 
     private void handleResponseDog(Dog[] dog) {
 
-        dogArrayList = new ArrayList();
+        dogArrayList = new ArrayList<Dog>();
         adapter = new ListViewAdapter();
+        dogNum = 0;
 
         for (Dog dogitem : dog){
             if(dogitem!=null){
+                dogArrayList.add(dogitem);
                 adapter.addItemDog(null, dogitem.getName(), dogitem.getSpecies(), dogitem.getGender(), dogitem.getBirth());
+                dogNum += 1;
             }
         }
         listViewDog.setAdapter(adapter);
@@ -163,7 +168,13 @@ public class InformationDogListActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("PaengPosition", String.valueOf(position));
+
+
+                Intent intent = new Intent(getApplicationContext(), InformationDogListDetail.class);
+                intent.putExtra("position", String.valueOf(position));
+                intent.putExtra("dogSet", dogArrayList);
+                intent.putExtra("dogNum", String.valueOf(dogNum));
+                startActivity(intent);
 
 
             }
@@ -193,33 +204,4 @@ public class InformationDogListActivity extends AppCompatActivity {
             }
         }
     };
-
-    public void UpdatingListInnerDB(){
-        final DBHelper dbHelper = new DBHelper(getApplicationContext(), "RumyPet.db", null, 1);
-
-
-        dogArrayList = new ArrayList();
-
-        dataDog = dbHelper.getResultOwnerDogList(ownerId);
-
-        adapter = new ListViewAdapter();
-
-        for (String data : dataDog){
-            if(data!=null){
-                Log.d("paengData", data);
-                dogArrayList.add(data);
-                String data_element[] = data.split("/");
-
-
-
-                adapter.addItemDog(null, data_element[2], data_element[3], data_element[4], data_element[5]);
-
-            }
-        }
-
-        listViewDog.setAdapter(adapter);
-
-
-    }
-
 }
