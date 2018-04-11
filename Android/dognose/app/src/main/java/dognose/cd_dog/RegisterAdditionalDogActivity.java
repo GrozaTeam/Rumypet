@@ -212,7 +212,8 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
                 case R.id.btn_photo_nose:
                     Intent intentNosePhoto = new Intent(getApplicationContext(), CameraActivity.class);
-                    startActivity(intentNosePhoto);
+                    intentNosePhoto.putExtra("ownerId", ownerId);
+                    startActivityForResult(intentNosePhoto,1);
                     break;
 
                 default:
