@@ -12,7 +12,7 @@ import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 
-import dognose.cd_dog.model.Response;
+import dognose.cd_dog.model.Res;
 import dognose.cd_dog.model.User;
 import dognose.cd_dog.network.NetworkUtil;
 import dognose.cd_dog.utils.Constants;
@@ -72,7 +72,7 @@ public class ProfileActivity extends AppCompatActivity{
             Gson gson = new GsonBuilder().create();
             try {
                 String errorBody = ((HttpException) error).response().errorBody().string();
-                Response response = gson.fromJson(errorBody,Response.class);
+                Res response = gson.fromJson(errorBody,Res.class);
                 showSnackBarMessage(response.getMessage());
 
             } catch (IOException e) {

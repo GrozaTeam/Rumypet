@@ -1,6 +1,7 @@
 package dognose.cd_dog.network;
 
 import android.util.Base64;
+import android.util.Log;
 
 import dognose.cd_dog.utils.Constants;
 
@@ -64,6 +65,8 @@ public class NetworkUtil {
             return  chain.proceed(builder.build());
 
         });
+
+
 
         RxJavaCallAdapterFactory rxAdapter = RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io());
 

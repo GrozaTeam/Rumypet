@@ -20,7 +20,7 @@ import com.google.gson.GsonBuilder;
 import java.io.IOException;
 
 import dognose.cd_dog.R;
-import dognose.cd_dog.model.Response;
+import dognose.cd_dog.model.Res;
 import dognose.cd_dog.model.User;
 import dognose.cd_dog.network.NetworkUtil;
 
@@ -164,7 +164,7 @@ public class RegisterActivity extends AppCompatActivity {
                 .subscribe(this::handleResponse,this::handleError));
     }
 
-    private void handleResponse(Response response) {
+    private void handleResponse(Res response) {
 
         mProgressbar.setVisibility(View.GONE);
         showSnackBarMessage(response.getMessage());
@@ -181,7 +181,7 @@ public class RegisterActivity extends AppCompatActivity {
             try {
 
                 String errorBody = ((HttpException) error).response().errorBody().string();
-                Response response = gson.fromJson(errorBody,Response.class);
+                Res response = gson.fromJson(errorBody,Res.class);
                 showSnackBarMessage(response.getMessage());
 
             } catch (IOException e) {
