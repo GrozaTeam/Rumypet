@@ -26,7 +26,7 @@ import java.io.IOException;
 import java.util.Random;
 
 import dognose.cd_dog.model.Dog;
-import dognose.cd_dog.model.Response;
+import dognose.cd_dog.model.Res;
 import dognose.cd_dog.network.NetworkUtil;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.android.schedulers.AndroidSchedulers;
@@ -69,6 +69,13 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
         bindingView();
 
     }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        mSubscriptions.unsubscribe();
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
@@ -148,8 +155,8 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
                 case R.id.btn_register:
 
                     if (checkjoin()) {
-                        // DBHelper dbHelper = new DBHelper(getApplicationContext(), "RumyPet.db", null, 1);
-                        // dbHelper.insertDog(ownerId, dogName, species, gender, birth);
+                        DBHelper dbHelper = new DBHelper(getApplicationContext(), "RumyPet.db", null, 1);
+                        dbHelper.insertDog(ownerId, dogName, species, gender, birth);
                         String dogId = getRandomString(8);
                         Dog dogdb = new Dog();
 
@@ -224,7 +231,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
                 .subscribe(this::handleResponse,this::handleError));
     }
 
-    private void handleResponse(Response response) {
+    private void handleResponse(Res response) {
 
         showSnackBarMessage(response.getMessage());
     }
@@ -239,7 +246,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
             try {
 
                 String errorBody = ((HttpException) error).response().errorBody().string();
-                Response response = gson.fromJson(errorBody,Response.class);
+                Res response = gson.fromJson(errorBody,Res.class);
                 showSnackBarMessage(response.getMessage());
 
             } catch (IOException e) {
@@ -255,17 +262,6 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
         Toast.makeText(RegisterAdditionalDogActivity.this, message, Toast.LENGTH_SHORT).show();
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
     private void textChangedListener(final EditText etInput){
@@ -330,7 +326,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
         StringBuffer buffer = new StringBuffer();
         Random random = new Random();
 
-        String chars[] = "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z".split(",");
+        String chars[] = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,1,2,3,4,5,6,7,8,9,0".split(",");
 
         for (int i=0 ; i<length ; i++)
         {

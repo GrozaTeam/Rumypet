@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 public class ListViewAdapter extends BaseAdapter {
 
-    private ArrayList<ListViewItem> listViewItemList = new ArrayList<ListViewItem>() ;
+    private ArrayList<ListViewItem> listViewItemList = new ArrayList<ListViewItem>();
 
     @Override
     public int getCount() {

@@ -17,16 +17,15 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import org.w3c.dom.Text;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
 import dognose.cd_dog.model.Dog;
-import dognose.cd_dog.model.Response;
+import dognose.cd_dog.model.Res;
 import dognose.cd_dog.model.User;
 import dognose.cd_dog.network.NetworkUtil;
 import dognose.cd_dog.utils.Constants;
+
 import retrofit2.adapter.rxjava.HttpException;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -52,15 +51,12 @@ public class InformationDogListActivity extends AppCompatActivity {
 
     private SharedPreferences mSharedPreferences;
     private CompositeSubscription mSubscriptions;
+
     private String mToken;
     private String mEmail;
-    private String mTokenDog;
-    private String mTokenEmail;
-
-    private TextView tvCheckError;
-    private Button btnCheckError;
 
 
+    private ArrayList<ListViewItem> data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,32 +66,21 @@ public class InformationDogListActivity extends AppCompatActivity {
         bindingView();
         initSharedPreferences();
         loadProfile();
-
-        // UpdatingList();
-
-/*
-        listViewDog.setOnItemClickListener(new ListView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView parent, View view, int position, long id) {
-
-                Intent intent = new Intent(getApplicationContext(), InformationDogListDetail.class);
-                intent.putExtra("data", dogArrayList.get(position));
-
-                startActivity(intent);
-
-            }
-        });
-*/
+        loadDogProfile();
 
     }
 
     @Override
     protected void onResume(){
         super.onResume();
-        // UpdatingList();
-
+        loadDogProfile();
     }
-    //
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        mSubscriptions.unsubscribe();
+    }
 
     private void initSharedPreferences() {
 
@@ -110,6 +95,7 @@ public class InformationDogListActivity extends AppCompatActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponse,this::handleError));
+
     }
 
     private void loadDogProfile(){
@@ -128,12 +114,18 @@ public class InformationDogListActivity extends AppCompatActivity {
         ownerName = user.getName();
 
     }
-    private void handleResponseDog(Dog dog) {
 
-        String resultDogID = dog.getDogId();
-        String resultDogName = dog.getName();
+    private void handleResponseDog(Dog[] dog) {
 
-        Log.d("paengResult", resultDogID+"/"+resultDogName);
+        dogArrayList = new ArrayList();
+        adapter = new ListViewAdapter();
+
+        for (Dog dogitem : dog){
+            if(dogitem!=null){
+                adapter.addItemDog(null, dogitem.getName(), dogitem.getSpecies(), dogitem.getGender(), dogitem.getBirth());
+            }
+        }
+        listViewDog.setAdapter(adapter);
 
     }
 
@@ -144,25 +136,7 @@ public class InformationDogListActivity extends AppCompatActivity {
             Gson gson = new GsonBuilder().create();
             try {
                 String errorBody = ((HttpException) error).response().errorBody().string();
-                Response response = gson.fromJson(errorBody,Response.class);
-                showSnackBarMessage(response.getMessage());
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            showSnackBarMessage("Network Error !");
-            Log.d("paengResultError", String.valueOf(error));
-        }
-    }
-    private void handleErrorDog(Throwable error) {
-
-        if (error instanceof HttpException) {
-
-            Gson gson = new GsonBuilder().create();
-            try {
-                String errorBody = ((HttpException) error).response().errorBody().string();
-                Response response = gson.fromJson(errorBody,Response.class);
+                Res response = gson.fromJson(errorBody, dognose.cd_dog.model.Res.class);
                 showSnackBarMessage(response.getMessage());
 
             } catch (IOException e) {
@@ -174,21 +148,55 @@ public class InformationDogListActivity extends AppCompatActivity {
     }
 
     private void showSnackBarMessage(String message){
-        Toast.makeText(InformationDogListActivity.this, "Network Error!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(InformationDogListActivity.this, message, Toast.LENGTH_SHORT).show();
 
     }
-    //
+
+    private void bindingView(){
+        tvOwnerId = (TextView)findViewById(R.id.tv_owner_id);
+        listViewDog = (ListView)findViewById(R.id.lv_dog);
+        btnAdd = (LinearLayout) findViewById(R.id.btn_add_dog);
+        btnProfile = (LinearLayout) findViewById(R.id.btn_profile);
+        btnAdd.setOnClickListener(listener);
+        btnProfile.setOnClickListener(listener);
+        listViewDog.setOnItemClickListener(new ListView.OnItemClickListener(){
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("PaengPosition", String.valueOf(position));
 
 
+            }
+        });
+    }
 
 
-    public void UpdatingList(){
-        //final DBHelper dbHelper = new DBHelper(getApplicationContext(), "RumyPet.db", null, 1);
+    Button.OnClickListener listener = new Button.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.btn_add_dog:
+                    Intent intentAdd = new Intent(getApplicationContext(), RegisterAdditionalDogActivity.class);
+                    intentAdd.putExtra("id", ownerId);
+                    intentAdd.putExtra("name", ownerName);
+                    startActivity(intentAdd);
+                    break;
 
+                case R.id.btn_profile:
+                    Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                    startActivity(intent);
+                    break;
 
-        loadDogProfile();
+                default:
 
-/*
+                    break;
+            }
+        }
+    };
+
+    public void UpdatingListInnerDB(){
+        final DBHelper dbHelper = new DBHelper(getApplicationContext(), "RumyPet.db", null, 1);
+
 
         dogArrayList = new ArrayList();
 
@@ -210,51 +218,8 @@ public class InformationDogListActivity extends AppCompatActivity {
         }
 
         listViewDog.setAdapter(adapter);
-*/
+
 
     }
-
-    private void bindingView(){
-        tvOwnerId = (TextView)findViewById(R.id.tv_owner_id);
-        listViewDog = (ListView)findViewById(R.id.lv_dog);
-        btnAdd = (LinearLayout) findViewById(R.id.btn_add_dog);
-        btnProfile = (LinearLayout) findViewById(R.id.btn_profile);
-        tvCheckError = (TextView) findViewById(R.id.tv_check_error);
-        btnCheckError = (Button) findViewById(R.id.btn_check_error);
-        btnAdd.setOnClickListener(listener);
-        btnProfile.setOnClickListener(listener);
-        btnCheckError.setOnClickListener(listener);
-    }
-
-
-
-    Button.OnClickListener listener = new Button.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.btn_add_dog:
-                    Intent intentAdd = new Intent(getApplicationContext(), RegisterAdditionalDogActivity.class);
-                    intentAdd.putExtra("id", ownerId);
-                    intentAdd.putExtra("name", ownerName);
-                    startActivity(intentAdd);
-                    break;
-
-                case R.id.btn_profile:
-                    Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-                    startActivity(intent);
-                    break;
-
-                case R.id.btn_check_error:
-
-                    UpdatingList();
-
-                    break;
-
-                default:
-
-                    break;
-            }
-        }
-    };
 
 }
