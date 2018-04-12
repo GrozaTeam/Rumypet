@@ -121,6 +121,7 @@ public class LoginActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         } else {
+            Log.d("어떤 에러가 뜨니 찬일", String.valueOf(error));
             showSnackBarMessage("Network Error!");
         }
     }
