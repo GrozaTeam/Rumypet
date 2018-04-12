@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="species_array">
+        <item>Select the dog's species</item>
+        <item>Golden Retriever</item>
+        <item>Bichon Frise</item>
+        <item>Cocker Spaniel</item>
+        <item>Maltese</item>
+        <item>Siberian Husky</item>
+        <item>Chihuahua</item>
+    </string-array>
+</resources>

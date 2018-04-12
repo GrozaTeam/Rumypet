@@ -90,13 +90,14 @@
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
-                    <EditText
+                    <Spinner
                         android:id="@+id/et_species"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="0.7"
                         android:layout_marginRight="20dp"
-
+                        android:textAlignment="center"
+                        android:entries="@array/species_array"
                         android:background="@android:color/background_light"
                         android:gravity="center_vertical|center"
                         android:textSize="20dp" />

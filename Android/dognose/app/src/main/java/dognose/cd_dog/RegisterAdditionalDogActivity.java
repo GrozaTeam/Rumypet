@@ -15,10 +15,12 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +41,8 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * Created by paeng on 2018. 3. 26..
  */
@@ -55,7 +59,8 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
 
 
-    private EditText etDogName, etSpecies;
+    private EditText etDogName;
+    private Spinner etSpecies;
     private TextView tvBirth;
     private Button btnRegister, btnPhoto, btnPhotoNose, btnGenderMale, btnGenderFemale;
     // For database
@@ -65,19 +70,15 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
     private String ownerId, ownerName;
 
     private CompositeSubscription mSubscriptions;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_register_additional);
-
         Intent intent = getIntent();
         ownerId = intent.getStringExtra("id");
         ownerName = intent.getStringExtra("name");
         mSubscriptions = new CompositeSubscription();
-
         bindingView();
-
     }
 
     @Override
@@ -137,7 +138,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
             Toast.makeText(RegisterAdditionalDogActivity.this, "Enter Dog Name", Toast.LENGTH_SHORT).show();
             return false;
         }
-        else if (species.equals("")){
+        else if (etSpecies.getSelectedItem().toString().equals("Select the dog's species")){
             Toast.makeText(RegisterAdditionalDogActivity.this, "Enter Species", Toast.LENGTH_SHORT).show();
             return false;
         }
@@ -171,7 +172,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
                         dogdb.setName(dogName);
                         dogdb.setGender(gender);
                         dogdb.setBirth(birth);
-                        dogdb.setSpecies(species);
+                        dogdb.setSpecies(etSpecies.getSelectedItem().toString());
 
                         registerProgress(dogdb);
 
@@ -339,9 +340,6 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
                     case R.id.et_dogname:
                         dogName = s.toString();
                         break;
-                    case R.id.et_species:
-                        species = s.toString();
-                        break;
                     default:
                         break;
                 }
@@ -356,7 +354,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
     public void bindingView() {
         etDogName = (EditText) findViewById(R.id.et_dogname);
-        etSpecies = (EditText) findViewById(R.id.et_species);
+        etSpecies = (Spinner) findViewById(R.id.et_species);
         tvBirth = (TextView) findViewById(R.id.tv_birth);
         btnRegister = (Button) findViewById(R.id.btn_register);
         btnPhoto = (Button) findViewById(R.id.btn_photo);
@@ -375,8 +373,6 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
         imgDogNose = (ImageView) findViewById(R.id.img_photo_nose);
 
         textChangedListener(etDogName);
-        textChangedListener(etSpecies);
-
         tvBirth.setOnClickListener(listener);
 
 
