@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -20,6 +19,8 @@ import com.google.gson.GsonBuilder;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import dognose.cd_dog.ListViewContent.ListViewAdapter;
+import dognose.cd_dog.ListViewContent.ListViewItem;
 import dognose.cd_dog.model.Dog;
 import dognose.cd_dog.model.Res;
 import dognose.cd_dog.model.User;

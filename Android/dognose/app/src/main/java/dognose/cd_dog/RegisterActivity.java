@@ -43,8 +43,6 @@ public class RegisterActivity extends AppCompatActivity {
     private Button btnRegister, btnCheckId, btnCheckPhone;
     // For database
     private String id="", pw="", pw2="", ownerName="", ownerPhone="";
-    private boolean idDulplicated = false;
-    private boolean duplicateCheck = false;
 
     private ProgressBar mProgressbar;
     private CompositeSubscription mSubscriptions;
@@ -64,23 +62,21 @@ public class RegisterActivity extends AppCompatActivity {
 
         if (id.equals("")) {
             Toast.makeText(RegisterActivity.this, "Please input id", Toast.LENGTH_SHORT).show();
-
             return false;
+
         }else if(!validateEmail(id)){
             Toast.makeText(RegisterActivity.this, "Input ID into e-mail form", Toast.LENGTH_SHORT).show();
-
             return false;
 
         } else if (pw.equals("")) {
             Toast.makeText(RegisterActivity.this, "Please input password", Toast.LENGTH_SHORT).show();
             return false;
-        } else if(!duplicateCheck){
-            Toast.makeText(RegisterActivity.this, "Please Double Check ID.", Toast.LENGTH_SHORT).show();
-            return false;
+
         } else if(!pw.equals(pw2)){
             Toast.makeText(RegisterActivity.this, "Password is not same", Toast.LENGTH_SHORT).show();
             return false;
-        }else {
+
+        } else {
             return true;
         }
     }
@@ -97,9 +93,9 @@ public class RegisterActivity extends AppCompatActivity {
 
                     if (checkjoin()) {
                         //내부 DB 이용하여 Register 할 때
-                        DBHelper dbHelper = new DBHelper(getApplicationContext(), "RumyPet.db", null, 1);
-                        dbHelper.insertOwner(id, pw, ownerName, ownerPhone);
-                        dbHelper.insertDog("id","dogname","species","gender", "birth");
+                        //DBHelper dbHelper = new DBHelper(getApplicationContext(), "RumyPet.db", null, 1);
+                        //dbHelper.insertOwner(id, pw, ownerName, ownerPhone);
+                        //dbHelper.insertDog("id","dogname","species","gender", "birth");
 
                         User user = new User();
                         user.setName(ownerName);
@@ -113,32 +109,6 @@ public class RegisterActivity extends AppCompatActivity {
 
                         Toast.makeText(RegisterActivity.this, "Register Complete.", Toast.LENGTH_SHORT).show();
                         finish();
-                    }
-
-                    break;
-
-                case R.id.btn_check_id:
-                    DBHelper dbHelper = new DBHelper(getApplicationContext(), "RumyPet.db", null, 1);
-                    String[] allId = dbHelper.getAllIdForDoubleCheck();
-                    for (String data : allId) {
-                        if (data != null) {
-                            if(id.equals(data)){
-                                idDulplicated = true;
-                            }
-                        }
-                    }
-                    if(idDulplicated){
-                        Toast.makeText(RegisterActivity.this, "ID is duplicated please try again.", Toast.LENGTH_SHORT).show();
-                        duplicateCheck = false;
-                    }else if(id.equals("")){
-                        Toast.makeText(RegisterActivity.this, "Please input ID", Toast.LENGTH_SHORT).show();
-                        duplicateCheck = false;
-                    }
-                    else{
-                        Toast.makeText(RegisterActivity.this, "ID double check Complete", Toast.LENGTH_SHORT).show();
-                        duplicateCheck = true;
-                        etId.setFocusable(false);
-
                     }
 
                     break;
@@ -245,7 +215,6 @@ public class RegisterActivity extends AppCompatActivity {
         etOwnerName = (EditText) findViewById(R.id.et_owner_name);
         etOwnerPhone = (EditText) findViewById(R.id.et_owner_phone);
         btnRegister = (Button) findViewById(R.id.btn_register);
-        btnCheckId = (Button) findViewById(R.id.btn_check_id);
         btnCheckPhone = (Button) findViewById(R.id.btn_check_phone);
         mProgressbar = (ProgressBar) findViewById(R.id.progress);
 

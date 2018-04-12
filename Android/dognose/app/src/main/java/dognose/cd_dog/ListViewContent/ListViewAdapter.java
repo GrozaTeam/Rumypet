@@ -1,4 +1,4 @@
-package dognose.cd_dog;
+package dognose.cd_dog.ListViewContent;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -9,9 +9,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
+
+import dognose.cd_dog.R;
 
 /**
  * Created by paeng on 2018. 4. 8..

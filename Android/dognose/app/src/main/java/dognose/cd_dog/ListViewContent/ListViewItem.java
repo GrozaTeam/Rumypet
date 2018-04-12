@@ -1,4 +1,4 @@
-package dognose.cd_dog;
+package dognose.cd_dog.ListViewContent;
 
 import android.graphics.drawable.Drawable;
 

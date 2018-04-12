@@ -18,10 +18,6 @@ public class Main extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main);
 
-        final DBHelper dbHelper = new DBHelper(getApplicationContext(), "RumyPet.db", null, 1);
-        dbHelper.insertOwner("id", "pw", "name", "phone");
-        dbHelper.insertDog("id", "name", "species", "gender", "birth");
-
         bindingView();
 
 
