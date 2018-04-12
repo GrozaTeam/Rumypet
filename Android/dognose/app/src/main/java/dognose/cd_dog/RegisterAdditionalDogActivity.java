@@ -138,7 +138,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
             Toast.makeText(RegisterAdditionalDogActivity.this, "Enter Dog Name", Toast.LENGTH_SHORT).show();
             return false;
         }
-        else if (etSpecies.getSelectedItem().toString().equals("Select the dog's species")){
+        else if (etSpecies.getSelectedItem().toString().equals("Select")){
             Toast.makeText(RegisterAdditionalDogActivity.this, "Enter Species", Toast.LENGTH_SHORT).show();
             return false;
         }
