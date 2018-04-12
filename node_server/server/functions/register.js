@@ -21,8 +21,10 @@ exports.registerUser = (name, email, password, phone) =>
 
 		newUser.save()
 
-		.then(() => resolve({ status: 201, message: 'User Registered Sucessfully !' }))
-
+		.then(() => {
+			resolve({ status: 201, message: 'User Registered Sucessfully !' });
+		})
+		
 		.catch(err => {
 
 			if (err.code == 11000) {

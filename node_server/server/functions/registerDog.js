@@ -28,8 +28,6 @@ exports.registerDog = (dogId, ownerId, dogName, dogGender, dogSpecies, dogBirth)
 
 		.catch(err => {
 
-			console.log('register error : ' + err);
-
 			if (err.code == 11000) {
 
 				reject({ status: 409, message: 'Dog Already Registered !' });

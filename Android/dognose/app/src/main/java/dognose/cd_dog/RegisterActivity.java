@@ -104,9 +104,6 @@ public class RegisterActivity extends AppCompatActivity {
 
                         mProgressbar.setVisibility(View.VISIBLE);
                         registerProcess(user);
-
-
-                        Toast.makeText(RegisterActivity.this, "Register Complete.", Toast.LENGTH_SHORT).show();
                         finish();
                     }
 
@@ -114,7 +111,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
                 case R.id.btn_check_phone:
-                    Log.d("paeng", "phone check pushed");
+                    Toast.makeText(RegisterActivity.this, "Certificating Phone Success", Toast.LENGTH_SHORT).show();
                     break;
 
 
