@@ -181,7 +181,10 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            doTakePhotoAction();
+                            Intent intentNosePhoto = new Intent(getApplicationContext(), CameraActivity_for_body.class);
+                            String ownerId2 = ownerId + "|body|";
+                            intentNosePhoto.putExtra("ownerId", ownerId2);
+                            startActivityForResult(intentNosePhoto,1);
                         }
                     };
 
@@ -211,9 +214,10 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
                     break;
 
                 case R.id.btn_photo_nose:
-                    Intent intentNosePhoto = new Intent(getApplicationContext(), CameraActivity.class);
-                    intentNosePhoto.putExtra("ownerId", ownerId);
-                    startActivityForResult(intentNosePhoto,1);
+                    Intent intentNosePhoto2 = new Intent(getApplicationContext(), CameraActivity.class);
+                    ownerId = ownerId + "|reg|";
+                    intentNosePhoto2.putExtra("ownerId", ownerId);
+                    startActivityForResult(intentNosePhoto2,1);
                     break;
 
                 default:

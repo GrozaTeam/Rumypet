@@ -38,6 +38,9 @@
 
         <activity android:name=".Main"/>
         <activity android:name=".CameraActivity"/>
+        <activity android:name=".CameraActivity_for_find"/>
+        <activity android:name=".CameraActivity_for_body"/>
+
         <activity android:name=".InformationDogListActivity"/>
         <activity android:name=".RegisterActivity"/>
         <activity android:name=".DBChecker"/>

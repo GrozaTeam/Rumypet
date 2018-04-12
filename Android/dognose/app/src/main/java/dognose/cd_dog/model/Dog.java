@@ -1,10 +1,12 @@
 package dognose.cd_dog.model;
 
+import java.io.Serializable;
+
 /**
  * Created by paeng on 2018. 4. 10..
  */
 
-public class Dog {
+public class Dog implements Serializable {
     private String dogId;
     private String ownerId;
     private String dogName;

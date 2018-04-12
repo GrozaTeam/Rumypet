@@ -43,7 +43,7 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/btn_beforeinfo"
+                android:id="@+id/btn_before"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.15"
@@ -58,7 +58,7 @@
                 app:srcCompat="@drawable/img_dog_example" />
 
             <ImageButton
-                android:id="@+id/btn_nextinfo"
+                android:id="@+id/btn_after"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.15"

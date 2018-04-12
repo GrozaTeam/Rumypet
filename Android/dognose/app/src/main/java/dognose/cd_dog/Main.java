@@ -57,8 +57,10 @@ public class Main extends AppCompatActivity {
                     break;
 
                 case R.id.btn_find:
-                    Intent intentFind = new Intent(getApplicationContext(), CameraActivity.class);
-                    startActivity(intentFind);
+                    Intent intentNosePhoto = new Intent(getApplicationContext(), CameraActivity.class);
+                    String ownerId = "temp|find|";
+                    intentNosePhoto.putExtra("ownerId", ownerId);
+                    startActivityForResult(intentNosePhoto,1);
                     break;
                 case R.id.btn_list:
                     Intent intentList = new Intent(getApplicationContext(), DBChecker.class);
