@@ -26,6 +26,7 @@ public class NetworkUtil {
 
     }
 
+    // for Login
     public static RetrofitInterface getRetrofit(String email, String password) {
 
         String credentials = email + ":" + password;

@@ -2,8 +2,6 @@ package dognose.cd_dog;
 
 
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,13 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 import java.io.IOException;
-
-import dognose.cd_dog.R;
 import dognose.cd_dog.model.Res;
 import dognose.cd_dog.model.User;
 import dognose.cd_dog.network.NetworkUtil;
@@ -30,8 +24,6 @@ import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
 import static dognose.cd_dog.utils.Validation.validateEmail;
-import static dognose.cd_dog.utils.Validation.validateFields;
-import static java.lang.System.err;
 
 /**
  * Created by paeng on 2018. 3. 26..
@@ -40,13 +32,12 @@ import static java.lang.System.err;
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText etId, etPw, etPw2, etOwnerName, etOwnerPhone;
-    private Button btnRegister, btnCheckId, btnCheckPhone;
+    private Button btnRegister, btnCheckPhone;
     // For database
     private String id="", pw="", pw2="", ownerName="", ownerPhone="";
 
     private ProgressBar mProgressbar;
     private CompositeSubscription mSubscriptions;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +47,6 @@ public class RegisterActivity extends AppCompatActivity {
         bindingView();
 
     }
-
 
     private boolean checkjoin() {
 
@@ -72,6 +62,18 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(RegisterActivity.this, "Please input password", Toast.LENGTH_SHORT).show();
             return false;
 
+        } else if (pw2.equals("")) {
+            Toast.makeText(RegisterActivity.this, "Please input password2", Toast.LENGTH_SHORT).show();
+            return false;
+
+        } else if (ownerName.equals("")) {
+            Toast.makeText(RegisterActivity.this, "Please input name", Toast.LENGTH_SHORT).show();
+            return false;
+
+        } else if (ownerPhone.equals("")) {
+            Toast.makeText(RegisterActivity.this, "Please input phone", Toast.LENGTH_SHORT).show();
+            return false;
+
         } else if(!pw.equals(pw2)){
             Toast.makeText(RegisterActivity.this, "Password is not same", Toast.LENGTH_SHORT).show();
             return false;
@@ -80,9 +82,6 @@ public class RegisterActivity extends AppCompatActivity {
             return true;
         }
     }
-
-
-
 
     Button.OnClickListener listener = new Button.OnClickListener() {
 
@@ -124,7 +123,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         }
     };
-
 
     private void registerProcess(User user) {
 
@@ -169,7 +167,6 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     }
-
 
     private void textChangedListener(final EditText etInput){
         etInput.addTextChangedListener(new TextWatcher() {
@@ -219,7 +216,6 @@ public class RegisterActivity extends AppCompatActivity {
         mProgressbar = (ProgressBar) findViewById(R.id.progress);
 
         btnRegister.setOnClickListener(listener);
-        btnCheckId.setOnClickListener(listener);
         btnCheckPhone.setOnClickListener(listener);
 
         textChangedListener(etId);

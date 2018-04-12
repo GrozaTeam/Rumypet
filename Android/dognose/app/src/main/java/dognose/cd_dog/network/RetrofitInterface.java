@@ -1,6 +1,5 @@
 package dognose.cd_dog.network;
 
-import dognose.cd_dog.jsonparsing.JSONResponse;
 import dognose.cd_dog.model.Dog;
 import dognose.cd_dog.model.Res;
 import dognose.cd_dog.model.User;
@@ -10,7 +9,6 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
-import retrofit2.Call;
 import rx.Observable;
 
 public interface RetrofitInterface {

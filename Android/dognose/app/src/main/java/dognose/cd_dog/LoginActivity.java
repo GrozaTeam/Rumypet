@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private Button btnLogin;
     private EditText etId, etPw;
-    private String id, pw, comparePw;
+    private String id, pw;
 
     private ProgressBar mProgressBar;
 
@@ -46,7 +46,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_login);
-
 
         etId = (EditText)findViewById(R.id.et_id);
         etPw = (EditText)findViewById(R.id.et_pw);
@@ -63,9 +62,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-
                 loginProcess(id,pw);
-
             }
         });
     }
@@ -78,7 +75,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void initSharedPreferences() {
 
-        //mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
 
     }
@@ -103,15 +99,9 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), InformationDogListActivity.class);
         startActivity(intent);
 
-
         etId.setText(null);
         etPw.setText(null);
-
         finish();
-
-
-
-
     }
 
     private void handleError(Throwable error) {
@@ -123,7 +113,6 @@ public class LoginActivity extends AppCompatActivity {
             Gson gson = new GsonBuilder().create();
 
             try {
-
                 String errorBody = ((HttpException) error).response().errorBody().string();
                 Res response = gson.fromJson(errorBody,Res.class);
                 showSnackBarMessage(response.getMessage());
@@ -132,7 +121,6 @@ public class LoginActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         } else {
-            Log.d("paeng", String.valueOf(error));
             showSnackBarMessage("Network Error!");
         }
     }
