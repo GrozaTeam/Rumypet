@@ -1,5 +1,8 @@
 package dognose.cd_dog;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import dognose.cd_dog.model.Dog;
 
@@ -29,8 +33,9 @@ public class InformationDogListDetail extends AppCompatActivity {
 
     private ImageButton btnBefore, btnAfter;
 
+    private Button btnMoreInfo;
 
-    private TextView tvName, tvSpecies, tvGender, tvBirth, tvMemo;
+    private TextView tvName, tvSpecies, tvGender, tvBirth, tvAge;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +54,7 @@ public class InformationDogListDetail extends AppCompatActivity {
 
     }
 
-    ImageButton.OnClickListener imgBtnListener = new ImageButton.OnClickListener(){
+    Button.OnClickListener listener = new Button.OnClickListener(){
 
         @Override
         public void onClick(View v) {
@@ -74,6 +79,34 @@ public class InformationDogListDetail extends AppCompatActivity {
                         Log.d("PaengPosition", String.valueOf(position));
                     }
                     break;
+
+                case R.id.btn_moreinfo:
+
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(InformationDogListDetail.this);
+                    dialog.setCancelable(false);
+                    dialog.setTitle("You need Certification");
+                    dialog.setMessage("If you want to see the detail Information of this dog, You need certification of your dog by picuture of dog's nose.\n\nDo you want to see it?");
+                    dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            Toast.makeText(InformationDogListDetail.this, "Coming Soon...", Toast.LENGTH_LONG).show();
+                        }
+                    }).setNegativeButton("Cancel ", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //Action for "Cancel".
+                        }
+                    });
+
+                    final AlertDialog alert = dialog.create();
+                    alert.show();
+
+
+                    break;
+
+                default:
+
+                    break;
             }
         }
     };
@@ -83,6 +116,8 @@ public class InformationDogListDetail extends AppCompatActivity {
         tvSpecies.setText(dogArrayList.get(position).getSpecies());
         tvGender.setText(dogArrayList.get(position).getGender());
         tvBirth.setText(dogArrayList.get(position).getBirth());
+        tvAge.setText(getAge(dogArrayList.get(position).getBirth()));
+
     }
 
     private void bindingView(){
@@ -90,12 +125,27 @@ public class InformationDogListDetail extends AppCompatActivity {
         tvGender = (TextView)findViewById(R.id.info_gender);
         tvBirth = (TextView)findViewById(R.id.info_birth);
         tvSpecies = (TextView)findViewById(R.id.info_species);
+        tvAge = (TextView)findViewById(R.id.info_age);
+        btnMoreInfo = (Button)findViewById(R.id.btn_moreinfo);
 
         btnBefore = (ImageButton)findViewById(R.id.btn_before);
         btnAfter = (ImageButton)findViewById(R.id.btn_after);
-        btnBefore.setOnClickListener(imgBtnListener);
-        btnAfter.setOnClickListener(imgBtnListener);
+        btnBefore.setOnClickListener(listener);
+        btnAfter.setOnClickListener(listener);
+        btnMoreInfo.setOnClickListener(listener);
 
+    }
+
+    private String getAge(String birth){
+
+        String birthYear = birth.substring(0,4);
+
+        Calendar calendarStart = Calendar.getInstance();
+        int todayYear = calendarStart.get(Calendar.YEAR);
+
+        String age = String.valueOf(todayYear - Integer.valueOf(birthYear) +1);
+
+        return age;
     }
 
 }

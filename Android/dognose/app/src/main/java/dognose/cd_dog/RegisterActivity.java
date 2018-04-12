@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -58,27 +57,35 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(RegisterActivity.this, "Input ID into e-mail form", Toast.LENGTH_SHORT).show();
             return false;
 
-        } else if (pw.equals("")) {
+        }else if (pw.equals("")) {
             Toast.makeText(RegisterActivity.this, "Please input password", Toast.LENGTH_SHORT).show();
             return false;
 
-        } else if (pw2.equals("")) {
+        }else if (pw2.equals("")) {
             Toast.makeText(RegisterActivity.this, "Please input password2", Toast.LENGTH_SHORT).show();
             return false;
 
-        } else if (ownerName.equals("")) {
+        }else if (ownerName.equals("")) {
             Toast.makeText(RegisterActivity.this, "Please input name", Toast.LENGTH_SHORT).show();
             return false;
 
-        } else if (ownerPhone.equals("")) {
+        }else if (ownerPhone.equals("")) {
             Toast.makeText(RegisterActivity.this, "Please input phone", Toast.LENGTH_SHORT).show();
             return false;
 
-        } else if(!pw.equals(pw2)){
+        }else if(!pw.equals(pw2)){
             Toast.makeText(RegisterActivity.this, "Password is not same", Toast.LENGTH_SHORT).show();
             return false;
 
-        } else {
+        }else if(pw.length()<4 || pw.length()>15){
+            Toast.makeText(RegisterActivity.this, "Choose Password Length between 4 and 15", Toast.LENGTH_SHORT).show();
+            return false;
+
+        }else if(ownerPhone.length() != 10 && ownerPhone.length() != 11){
+            Toast.makeText(RegisterActivity.this, "Phone number Length must be 10 or 11", Toast.LENGTH_SHORT).show();
+            return false;
+
+        }else {
             return true;
         }
     }
@@ -91,10 +98,6 @@ public class RegisterActivity extends AppCompatActivity {
                 case R.id.btn_register:
 
                     if (checkjoin()) {
-                        //내부 DB 이용하여 Register 할 때
-                        //DBHelper dbHelper = new DBHelper(getApplicationContext(), "RumyPet.db", null, 1);
-                        //dbHelper.insertOwner(id, pw, ownerName, ownerPhone);
-                        //dbHelper.insertDog("id","dogname","species","gender", "birth");
 
                         User user = new User();
                         user.setName(ownerName);

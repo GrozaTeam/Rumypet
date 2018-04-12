@@ -1,11 +1,14 @@
 package dognose.cd_dog;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class Main extends AppCompatActivity {
 
@@ -48,10 +51,29 @@ public class Main extends AppCompatActivity {
                     break;
 
                 case R.id.btn_find:
-                    Intent intentNosePhoto = new Intent(getApplicationContext(), CameraActivity.class);
-                    String ownerId = "temp|find|";
-                    intentNosePhoto.putExtra("ownerId", ownerId);
-                    startActivityForResult(intentNosePhoto,1);
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(Main.this);
+                    dialog.setCancelable(false);
+                    dialog.setTitle("Find the dog");
+                    dialog.setMessage("We will find the dog's information by dog's nose. So you need to take three pictures of the dog.\n\nWill you try it?");
+                    dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+
+                            Intent intentNosePhoto = new Intent(getApplicationContext(), CameraActivity.class);
+                            String ownerId = "temp|find|";
+                            intentNosePhoto.putExtra("ownerId", ownerId);
+                            startActivityForResult(intentNosePhoto,1);
+
+                        }
+                    }).setNegativeButton("Cancel ", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //Action for "Cancel".
+                        }
+                    });
+
+                    final AlertDialog alert = dialog.create();
+                    alert.show();
                     break;
                 case R.id.btn_list:
                     Intent intentList = new Intent(getApplicationContext(), DBChecker.class);

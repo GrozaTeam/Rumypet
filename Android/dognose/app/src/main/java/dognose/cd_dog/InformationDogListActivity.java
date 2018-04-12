@@ -18,6 +18,7 @@ import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import dognose.cd_dog.ListViewContent.ListViewAdapter;
 import dognose.cd_dog.ListViewContent.ListViewItem;
@@ -45,10 +46,8 @@ public class InformationDogListActivity extends AppCompatActivity {
 
     private ArrayList<Dog> dogArrayList;
     ListViewAdapter adapter;
-    private String[] dataDog;
     private ListView listViewDog;
     private LinearLayout btnAdd, btnProfile;
-
 
     private SharedPreferences mSharedPreferences;
     private CompositeSubscription mSubscriptions;
@@ -57,9 +56,6 @@ public class InformationDogListActivity extends AppCompatActivity {
     private String mEmail;
 
     private int dogNum = 0;
-
-
-    private ArrayList<ListViewItem> data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,10 +120,12 @@ public class InformationDogListActivity extends AppCompatActivity {
         adapter = new ListViewAdapter();
         dogNum = 0;
 
+
+
         for (Dog dogitem : dog){
             if(dogitem!=null){
                 dogArrayList.add(dogitem);
-                adapter.addItemDog(null, dogitem.getName(), dogitem.getSpecies(), dogitem.getGender(), dogitem.getBirth());
+                adapter.addItemDog(null, dogitem.getName(), dogitem.getSpecies(), dogitem.getGender(), getAge(dogitem.getBirth()));
                 dogNum += 1;
             }
         }
@@ -156,6 +154,18 @@ public class InformationDogListActivity extends AppCompatActivity {
     private void showSnackBarMessage(String message){
         Toast.makeText(InformationDogListActivity.this, message, Toast.LENGTH_SHORT).show();
 
+    }
+
+    private String getAge(String birth){
+
+        String birthYear = birth.substring(0,4);
+
+        Calendar calendarStart = Calendar.getInstance();
+        int todayYear = calendarStart.get(Calendar.YEAR);
+
+        String age = String.valueOf(todayYear - Integer.valueOf(birthYear) +1);
+
+        return age;
     }
 
     private void bindingView(){

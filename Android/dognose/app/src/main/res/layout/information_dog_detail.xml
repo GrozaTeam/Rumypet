@@ -170,21 +170,6 @@
                     android:textSize="20dp"
                     android:focusable="false"/>
 
-                <TextView
-                    android:id="@+id/editText6"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.5"
-                    android:background="@null"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Memo"
-                    android:textAlignment="center"
-                    android:textStyle="bold"
-                    android:textColor="#000000"
-                    android:gravity="center"
-                    android:textSize="20dp"
-                    android:focusable="false"/>
             </LinearLayout>
 
             <LinearLayout
@@ -243,15 +228,6 @@
                     android:textSize="20dp"
                     android:focusable="false"/>
 
-                <TextView
-                    android:id="@+id/info_memo"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.5"
-                    android:textColor="#000000"
-                    android:gravity="center|left"
-                    android:textSize="20dp"
-                    android:focusable="false"/>
             </LinearLayout>
 
             <LinearLayout
