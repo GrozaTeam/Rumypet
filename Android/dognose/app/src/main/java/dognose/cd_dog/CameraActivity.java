@@ -313,7 +313,7 @@ public class CameraActivity extends AppCompatActivity{
         }
     };
 
-    private class SaveImageTask extends AsyncTask<byte[], Void, Void> {
+    protected class SaveImageTask extends AsyncTask<byte[], Void, Void> {
 
         @Override
         protected Void doInBackground(byte[]... data) {

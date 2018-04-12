@@ -4,9 +4,14 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -29,6 +34,10 @@ import com.google.gson.GsonBuilder;
 
 import org.w3c.dom.Text;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Random;
@@ -67,7 +76,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
     private String dogName="", species="", gender="", birth="";
     private ImageView imgDog, imgDogNose;
 
-    private String ownerId, ownerName;
+    private String ownerId, ownerId_for_body,ownerName;
 
     private CompositeSubscription mSubscriptions;
     @Override
@@ -87,36 +96,101 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
         mSubscriptions.unsubscribe();
     }
 
+    private class SaveImageTask extends AsyncTask<byte[], Void, Void> {
+
+        @Override
+        protected Void doInBackground(byte[]... data) {
+            FileOutputStream outStream = null;
+
+            // Write to SD Card
+            try {
+                File sdCard = Environment.getExternalStorageDirectory();
+                File dir = new File (sdCard.getAbsolutePath() + "/RUMYPET");
+                dir.mkdirs();
+
+                String fileName = String.format(ownerId_for_body+"|doginalbum|.jpg" );
+                File outFile = new File(dir, fileName);
+
+                outStream = new FileOutputStream(outFile);
+                outStream.write(data[0]);
+                outStream.flush();
+                outStream.close();
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+            }
+            return null;
+        }
+
+    }
+    private final int GALLERY_CODE=1112;
+
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode!= RESULT_OK)
+        if (resultCode == RESULT_OK) {
 
-        switch (requestCode)
-        {
-            case PICK_FROM_ALBUM:
-            {
-                try{
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData());
-                    imgDog.setImageBitmap(bitmap);
-                }catch (Exception e){
-                }
+            switch (requestCode) {
+
+                case GALLERY_CODE:
+                    sendPicture(data.getData()); //갤러리에서 가져오기
+                    break;
 
 
-
+                default:
+                    break;
             }
-            case PICK_FROM_CAMERA:
-            {
 
-
-            }
-            case CROP_FROM_IMAGE:
-            {
-
-            }
         }
     }
+
+    private void sendPicture(Uri imgUri) {
+
+        String imagePath = getRealPathFromURI(imgUri); // path 경로
+        ExifInterface exif = null;
+        try {
+            exif = new ExifInterface(imagePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int exifOrientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+
+        Bitmap bitmap = BitmapFactory.decodeFile(imagePath);//경로를 통해 비트맵으로 전환
+        
+        
+        imgDog.setImageBitmap(bitmap);//이미지 뷰에 비트맵 넣기
+        imgDog.setBackground(null);
+
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        byte[] currentData = stream.toByteArray();
+
+        //파일로 저장
+        new RegisterAdditionalDogActivity.SaveImageTask().execute(currentData);
+
+
+    }
+
+    private String getRealPathFromURI(Uri contentUri) {
+        int column_index=0;
+        String[] proj = {MediaStore.Images.Media.DATA};
+        Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
+        if(cursor.moveToFirst()){
+            column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        }
+
+        return cursor.getString(column_index);
+    }
+
+
+
+
+
 
     public void doTakePhotoAction(){
 
@@ -197,10 +271,20 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
                     DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener(){
 
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            doTakeAlbumAction();
-                        }
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                Intent intent = new Intent(Intent.ACTION_PICK);
+                                intent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                                intent.setType("image/*");
+                                startActivityForResult(intent, GALLERY_CODE);
+
+
+                            }
+
+
+
                     };
 
                     DialogInterface.OnClickListener cancelListener = new DialogInterface.OnClickListener(){
