@@ -19,7 +19,7 @@
             android:layout_height="50dp"
             android:background="@color/colorMainDark"
 
-            android:text="Register of my dog"
+            android:text="SIGN UP"
             android:gravity="center"
 
             android:textColor="@android:color/black"
@@ -258,7 +258,7 @@
                     android:id="@+id/tv_sign_in"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Already Registered? Login Now!"
+                    android:text="Already Registered? Sign in Now!"
                     android:gravity="center"
                     android:textStyle="bold"/>
 

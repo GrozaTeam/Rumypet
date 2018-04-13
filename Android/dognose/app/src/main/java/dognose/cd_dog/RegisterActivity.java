@@ -118,7 +118,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
                 case R.id.btn_check_phone:
-                    Toast.makeText(RegisterActivity.this, "Coming Soon", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Coming Soon...", Toast.LENGTH_SHORT).show();
                     break;
 
                 case R.id.tv_sign_in:

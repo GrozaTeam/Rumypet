@@ -20,7 +20,7 @@
             android:layout_height="50dp"
             android:background="@color/colorMainDark"
 
-            android:text="Log In"
+            android:text="SIGN IN"
             android:gravity="center"
 
             android:textColor="@android:color/black"
