@@ -54,7 +54,7 @@
                 android:layout_weight="5"
                 android:background="@drawable/btn_line_differentcolor"
                 android:gravity="center|left"
-                android:text="Register My Dog"
+                android:text="Register My ID"
                 android:textColor="@android:color/black"
                 android:textSize="24dp"
                 android:textStyle="bold" />
@@ -93,7 +93,7 @@
                 android:layout_weight="5"
                 android:background="@drawable/btn_line_differentcolor"
                 android:gravity="center|left"
-                android:text="Information of my Dog"
+                android:text="Information of My Dog"
                 android:textColor="@android:color/black"
                 android:textSize="24dp"
                 android:textStyle="bold" />

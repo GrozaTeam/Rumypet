@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -36,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin;
     private EditText etId, etPw;
     private String id, pw;
+    private TextView tvSignUp;
 
     private ProgressBar mProgressBar;
 
@@ -47,24 +49,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_login);
 
-        etId = (EditText)findViewById(R.id.et_id);
-        etPw = (EditText)findViewById(R.id.et_pw);
-        btnLogin = (Button)findViewById(R.id.btn_login);
-        mProgressBar = (ProgressBar)findViewById(R.id.progress);
-
-        textChangedListener(etId);
-        textChangedListener(etPw);
+        bindingView();
 
         mSubscriptions = new CompositeSubscription();
         initSharedPreferences();
-
-        btnLogin.setOnClickListener(new Button.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                loginProcess(id,pw);
-            }
-        });
     }
 
     @Override
@@ -131,6 +119,27 @@ public class LoginActivity extends AppCompatActivity {
         Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
     }
 
+    Button.OnClickListener listener = new Button.OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+
+                case R.id.btn_login:
+                    loginProcess(id,pw);
+                    break;
+
+                case R.id.tv_sign_up:
+                    Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                    startActivity(intent);
+                    finish();
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    };
 
     private void textChangedListener(final EditText etInput){
         etInput.addTextChangedListener(new TextWatcher() {
@@ -159,4 +168,19 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void bindingView(){
+
+        etId = (EditText)findViewById(R.id.et_id);
+        etPw = (EditText)findViewById(R.id.et_pw);
+        btnLogin = (Button)findViewById(R.id.btn_login);
+        mProgressBar = (ProgressBar)findViewById(R.id.progress);
+        tvSignUp = (TextView)findViewById(R.id.tv_sign_up);
+        tvSignUp.setOnClickListener(listener);
+        btnLogin.setOnClickListener(listener);
+
+        textChangedListener(etId);
+        textChangedListener(etPw);
+    }
 }
+

@@ -255,7 +255,7 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/tv_login"
+                    android:id="@+id/tv_sign_in"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Already Registered? Login Now!"

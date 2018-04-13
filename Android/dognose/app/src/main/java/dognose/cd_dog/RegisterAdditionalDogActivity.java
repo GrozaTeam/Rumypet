@@ -58,9 +58,8 @@ import static android.app.Activity.RESULT_OK;
 
 public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
-    private static final int PICK_FROM_CAMERA = 0;
     private static final int PICK_FROM_ALBUM = 1;
-    private static final int CROP_FROM_IMAGE = 2;
+    private static final int GALLERY_CODE=1112;
     private static final int colorMaleLight = 0XFFCCCCFF;
     private static final int colorMaleDark = 0XFF5555FF;
     private static final int colorFemaleLight =  0XFFFFCCCC;
@@ -79,6 +78,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
     private String ownerId, ownerId_for_body,ownerName;
 
     private CompositeSubscription mSubscriptions;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,9 +124,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
             }
             return null;
         }
-
     }
-    private final int GALLERY_CODE=1112;
 
 
     @Override
@@ -188,10 +186,6 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
     }
 
 
-
-
-
-
     public void doTakePhotoAction(){
 
     }
@@ -206,29 +200,6 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
     }
 
-    private boolean checkjoin() {
-
-        if (dogName.equals("")) {
-            Toast.makeText(RegisterAdditionalDogActivity.this, "Enter Dog Name", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        else if (etSpecies.getSelectedItem().toString().equals("Select")){
-            Toast.makeText(RegisterAdditionalDogActivity.this, "Enter Species", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        else if (gender.equals("")){
-            Toast.makeText(RegisterAdditionalDogActivity.this, "Choose Gender", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        else if (birth.equals("")){
-            Toast.makeText(RegisterAdditionalDogActivity.this, "Enter Birth", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        else {
-            return true;
-        }
-    }
 
     Button.OnClickListener listener = new Button.OnClickListener() {
 
@@ -279,12 +250,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
                                 intent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                                 intent.setType("image/*");
                                 startActivityForResult(intent, GALLERY_CODE);
-
-
                             }
-
-
-
                     };
 
                     DialogInterface.OnClickListener cancelListener = new DialogInterface.OnClickListener(){
@@ -298,8 +264,8 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
                     new AlertDialog.Builder(RegisterAdditionalDogActivity.this)
                             .setTitle("Select Upload Image")
                             .setPositiveButton("Take Photo", cameraListener)
-                            .setNeutralButton("Select Album", albumListener)
-                            .setNegativeButton("Cancel", cancelListener)
+                            .setNeutralButton("Cancel", cancelListener)
+                            .setNegativeButton("Select Album", albumListener)
                             .show();
 
                     break;
@@ -335,8 +301,6 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
                     DatePickerDialog dialog = new DatePickerDialog(RegisterAdditionalDogActivity.this, datePickListener, todayYear, todayMonth, todayDay);
                     dialog.show();
-
-
 
                     break;
 
@@ -386,11 +350,9 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
     private void handleError(Throwable error) {
 
-
         if (error instanceof HttpException) {
 
             Gson gson = new GsonBuilder().create();
-
             try {
 
                 String errorBody = ((HttpException) error).response().errorBody().string();
@@ -436,6 +398,43 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
         });
     }
 
+    private static String getRandomString(int length) {
+        StringBuffer buffer = new StringBuffer();
+        Random random = new Random();
+
+        String chars[] = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,1,2,3,4,5,6,7,8,9,0".split(",");
+
+        for (int i=0 ; i<length ; i++)
+        {
+            buffer.append(chars[random.nextInt(chars.length)]);
+        }
+        return buffer.toString();
+    }
+
+    private boolean checkjoin() {
+
+        if (dogName.equals("")) {
+            Toast.makeText(RegisterAdditionalDogActivity.this, "Enter Dog Name", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else if (etSpecies.getSelectedItem().toString().equals("Select")){
+            Toast.makeText(RegisterAdditionalDogActivity.this, "Enter Species", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else if (gender.equals("")){
+            Toast.makeText(RegisterAdditionalDogActivity.this, "Choose Gender", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else if (birth.equals("")){
+            Toast.makeText(RegisterAdditionalDogActivity.this, "Enter Birth", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        else {
+            return true;
+        }
+    }
+
     public void bindingView() {
         etDogName = (EditText) findViewById(R.id.et_dogname);
         etSpecies = (Spinner) findViewById(R.id.et_species);
@@ -463,18 +462,6 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
     }
 
-    private static String getRandomString(int length) {
-        StringBuffer buffer = new StringBuffer();
-        Random random = new Random();
-
-        String chars[] = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,1,2,3,4,5,6,7,8,9,0".split(",");
-
-        for (int i=0 ; i<length ; i++)
-        {
-            buffer.append(chars[random.nextInt(chars.length)]);
-        }
-        return buffer.toString();
-    }
 
 
 }

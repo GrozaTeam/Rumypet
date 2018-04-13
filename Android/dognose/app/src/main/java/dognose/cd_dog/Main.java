@@ -76,8 +76,13 @@ public class Main extends AppCompatActivity {
                     alert.show();
                     break;
                 case R.id.btn_list:
-                    Intent intentList = new Intent(getApplicationContext(), DBChecker.class);
-                    startActivity(intentList);
+                    //Intent intentList = new Intent(getApplicationContext(), DBChecker.class);
+                    //startActivity(intentList);
+                    Toast.makeText(Main.this, "Coming Soon", Toast.LENGTH_SHORT);
+                    break;
+
+                case R.id.btn_set:
+                    Toast.makeText(Main.this, "Coming Soon", Toast.LENGTH_SHORT);
                     break;
             }
         }

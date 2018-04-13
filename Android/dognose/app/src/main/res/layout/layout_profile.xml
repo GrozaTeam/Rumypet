@@ -127,7 +127,7 @@
                     android:layout_weight="0.5"
                     android:textColor="#000000"
                     android:gravity="center|left"
-                    android:textSize="20dp"
+                    android:textSize="14dp"
                     android:focusable="false"/>
 
                 <TextView

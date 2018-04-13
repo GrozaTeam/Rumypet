@@ -1,6 +1,7 @@
 package dognose.cd_dog;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -37,6 +39,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     private ProgressBar mProgressbar;
     private CompositeSubscription mSubscriptions;
+
+    private TextView tvSignIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +118,14 @@ public class RegisterActivity extends AppCompatActivity {
 
 
                 case R.id.btn_check_phone:
-                    Toast.makeText(RegisterActivity.this, "Certificating Phone Success", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Coming Soon", Toast.LENGTH_SHORT).show();
+                    break;
+
+                case R.id.tv_sign_in:
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+
                     break;
 
 
@@ -214,9 +225,12 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister = (Button) findViewById(R.id.btn_register);
         btnCheckPhone = (Button) findViewById(R.id.btn_check_phone);
         mProgressbar = (ProgressBar) findViewById(R.id.progress);
+        tvSignIn = (TextView) findViewById(R.id.tv_sign_in);
+
 
         btnRegister.setOnClickListener(listener);
         btnCheckPhone.setOnClickListener(listener);
+        tvSignIn.setOnClickListener(listener);
 
         textChangedListener(etId);
         textChangedListener(etPw);
