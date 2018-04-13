@@ -94,7 +94,6 @@ public class InformationDogListActivity extends AppCompatActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponse,this::handleError));
-
     }
 
     private void loadDogProfile(){
@@ -103,7 +102,6 @@ public class InformationDogListActivity extends AppCompatActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponseDog,this::handleError));
-
     }
 
     private void handleResponse(User user) {
@@ -119,8 +117,6 @@ public class InformationDogListActivity extends AppCompatActivity {
         dogArrayList = new ArrayList<Dog>();
         adapter = new ListViewAdapter();
         dogNum = 0;
-
-
 
         for (Dog dogitem : dog){
             if(dogitem!=null){

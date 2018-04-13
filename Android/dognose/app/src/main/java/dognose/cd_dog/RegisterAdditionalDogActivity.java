@@ -229,6 +229,10 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
                 case R.id.btn_photo:
 
+                    Toast.makeText(RegisterAdditionalDogActivity.this, "Coming Soon...", Toast.LENGTH_SHORT);
+
+                    /*
+
                     DialogInterface.OnClickListener cameraListener = new DialogInterface.OnClickListener(){
 
                         @Override
@@ -267,14 +271,19 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
                             .setNeutralButton("Cancel", cancelListener)
                             .setNegativeButton("Select Album", albumListener)
                             .show();
+                    */
+
 
                     break;
 
                 case R.id.btn_photo_nose:
+                    Toast.makeText(RegisterAdditionalDogActivity.this, "Coming Soon...", Toast.LENGTH_SHORT);
+                    /*
                     Intent intentNosePhoto2 = new Intent(getApplicationContext(), CameraActivity.class);
                     ownerId = ownerId + "|reg|";
                     intentNosePhoto2.putExtra("ownerId", ownerId);
                     startActivityForResult(intentNosePhoto2,1);
+                    */
                     break;
 
                 case R.id.btn_gender_male:

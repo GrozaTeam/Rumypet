@@ -15,56 +15,38 @@ module.exports = router => {
 	router.get('/', (req, res) => res.end('Welcome to Rumypet !'));
 
 	router.post('/authenticate', (req, res) => {
-
 		var credentials = auth(req);
-
 		if (!credentials) {
-
 			res.status(400).json({ message: 'Invalid Request !' });
-
 		} else {
-
 			login.loginUser(credentials.name, credentials.pass)
-
 			.then(result => {
-
 				var token = jwt.sign(result, config.secret, { expiresIn: 1440 });
-
 				res.status(result.status).json({ message: result.message, token: token });
-
 			})
-
 			.catch(err => res.status(err.status).json({ message: err.message }));
 		}
 	});
 
 	router.post('/users', (req, res) => {
-
 		var name = req.body.name;
 		var email = req.body.email;
 		var password = req.body.password;
 		var phone = req.body.phone;
-
 		if (!name || !email || !password || !phone || !name.trim() || !email.trim() || !password.trim() || !phone.trim()) {
-
 			res.status(400).json({message: 'Invalid Request !'});
-
 		} else {
-
 			register.registerUser(name, email, password, phone)
-
 			.then(result => {
 				console.log('post result for user: '+ result);
 				res.setHeader('Location', '/users/'+email);
 				res.status(result.status).json({ message: result.message })
 			})
-
 			.catch(err => res.status(err.status).json({ message: err.message }));
 		}
 	});
 
 	router.post('/dogs', (req, res) => {
-
 		var dogId = req.body.dogId;
 		var ownerId = req.body.ownerId;
 		var dogName = req.body.dogName;
@@ -72,14 +54,11 @@ module.exports = router => {
 		var dogSpecies = req.body.dogSpecies;
 		var dogBirth = req.body.dogBirth;
 
-
 		if(!dogId || !ownerId || !dogName || !dogGender || !dogSpecies || !dogBirth || !dogId.trim() || !ownerId.trim() || !dogName.trim() || !dogGender.trim() || !dogBirth.trim() || !dogSpecies.trim()) {
 			res.status(400).json({message: 'Invalid Request !'});
-
 		}else{
 			console.log('id: '+dogId+'/'+ownerId+'/'+dogName+'/'+dogGender+'/'+dogSpecies+'/'+dogBirth);
-
-			registerDog.registerDog(dogId, ownerId, dogName, dogGender, dogSpecies, dogBirth)
+			registerDog.registerDog(dogId, ownerId, dogName, dogGender, dogSpecies, dogBirth);
 
 			.then (result => {
 				console.log('post result: ' + result);
@@ -99,21 +78,16 @@ module.exports = router => {
 	router.get('/users/:id', (req,res) => {
 
 		if (checkToken(req)) {
-
 			profile.getProfile(req.params.id)
-
 			.then(result => {
 				console.log('user result : '+result);
 				res.json(result);
 			})
-
 			.catch(err => {
 				console.log('user err : '+err);
 				res.status(err.status).json({ message: err.message });
 			});
-
 		} else {
-
 			res.status(401).json({ message: 'Invalid Token !' });
 		}
 	});
@@ -122,7 +96,6 @@ module.exports = router => {
 		if (checkToken(req)){
 			console.log("id == " + req.params.id);
 			profileDog.getDogProfile(req.params.id)
-
 			.then(result => {
 				console.log('dog result : '+result);
 				res.json(result);
