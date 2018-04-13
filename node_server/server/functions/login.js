@@ -1,7 +1,5 @@
-'use strict';
-
-const user = require('../models/user');
-const bcrypt = require('bcryptjs');
+var user = require('../models/user');
+var bcrypt = require('bcryptjs');
 
 exports.loginUser = (email, password) =>
 
@@ -24,7 +22,7 @@ exports.loginUser = (email, password) =>
 
 		.then(user => {
 
-			const hashed_password = user.hashed_password;
+			var hashed_password = user.hashed_password;
 
 			if (bcrypt.compareSync(password, hashed_password)) {
 

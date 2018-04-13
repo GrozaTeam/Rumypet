@@ -1,6 +1,4 @@
-'use strict';
-
-const user = require('../models/user');
+var user = require('../models/user');
 
 exports.getProfile = email =>
 

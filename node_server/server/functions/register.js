@@ -1,14 +1,12 @@
-'use strict';
-
-const user = require('../models/user');
-const bcrypt = require('bcryptjs');
+var user = require('../models/user');
+var bcrypt = require('bcryptjs');
 
 exports.registerUser = (name, email, password, phone) =>
 
 	new Promise((resolve,reject) => {
 
-	    const salt = bcrypt.genSaltSync(10);
-		const hash = bcrypt.hashSync(password, salt);
+	  var salt = bcrypt.genSaltSync(10);
+		var hash = bcrypt.hashSync(password, salt);
 
 		const newUser = new user({
 
@@ -24,7 +22,7 @@ exports.registerUser = (name, email, password, phone) =>
 		.then(() => {
 			resolve({ status: 201, message: 'User Registered Sucessfully !' });
 		})
-		
+
 		.catch(err => {
 
 			if (err.code == 11000) {

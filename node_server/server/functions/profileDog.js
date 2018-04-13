@@ -1,6 +1,4 @@
-'use strict';
-
-const dog = require('../models/dog');
+var dog = require('../models/dog');
 
 exports.getDogProfile = email =>
 

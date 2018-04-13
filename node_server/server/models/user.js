@@ -1,10 +1,6 @@
-'use strict';
-
-const mongoose = require('mongoose');
-
-const Schema = mongoose.Schema;
-
-const userSchema = mongoose.Schema({
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var userSchema = mongoose.Schema({
 
 	name 			: String,
 	email			: {type: String, unique: true},

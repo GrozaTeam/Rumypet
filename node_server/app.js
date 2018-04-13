@@ -1,6 +1,3 @@
-// import mongooseConnect from './util/mongoose.util';
-// import mongoose from 'mongoose';
-
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');

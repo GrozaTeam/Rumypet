@@ -1,12 +1,10 @@
-'use strict';
-
-const dog = require('../models/dog');
+var dog = require('../models/dog');
 
 exports.registerDog = (dogId, ownerId, dogName, dogGender, dogSpecies, dogBirth) =>
 
 	new Promise((resolve,reject) => {
 
-		const newDog = new dog({
+	 	const newDog = new dog({
       dogId: dogId,
       ownerId: ownerId,
 			dogName: dogName,
