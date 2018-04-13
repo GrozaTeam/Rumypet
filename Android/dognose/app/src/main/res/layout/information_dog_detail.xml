@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="#F3F3E6"
-            android:text="About Happy"
+            android:text="Detail of My dog"
             android:textAlignment="center"
             android:textColor="@android:color/black"
             android:textSize="30sp"
