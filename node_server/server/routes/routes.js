@@ -169,7 +169,7 @@ module.exports = router => {
 	var upload = multer({
 	   dest:'images/',
 	   limits: {fileSize: 10000000, files: 1},
-		 fileFilter:  (req, file, callback) => {
+		 fileFilter: function(req, file, callback){
 			 console.log(file.originalname);
 
 			 if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
@@ -180,8 +180,8 @@ module.exports = router => {
 	   }
 	}).single('image');
 
-	router.post('/images/upload', (req, res) => {
-		console.log('uploadign is listening');
+	router.post('/images/upload', function(req, res){
+		console.log('uploading is listening');
 		upload(req, res, function (err) {
 			console.log(err);
 	       if (err) {
@@ -193,14 +193,16 @@ module.exports = router => {
 	   });
 	 });
 
-	router.get('/images/:imagename', (req, res) => {
-	  var imagename = req.params.imagename;
-	  var imagepath = __dirname + "/images/" + imagename;
-	  var image = fs.readFileSync(imagepath);
-	  var mime = fileType(image).mime;
-		res.writeHead(200, {'Content-Type': mime });
-		res.end(image, 'binary');
-	});
+	 router.get('images/:imagename', function(req, res){
+			console.log('image image');
+	 	  var imagename = req.params.imagename;
+	 	  var imagepath = __dirname + "/images/" + imagename;
+	 	  var image = fs.readFileSync(imagepath);
+	 	  var mime = fileType(image).mime;
+	 		res.writeHead(200, {'Content-Type': mime });
+	 		res.end(image, 'binary');
+	 });
+
 	//----
 
 
