@@ -62,8 +62,7 @@ module.exports = router => {
 			res.status(400).json({message: 'Invalid Request !'});
 		}else{
 			console.log('id: '+dogId+'/'+ownerId+'/'+dogName+'/'+dogGender+'/'+dogSpecies+'/'+dogBirth);
-			registerDog.registerDog(dogId, ownerId, dogName, dogGender, dogSpecies, dogBirth);
-
+			registerDog.registerDog(dogId, ownerId, dogName, dogGender, dogSpecies, dogBirth)
 			.then (result => {
 				console.log('post result: ' + result);
 				res.setHeader('Location', '/dogs/' + ownerId);
