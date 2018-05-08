@@ -181,8 +181,9 @@ module.exports = router => {
 	}).single('image');
 
 	router.post('/images/upload', (req, res) => {
-	   upload(req, res, function (err) {
-			 console.log(err);
+		console.log('uploadign is listening');
+		upload(req, res, function (err) {
+			console.log(err);
 	       if (err) {
 	           res.status(400).json({message: err.message});
 	       } else {
@@ -193,10 +194,10 @@ module.exports = router => {
 	 });
 
 	router.get('/images/:imagename', (req, res) => {
-	    var imagename = req.params.imagename;
-	    var imagepath = __dirname + "/images/" + imagename;
-	    var image = fs.readFileSync(imagepath);
-	    var mime = fileType(image).mime;
+	  var imagename = req.params.imagename;
+	  var imagepath = __dirname + "/images/" + imagename;
+	  var image = fs.readFileSync(imagepath);
+	  var mime = fileType(image).mime;
 		res.writeHead(200, {'Content-Type': mime });
 		res.end(image, 'binary');
 	});
