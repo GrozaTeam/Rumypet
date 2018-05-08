@@ -354,7 +354,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
     private void handleResponse(Res response) {
 
-        showSnackBarMessage(response.getMessage());
+        showMessage(response.getMessage());
     }
 
     private void handleError(Throwable error) {
@@ -366,18 +366,18 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
                 String errorBody = ((HttpException) error).response().errorBody().string();
                 Res response = gson.fromJson(errorBody,Res.class);
-                showSnackBarMessage(response.getMessage());
+                showMessage(response.getMessage());
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else {
 
-            showSnackBarMessage("Network Error !");
+            showMessage("Network Error !");
         }
     }
 
-    private void showSnackBarMessage(String message) {
+    private void showMessage(String message) {
 
         Toast.makeText(RegisterAdditionalDogActivity.this, message, Toast.LENGTH_SHORT).show();
     }

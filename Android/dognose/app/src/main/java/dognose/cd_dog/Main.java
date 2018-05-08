@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 public class Main extends AppCompatActivity {
 
+
     private LinearLayout btnAdd, btnInf, btnFind, btnList, btnSet;
 
     @Override
