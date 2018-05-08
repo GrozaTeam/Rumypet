@@ -167,29 +167,30 @@ module.exports = router => {
 
 	//----
 	var upload = multer({
-	    dest:'images/',
-	    limits: {fileSize: 10000000, files: 1},
-	    fileFilter:  (req, file, callback) => {
+	   dest:'images/',
+	   limits: {fileSize: 10000000, files: 1},
+		 fileFilter:  (req, file, callback) => {
+			 console.log(file.originalname);
 
-	        if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-	            return callback(new Error('Only Images are allowed !'), false);
-	        }
+			 if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+				 return callback(new Error('Only Images are allowed !'), false);
+				 }
 
-	        callback(null, true);
-	    }
-	}).single('image')
-
+	       callback(null, true);
+	   }
+	}).single('image');
 
 	router.post('/images/upload', (req, res) => {
-	    upload(req, res, function (err) {
-	        if (err) {
-	            res.status(400).json({message: err.message});
-	        } else {
-	            var path = '/images/${req.file.filename}';
-	            res.status(200).json({message: 'Image Uploaded Successfully !', path: path});
-	        }
-	    })
-	})
+	   upload(req, res, function (err) {
+			 console.log(err);
+	       if (err) {
+	           res.status(400).json({message: err.message});
+	       } else {
+	           var path = '/images/${req.file.filename}';
+	           res.status(200).json({message: 'Image Uploaded Successfully !', path: path});
+	       }
+	   });
+	 });
 
 	router.get('/images/:imagename', (req, res) => {
 	    var imagename = req.params.imagename;
