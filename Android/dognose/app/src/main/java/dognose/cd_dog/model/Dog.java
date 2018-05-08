@@ -17,6 +17,7 @@ public class Dog implements Serializable {
     private String newPassword;
     private String token;
 
+
     public void setDogId(String dogId){this.dogId = dogId; }
 
     public void setOwnerId(String ownerId){

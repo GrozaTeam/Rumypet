@@ -67,8 +67,6 @@ public class NetworkUtil {
 
         });
 
-
-
         RxJavaCallAdapterFactory rxAdapter = RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io());
 
         return new Retrofit.Builder()

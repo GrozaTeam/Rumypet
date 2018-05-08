@@ -158,9 +158,8 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
         }
         int exifOrientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
 
-        Bitmap bitmap = BitmapFactory.decodeFile(imagePath);//경로를 통해 비트맵으로 전환
-        
-        
+        Bitmap bitmap = BitmapFactory.decodeFile(imagePath); //경로를 통해 비트맵으로 전환
+
         imgDog.setImageBitmap(bitmap);//이미지 뷰에 비트맵 넣기
         imgDog.setBackground(null);
 
@@ -186,21 +185,6 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
     }
 
 
-    public void doTakePhotoAction(){
-
-    }
-
-    public void doTakeAlbumAction(){
-
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
-        intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(intent, PICK_FROM_ALBUM);
-
-
-    }
-
-
     Button.OnClickListener listener = new Button.OnClickListener() {
 
         @Override
@@ -210,7 +194,6 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
                     if (checkjoin()) {
                         String dogId = getRandomString(8);
-
                         Dog dogdb = new Dog();
                         dogdb.setDogId(dogId);
                         dogdb.setOwnerId(ownerId);
@@ -220,70 +203,28 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
                         dogdb.setSpecies(etSpecies.getSelectedItem().toString());
 
                         registerProgress(dogdb);
-
-
                         finish();
                     }
                     break;
 
-
                 case R.id.btn_photo:
 
-                    Toast.makeText(RegisterAdditionalDogActivity.this, "Coming Soon...", Toast.LENGTH_SHORT);
-
-                    /*
-
-                    DialogInterface.OnClickListener cameraListener = new DialogInterface.OnClickListener(){
-
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent intentNosePhoto = new Intent(getApplicationContext(), CameraActivity_for_body.class);
-                            String ownerId2 = ownerId + "|body|";
-                            intentNosePhoto.putExtra("ownerId", ownerId2);
-                            startActivityForResult(intentNosePhoto,1);
-                        }
-                    };
-
-                    DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener(){
-
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                Intent intent = new Intent(Intent.ACTION_PICK);
-                                intent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                                intent.setType("image/*");
-                                startActivityForResult(intent, GALLERY_CODE);
-                            }
-                    };
-
-                    DialogInterface.OnClickListener cancelListener = new DialogInterface.OnClickListener(){
-
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    };
-
+                    // Toast.makeText(RegisterAdditionalDogActivity.this, "Coming Soon...", Toast.LENGTH_SHORT);
                     new AlertDialog.Builder(RegisterAdditionalDogActivity.this)
                             .setTitle("Select Upload Image")
-                            .setPositiveButton("Take Photo", cameraListener)
-                            .setNeutralButton("Cancel", cancelListener)
-                            .setNegativeButton("Select Album", albumListener)
+                            .setPositiveButton("Select Album", albumListener)
+                            .setNegativeButton("Cancel", cancelListener)
                             .show();
-                    */
-
-
                     break;
 
                 case R.id.btn_photo_nose:
-                    Toast.makeText(RegisterAdditionalDogActivity.this, "Coming Soon...", Toast.LENGTH_SHORT);
-                    /*
+                    // Toast.makeText(RegisterAdditionalDogActivity.this, "Coming Soon...", Toast.LENGTH_SHORT);
+
                     Intent intentNosePhoto2 = new Intent(getApplicationContext(), CameraActivity.class);
                     ownerId = ownerId + "|reg|";
                     intentNosePhoto2.putExtra("ownerId", ownerId);
                     startActivityForResult(intentNosePhoto2,1);
-                    */
+
                     break;
 
                 case R.id.btn_gender_male:
@@ -302,7 +243,6 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
                     break;
 
                 case R.id.tv_birth:
-                    Log.d("PaengTest", "hi");
                     Calendar calendarStart = Calendar.getInstance();
                     int todayYear = calendarStart.get(Calendar.YEAR);
                     int todayMonth = calendarStart.get(Calendar.MONTH);
@@ -316,6 +256,37 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
                 default:
                     break;
             }
+        }
+    };
+
+    DialogInterface.OnClickListener cameraListener = new DialogInterface.OnClickListener(){
+
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            Intent intentNosePhoto = new Intent(getApplicationContext(), CameraActivity_for_body.class);
+            String ownerId2 = ownerId + "|body|";
+            intentNosePhoto.putExtra("ownerId", ownerId2);
+            startActivityForResult(intentNosePhoto,1);
+        }
+    };
+
+    DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener(){
+
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+
+            Intent intent = new Intent(Intent.ACTION_PICK);
+            intent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            intent.setType("image/*");
+            startActivityForResult(intent, GALLERY_CODE);
+        }
+    };
+
+    DialogInterface.OnClickListener cancelListener = new DialogInterface.OnClickListener(){
+
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            dialog.dismiss();
         }
     };
 
