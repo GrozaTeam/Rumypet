@@ -163,13 +163,15 @@ module.exports = router => {
 			.catch(err => res.status(err.status).json({ message: err.message }));
 		}
 	});
+
+
 	//----
 	var upload = multer({
 	    dest:'images/',
 	    limits: {fileSize: 10000000, files: 1},
 	    fileFilter:  (req, file, callback) => {
 
-	        if (!file.originalname.match(/\.(jpg|jpeg)$/)) {
+	        if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
 	            return callback(new Error('Only Images are allowed !'), false);
 	        }
 
@@ -198,6 +200,10 @@ module.exports = router => {
 		res.end(image, 'binary');
 	});
 	//----
+
+
+
+
 	function checkToken(req) {
 
 		var token = req.headers['x-access-token'];
