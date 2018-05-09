@@ -1,7 +1,7 @@
 var user = require('../models/user');
 var bcrypt = require('bcryptjs');
 
-exports.loginUser = (email, password) =>
+exports.loginUser = function(email, password){
 
   new Promise(function(resolve, reject) {
 
@@ -53,3 +53,4 @@ exports.loginUser = (email, password) =>
       });
 
   });
+};
