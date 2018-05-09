@@ -245,14 +245,11 @@ var upload = multer({
 router.post('/images/upload', function(req, res) {
   console.log('uploading is listening');
   upload(req, res, function(err) {
-    console.log(err);
     if (err) {
+			console.log(err);
       res.status(400).json({
         message: err.message
       });
-			res.status(404).json({
-				message: err.message
-			});
     } else {
       var path = '/images/${req.file.filename}';
       res.status(200).json({
