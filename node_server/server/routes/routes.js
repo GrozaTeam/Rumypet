@@ -81,7 +81,7 @@ router.post('/dogs', function(req, res) {
   var dogSpecies = req.body.dogSpecies;
   var dogBirth = req.body.dogBirth;
 
-  if (!dogId || !ownerId || !dogName || !dogGender || !dogSpecies || !dogBirth || !dogImg || !dogId.trim() || !ownerId.trim() || !dogName.trim() || !dogGender.trim() || !dogBirth.trim() || !dogSpecies.trim()) {
+  if (!dogId || !ownerId || !dogName || !dogGender || !dogSpecies || !dogBirth || !dogId.trim() || !ownerId.trim() || !dogName.trim() || !dogGender.trim() || !dogBirth.trim() || !dogSpecies.trim()) {
     res.status(400).json({
       message: 'Invalid Request !'
     });
