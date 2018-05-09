@@ -95,12 +95,7 @@ router.post('/dogs', function(req, res) {
           message: result.message
         });
       })
-
       .catch(function(err) {
-        console.log('post error: ' + err);
-        console.log('post error2: ' + err.status);
-        console.log('post error3: ' + err.message);
-
         res.status(err.status).json({
           message: err.message
         });
