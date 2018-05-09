@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-
 var auth = require('basic-auth');
 var jwt = require('jsonwebtoken');
 
@@ -30,7 +29,7 @@ router.post('/authenticate', function(req, res) {
     });
   } else {
     login.loginUser(credentials.name, credentials.pass)
-      .then(function(result) {
+      .then(result => {
         var token = jwt.sign(result, config.secret, {
           expiresIn: 1440
         });
@@ -39,11 +38,9 @@ router.post('/authenticate', function(req, res) {
           token: token
         });
       })
-      .catch(function(err) {
-        res.status(err.status).json({
-          message: err.message
-        });
-      });
+      .catch(err => res.status(err.status).json({
+        message: err.message
+      }));
   }
 });
 
@@ -58,18 +55,16 @@ router.post('/users', function(req, res) {
     });
   } else {
     register.registerUser(name, email, password, phone)
-      .then(function(result) {
+      .then(result => {
         console.log('post result for user: ' + result);
         res.setHeader('Location', '/users/' + email);
         res.status(result.status).json({
           message: result.message
-        });
+        })
       })
-      .catch(function(err) {
-        res.status(err.status).json({
-          message: err.message
-        });
-      });
+      .catch(err => res.status(err.status).json({
+        message: err.message
+      }));
   }
 });
 
@@ -88,7 +83,7 @@ router.post('/dogs', function(req, res) {
   } else {
     console.log('id: ' + dogId + '/' + ownerId + '/' + dogName + '/' + dogGender + '/' + dogSpecies + '/' + dogBirth);
     registerDog.registerDog(dogId, ownerId, dogName, dogGender, dogSpecies, dogBirth)
-      .then(function(result) {
+      .then(result => {
         console.log('post result: ' + result);
         res.setHeader('Location', '/dogs/' + ownerId);
         res.status(result.status).json({
@@ -96,7 +91,7 @@ router.post('/dogs', function(req, res) {
         });
       })
 
-      .catch(function(err) {
+      .catch(err => {
         console.log('post error: ' + err);
         res.status(err.status).json({
           message: err.message
@@ -111,11 +106,11 @@ router.get('/users/:id', function(req, res) {
 
   if (checkToken(req)) {
     profile.getProfile(req.params.id)
-      .then(function(result) {
+      .then(result => {
         console.log('user result : ' + result);
         res.json(result);
       })
-      .catch(function(err) {
+      .catch(err => {
         console.log('user err : ' + err);
         res.status(err.status).json({
           message: err.message
@@ -132,11 +127,12 @@ router.get('/dogs/:id', function(req, res) {
   if (checkToken(req)) {
     console.log("id == " + req.params.id);
     profileDog.getDogProfile(req.params.id)
-      .then(function(result) {
+      .then(result => {
         console.log('dog result : ' + result);
         res.json(result);
       })
-      .catch(function(err) {
+
+      .catch(err => {
         console.log('dog err : ' + err);
         res.status(err.status).json({
           message: err.message
@@ -167,16 +163,13 @@ router.put('/users/:id', function(req, res) {
 
       password.changePassword(req.params.id, oldPassword, newPassword)
 
-        .then(function(result) {
-          res.status(result.status).json({
-            message: result.message
-          });
-        })
-        .catch(function(err) {
-          res.status(err.status).json({
-            message: err.message
-          });
-        });
+        .then(result => res.status(result.status).json({
+          message: result.message
+        }))
+
+        .catch(err => res.status(err.status).json({
+          message: err.message
+        }));
 
     }
   } else {
@@ -196,30 +189,26 @@ router.post('/users/:id/password', function(req, res) {
   if (!token || !newPassword || !token.trim() || !newPassword.trim()) {
 
     password.resetPasswordInit(email)
-      .then(function(result) {
-        res.status(result.status).json({
-          message: result.message
-        });
-      })
-      .catch(function(err) {
-        res.status(err.status).json({
-          message: err.message
-        });
-      });
+
+      .then(result => res.status(result.status).json({
+        message: result.message
+      }))
+
+      .catch(err => res.status(err.status).json({
+        message: err.message
+      }));
+
   } else {
 
     password.resetPasswordFinish(email, token, newPassword)
 
-      .then(function(result) {
-        res.status(result.status).json({
-          message: result.message
-        });
-      })
-      .catch(function(err) {
-        res.status(err.status).json({
-          message: err.message
-        });
-      });
+      .then(result => res.status(result.status).json({
+        message: result.message
+      }))
+
+      .catch(err => res.status(err.status).json({
+        message: err.message
+      }));
   }
 });
 
@@ -245,8 +234,8 @@ var upload = multer({
 router.post('/images/upload', function(req, res) {
   console.log('uploading is listening');
   upload(req, res, function(err) {
+    console.log(err);
     if (err) {
-      console.log(err);
       res.status(400).json({
         message: err.message
       });
