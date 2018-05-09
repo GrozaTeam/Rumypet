@@ -2,7 +2,8 @@ var dog = require('../models/dog');
 
 exports.registerDog = (dogId, ownerId, dogName, dogGender, dogSpecies, dogBirth) =>
 
-	new Promise((resolve,reject) => {
+	new Promise(
+		function(resolve,reject){
 
 	 	const newDog = new dog({
       dogId: dogId,
@@ -16,22 +17,15 @@ exports.registerDog = (dogId, ownerId, dogName, dogGender, dogSpecies, dogBirth)
 
 		newDog.save()
 
-		.then(() => {
-
+		.then(function(){
 			console.log('register complete');
-
 			resolve({ status: 201, message: 'Dog Registered Sucessfully !' });
-
 		})
 
-		.catch(err => {
-
+		.catch(function(err){
 			if (err.code == 11000) {
-
 				reject({ status: 409, message: 'Dog Already Registered !' });
-
 			} else {
-
 				reject({ status: 500, message: 'Internal Server Error !' });
 			}
 		});
