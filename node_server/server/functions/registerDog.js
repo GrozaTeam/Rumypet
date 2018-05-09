@@ -15,8 +15,8 @@ exports.registerDog = (dogId, ownerId, dogName, dogGender, dogSpecies, dogBirth)
 			dogBirth: dogBirth,
 			created_at: new Date()
 		});
-		newDog.dogImg.data = fs.createReadStream('./public/images/test.png');
-		newDog.dogImg.contentType ='image/png';
+		//newDog.dogImg.data = fs.createReadStream('./public/images/test.png');
+		//newDog.dogImg.contentType ='image/png';
 
 		newDog.save()
 		.then(function(){

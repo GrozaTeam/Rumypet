@@ -10,8 +10,8 @@ var dogSchema = mongoose.Schema({
 	dogGender : String,
 	dogSpecies : String,
   dogBirth : String,
-	created_at		: String,
-  dogImg : {data : Buffer, contentType : String }
+	created_at		: String
+  //dogImg : {data : Buffer, contentType : String }
 
 });
 
