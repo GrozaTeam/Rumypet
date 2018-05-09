@@ -3,6 +3,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 var index = require('./server/routes/index');
+var routes = require('./server/routes/routes');
 var mongoose = require('mongoose');
 var app = express();
 var router = express.Router();
@@ -16,12 +17,14 @@ app.set('view engine', 'ejs');
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/node-login');
 
-
+/*
 require('./server/routes/routes')(router);
 app.use('/api/v1',router);
+*/
 
 app.use('/', index);
 app.use('/python', index);
+app.use('/api/v1', routes);
 
 module.exports = app;
 

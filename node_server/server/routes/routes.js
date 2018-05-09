@@ -14,6 +14,8 @@ var multer = require('multer');
 var fileType = require('file-type');
 var fs = require('fs');
 
+var router = express.Router();
+
 router.get('/', function(req, res) {
   res.end('Welcome to Rumypet !');
 });
