@@ -1,14 +1,15 @@
 var user = require('../models/user');
 var bcrypt = require('bcryptjs');
 
-exports.registerUser = function(name, email, password, phone){
+exports.registerUser = (name, email, password, phone) =>
 
-	new Promise(function(resolve,reject){
+	new Promise((resolve,reject) => {
 
 	  var salt = bcrypt.genSaltSync(10);
 		var hash = bcrypt.hashSync(password, salt);
 
-		var newUser = new user({
+		const newUser = new user({
+
 			name: name,
 			email: email,
 			phone: phone,
@@ -17,11 +18,12 @@ exports.registerUser = function(name, email, password, phone){
 		});
 
 		newUser.save()
-		.then(function(){
+
+		.then(() => {
 			resolve({ status: 201, message: 'User Registered Sucessfully !' });
 		})
 
-		.catch(function(err){
+		.catch(err => {
 
 			if (err.code == 11000) {
 
@@ -33,4 +35,3 @@ exports.registerUser = function(name, email, password, phone){
 			}
 		});
 	});
-};

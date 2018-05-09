@@ -1,16 +1,13 @@
 var dog = require('../models/dog');
 
-exports.getDogProfile = function(email){
+exports.getDogProfile = email =>
 
-	new Promise(function(resolve,reject){
+	new Promise((resolve,reject) => {
 
 		dog.find({ ownerId: email })
 
-		.then(function(dogs){
-			resolve(dogs);
-		})
-		.catch(function(err){
-			reject({ status: 500, message: 'Internal Server Error !' });
-		});
+		.then(dogs => resolve(dogs))
+
+		.catch(err => reject({ status: 500, message: 'Internal Server Error !' }))
+
 	});
-};
