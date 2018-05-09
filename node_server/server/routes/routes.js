@@ -1,3 +1,6 @@
+var express = require('express');
+var router = express.Router();
+
 var auth = require('basic-auth');
 var jwt = require('jsonwebtoken');
 
@@ -14,7 +17,6 @@ var multer = require('multer');
 var fileType = require('file-type');
 var fs = require('fs');
 
-var router = express.Router();
 
 router.get('/', function(req, res) {
   res.end('Welcome to Rumypet !');
