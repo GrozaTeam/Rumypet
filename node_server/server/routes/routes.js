@@ -81,7 +81,7 @@ router.post('/dogs', function(req, res) {
   var dogSpecies = req.body.dogSpecies;
   var dogBirth = req.body.dogBirth;
   //var dogImg = req.body.dogImg;
-  var imgPath = '../functions/logo.png';
+  var imgPath = 'logo.png';
   var dogImg = fs.readFileSync(imgPath);
   dogImg.contentType = 'image/png';
 
