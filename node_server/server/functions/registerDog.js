@@ -1,6 +1,6 @@
 var dog = require('../models/dog');
 
-exports.registerDog = (dogId, ownerId, dogName, dogGender, dogSpecies, dogBirth) =>
+exports.registerDog = (dogId, ownerId, dogName, dogGender, dogSpecies, dogBirth, dogImg) =>
 
 	new Promise(
 		function(resolve,reject){
@@ -12,7 +12,8 @@ exports.registerDog = (dogId, ownerId, dogName, dogGender, dogSpecies, dogBirth)
 			dogGender: dogGender,
 			dogSpecies: dogSpecies,
 			dogBirth: dogBirth,
-			created_at: new Date()
+			created_at: new Date(),
+			dogImg: dogImg
 		});
 
 		newDog.save()

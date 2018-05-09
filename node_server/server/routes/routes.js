@@ -80,8 +80,12 @@ router.post('/dogs', function(req, res) {
   var dogGender = req.body.dogGender;
   var dogSpecies = req.body.dogSpecies;
   var dogBirth = req.body.dogBirth;
+  //var dogImg = req.body.dogImg;
+  var imgPath = '../functions/logo.png';
+  var dogImg = fs.readFileSync(imgPath);
+  dogImg.contentType = 'image/png';
 
-  if (!dogId || !ownerId || !dogName || !dogGender || !dogSpecies || !dogBirth || !dogId.trim() || !ownerId.trim() || !dogName.trim() || !dogGender.trim() || !dogBirth.trim() || !dogSpecies.trim()) {
+  if (!dogId || !ownerId || !dogName || !dogGender || !dogSpecies || !dogBirth || !dogImg || !dogId.trim() || !ownerId.trim() || !dogName.trim() || !dogGender.trim() || !dogBirth.trim() || !dogSpecies.trim() || !dogImg.trim()) {
     res.status(400).json({
       message: 'Invalid Request !'
     });
