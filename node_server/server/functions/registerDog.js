@@ -1,4 +1,5 @@
 var dog = require('../models/dog');
+var fs = require('fs');
 
 exports.registerDog = (dogId, ownerId, dogName, dogGender, dogSpecies, dogBirth) =>
 
