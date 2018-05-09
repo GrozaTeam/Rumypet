@@ -80,18 +80,14 @@ router.post('/dogs', function(req, res) {
   var dogGender = req.body.dogGender;
   var dogSpecies = req.body.dogSpecies;
   var dogBirth = req.body.dogBirth;
-  //var dogImg = req.body.dogImg;
-  var imgPath = 'logo.png';
-  var dogImg = fs.readFileSync(imgPath);
-  dogImg.contentType = 'image/png';
 
-  if (!dogId || !ownerId || !dogName || !dogGender || !dogSpecies || !dogBirth || !dogImg || !dogId.trim() || !ownerId.trim() || !dogName.trim() || !dogGender.trim() || !dogBirth.trim() || !dogSpecies.trim() || !dogImg.trim()) {
+  if (!dogId || !ownerId || !dogName || !dogGender || !dogSpecies || !dogBirth || !dogImg || !dogId.trim() || !ownerId.trim() || !dogName.trim() || !dogGender.trim() || !dogBirth.trim() || !dogSpecies.trim()) {
     res.status(400).json({
       message: 'Invalid Request !'
     });
   } else {
     console.log('id: ' + dogId + '/' + ownerId + '/' + dogName + '/' + dogGender + '/' + dogSpecies + '/' + dogBirth + '/' + dogImg);
-    registerDog.registerDog(dogId, ownerId, dogName, dogGender, dogSpecies, dogBirth, dogImg)
+    registerDog.registerDog(dogId, ownerId, dogName, dogGender, dogSpecies, dogBirth)
       .then(function(result) {
         console.log('post result: ' + result);
         res.setHeader('Location', '/dogs/' + ownerId);

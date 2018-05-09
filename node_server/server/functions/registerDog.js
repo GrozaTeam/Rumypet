@@ -1,20 +1,21 @@
 var dog = require('../models/dog');
 
-exports.registerDog = (dogId, ownerId, dogName, dogGender, dogSpecies, dogBirth, dogImg) =>
+exports.registerDog = (dogId, ownerId, dogName, dogGender, dogSpecies, dogBirth) =>
 
 	new Promise(
 		function(resolve,reject){
 
-	 	const newDog = new dog({
+	 	var newDog = new dog({
       dogId: dogId,
       ownerId: ownerId,
 			dogName: dogName,
 			dogGender: dogGender,
 			dogSpecies: dogSpecies,
 			dogBirth: dogBirth,
-			created_at: new Date(),
-			dogImg: dogImg
+			created_at: new Date()
 		});
+		newDog.dogImg.data = fs.readFileSync('../functions/logo.png');
+		newDog.dogImg.contentType ='image/png';
 
 		newDog.save()
 		.then(function(){
