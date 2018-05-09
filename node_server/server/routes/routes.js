@@ -91,7 +91,7 @@ router.post('/dogs', function(req, res) {
     });
   } else {
     console.log('id: ' + dogId + '/' + ownerId + '/' + dogName + '/' + dogGender + '/' + dogSpecies + '/' + dogBirth + '/' + dogImg);
-    registerDog.registerDog(dogId, ownerId, dogName, dogGender, dogSpecies, dogBirth)
+    registerDog.registerDog(dogId, ownerId, dogName, dogGender, dogSpecies, dogBirth, dogImg)
       .then(function(result) {
         console.log('post result: ' + result);
         res.setHeader('Location', '/dogs/' + ownerId);

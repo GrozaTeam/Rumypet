@@ -17,12 +17,10 @@ exports.registerDog = (dogId, ownerId, dogName, dogGender, dogSpecies, dogBirth,
 		});
 
 		newDog.save()
-
 		.then(function(){
 			console.log('register complete');
 			resolve({ status: 201, message: 'Dog Registered Sucessfully !' });
 		})
-
 		.catch(function(err){
 			if (err.code == 11000) {
 				reject({ status: 409, message: 'Dog Already Registered !' });
