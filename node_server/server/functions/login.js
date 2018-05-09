@@ -1,56 +1,39 @@
 var user = require('../models/user');
 var bcrypt = require('bcryptjs');
 
-exports.loginUser = function(email, password){
+exports.loginUser = (email, password) =>
 
-  new Promise(function(resolve, reject) {
+	new Promise((resolve,reject) => {
 
-    user.find({
-        email: email
-      })
+		user.find({email: email})
 
-      .then(function(users) {
+		.then(users => {
 
-        if (users.length == 0) {
+			if (users.length == 0) {
 
-          reject({
-            status: 404,
-            message: 'User Not Found !'
-          });
+				reject({ status: 404, message: 'User Not Found !' });
 
-        } else {
+			} else {
 
-          return users[0];
+				return users[0];
 
-        }
-      })
+			}
+		})
 
-      .then(function(user) {
+		.then(user => {
 
-        var hashed_password = user.hashed_password;
+			var hashed_password = user.hashed_password;
 
-        if (bcrypt.compareSync(password, hashed_password)) {
+			if (bcrypt.compareSync(password, hashed_password)) {
 
-          resolve({
-            status: 200,
-            message: email
-          });
+				resolve({ status: 200, message: email });
 
-        } else {
+			} else {
 
-          reject({
-            status: 401,
-            message: 'Wrong Password !'
-          });
-        }
-      })
+				reject({ status: 401, message: 'Wrong Password !' });
+			}
+		})
 
-      .catch(function(err) {
-        reject({
-          status: 500,
-          message: 'Internal Server Error !'
-        });
-      });
+		.catch(err => reject({ status: 500, message: 'Internal Server Error !' }));
 
-  });
-};
+	});
