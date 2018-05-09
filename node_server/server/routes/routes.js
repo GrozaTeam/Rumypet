@@ -86,7 +86,7 @@ router.post('/dogs', function(req, res) {
       message: 'Invalid Request !'
     });
   } else {
-    console.log('id: ' + dogId + '/' + ownerId + '/' + dogName + '/' + dogGender + '/' + dogSpecies + '/' + dogBirth + '/' + dogImg);
+    console.log('id: ' + dogId + '/' + ownerId + '/' + dogName + '/' + dogGender + '/' + dogSpecies + '/' + dogBirth);
     registerDog.registerDog(dogId, ownerId, dogName, dogGender, dogSpecies, dogBirth)
       .then(function(result) {
         console.log('post result: ' + result);
