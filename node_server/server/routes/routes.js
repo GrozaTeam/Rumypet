@@ -250,6 +250,9 @@ router.post('/images/upload', function(req, res) {
       res.status(400).json({
         message: err.message
       });
+			res.status(404).json({
+				message: err.message
+			});
     } else {
       var path = '/images/${req.file.filename}';
       res.status(200).json({
