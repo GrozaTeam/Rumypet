@@ -121,7 +121,7 @@ public class InformationDogListActivity extends AppCompatActivity {
         for (Dog dogitem : dog){
             if(dogitem!=null){
                 dogArrayList.add(dogitem);
-                adapter.addItemDog(null, dogitem.getName(), dogitem.getSpecies(), dogitem.getGender(), getAge(dogitem.getBirth()));
+                adapter.addItemDog(dogitem.getDogImage(), dogitem.getName(), dogitem.getSpecies(), dogitem.getGender(), getAge(dogitem.getBirth()));
                 dogNum += 1;
             }
         }
