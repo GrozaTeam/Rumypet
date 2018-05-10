@@ -209,10 +209,6 @@ public class InformationDogListActivity extends AppCompatActivity {
 
                 case R.id.btn_test:
 
-                    String hi = "fuck you";
-                    Log.d("paeng", hi);
-
-
                     break;
 
                 default:

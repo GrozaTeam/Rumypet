@@ -11,7 +11,7 @@ var dogSchema = mongoose.Schema({
 	dogSpecies : String,
   dogBirth : String,
 	created_at		: String,
-  dogImg : Buffer
+  dogImg : String
 });
 
 module.exports = mongoose.model('dog', dogSchema);

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
+
 var auth = require('basic-auth');
 var jwt = require('jsonwebtoken');
 
@@ -249,7 +250,7 @@ router.post('/images/upload', function(req, res) {
         message: err.message
       });
     } else {
-      var path = '/images/${req.file.filename}';
+      var path = '.public/images/${req.file.filename}';
       res.status(200).json({
         message: 'Image Uploaded Successfully !',
         path: path

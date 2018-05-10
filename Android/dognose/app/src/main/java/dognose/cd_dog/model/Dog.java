@@ -20,7 +20,7 @@ public class Dog implements Serializable {
     private String created_at;
     private String newPassword;
     private String token;
-    // private JSONObject dogImg;
+    private JSONObject dogImg;
 
 
     public void setDogId(String dogId){this.dogId = dogId; }
