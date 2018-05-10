@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -47,7 +48,7 @@ public class InformationDogListActivity extends AppCompatActivity {
     private ArrayList<Dog> dogArrayList;
     ListViewAdapter adapter;
     private ListView listViewDog;
-    private LinearLayout btnAdd, btnProfile;
+    private LinearLayout btnAdd, btnProfile, btnTest;
 
     private SharedPreferences mSharedPreferences;
     private CompositeSubscription mSubscriptions;
@@ -119,9 +120,9 @@ public class InformationDogListActivity extends AppCompatActivity {
         dogNum = 0;
 
         for (Dog dogitem : dog){
-            if(dogitem!=null){
+            if(dogitem != null){
                 dogArrayList.add(dogitem);
-                adapter.addItemDog(dogitem.getDogImage(), dogitem.getName(), dogitem.getSpecies(), dogitem.getGender(), getAge(dogitem.getBirth()));
+                adapter.addItemDog(null, dogitem.getName(), dogitem.getSpecies(), dogitem.getGender(), getAge(dogitem.getBirth()));
                 dogNum += 1;
             }
         }
@@ -171,11 +172,13 @@ public class InformationDogListActivity extends AppCompatActivity {
         btnProfile = (LinearLayout) findViewById(R.id.btn_profile);
         btnAdd.setOnClickListener(listener);
         btnProfile.setOnClickListener(listener);
+        btnTest = (LinearLayout) findViewById(R.id.btn_test);
+        btnTest.setOnClickListener(listener);
+
         listViewDog.setOnItemClickListener(new ListView.OnItemClickListener(){
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
 
                 Intent intent = new Intent(getApplicationContext(), InformationDogListDetail.class);
                 intent.putExtra("position", String.valueOf(position));
@@ -187,7 +190,6 @@ public class InformationDogListActivity extends AppCompatActivity {
             }
         });
     }
-
 
     Button.OnClickListener listener = new Button.OnClickListener() {
         @Override
@@ -203,6 +205,14 @@ public class InformationDogListActivity extends AppCompatActivity {
                 case R.id.btn_profile:
                     Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
                     startActivity(intent);
+                    break;
+
+                case R.id.btn_test:
+
+                    String hi = "fuck you";
+                    Log.d("paeng", hi);
+
+
                     break;
 
                 default:

@@ -29,9 +29,7 @@ public class ListViewItem {
     public void setAgeStr(String age){
         ageStr = age ;
     }
-    public Drawable getIcon() {
-        return this.iconDrawable ;
-    }
+    public Drawable getIcon() { return this.iconDrawable ; }
     public String getSpeciesStr(){
         return this.speciesStr;
     }

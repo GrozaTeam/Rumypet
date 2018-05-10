@@ -2,6 +2,8 @@ package dognose.cd_dog.model;
 
 import android.graphics.drawable.Drawable;
 
+import org.json.JSONObject;
+
 import java.io.Serializable;
 
 /**
@@ -18,9 +20,7 @@ public class Dog implements Serializable {
     private String created_at;
     private String newPassword;
     private String token;
-    private Drawable dogImage;
-
-
+    // private JSONObject dogImg;
 
 
     public void setDogId(String dogId){this.dogId = dogId; }
@@ -45,9 +45,7 @@ public class Dog implements Serializable {
         this.dogSpecies = dogSpecies;
     }
 
-    public void setDogImage(Drawable dogImage){
-        this.dogImage = dogImage;
-    }
+    // public void setDogImg(JSONObject dogImg){ this.dogImg = dogImg; }
 
     public String getDogId() { return dogId; }
 
@@ -67,11 +65,11 @@ public class Dog implements Serializable {
 
     public String getSpecies() { return dogSpecies; }
 
-    public Drawable getDogImage() { return dogImage; }
-
     public String getCreated_at() {
         return created_at;
     }
+
+    // public JSONObject getDogImg() { return dogImg; }
 
     public void setNewPassword(String newPassword) {
         this.newPassword = newPassword;
