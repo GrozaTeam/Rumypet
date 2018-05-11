@@ -15,8 +15,7 @@ def pre_processing_method(img):
     img_mask = Preprocessing.cropping3(img_gray)
     img_result = Preprocessing.equalization(img_mask)
     return img_result
-
-
+'''
 def pre_processing_method_test(img):
 
     img_gray = Preprocessing.gray_scaling(img)
@@ -24,8 +23,6 @@ def pre_processing_method_test(img):
     img_eq = Preprocessing.equalization(img_mask)
     img_filter = image_enhance(img_eq)
     return img_filter
-
-
 def pre_processing_method_test2(img):
 
     img_fin = Preprocessing.fining(img)
@@ -34,8 +31,6 @@ def pre_processing_method_test2(img):
     img_thin = Preprocessing.thinning(img_eq)
 
     return img_thin
-
-
 def pre_processing_method_test3(img):
 
     img_fin = Preprocessing.fining(img)
@@ -44,8 +39,6 @@ def pre_processing_method_test3(img):
     img_filter = image_enhance(img_eq)
 
     return img_filter
-
-
 # test4 differs for direction
 def pre_processing_method_test4(img):
 
@@ -55,7 +48,7 @@ def pre_processing_method_test4(img):
     img_filter = image_enhance(img_eq)
 
     return img_filter
-
+'''
 
 def comparing(img_dog1, img_dog2):
     match_dog1 = pre_processing_method_test3(Preprocessing.resize(img_dog1, 400, 400))
@@ -107,7 +100,7 @@ def comparing_result(image_input, path_of_input, image_database):
 
 if __name__ == "__main__":
     # OpenCV version
-    print("OpenCV Version : " + cv2.__version__ + "\n")
+    # print("OpenCV Version : " + cv2.__version__ + "\n")
 
     # 1) For Pre-Process Testing
     '''
@@ -162,7 +155,7 @@ if __name__ == "__main__":
     start_time = time.time()
     average_result = comparing_result(img_input, path_input, img_database)
     print("Average : ", round(average_result, 3))
-    print("--- %s seconds ---" % round((time.time() - start_time), 5))
+    # print("--- %s seconds ---" % round((time.time() - start_time), 5))
 
     if average_result > 50:
         print('It is Same Dog')
