@@ -8,7 +8,7 @@ var options = {
   pythonPath: '',
   pythonOptions: ['-u'],
   scriptPath: './python-code',
-  args: ['value1', 'value2', 'value3']
+  args: ['value1']
 };
 router.get('/', function(req,res){
   res.render('start',{
