@@ -1,6 +1,6 @@
 import sys
 
-argv_length = sys.argv
+argv_length = len(sys.argv)
 print('argv length' + argv_length)
 if argv_length == 1:
     print('please input image')
