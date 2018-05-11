@@ -1,7 +1,6 @@
 import cv2
 import Preprocessing
 import numpy as np
-from matplotlib import pyplot as plt
 
 
 # not good performance
@@ -21,7 +20,6 @@ def ORBMatching(img1, img2):
 
     img3 = cv2.drawMatches(img1, kp1, img2, kp2, matches, None, flags=2)
 
-    #plt.imshow(img3), plt.show()
     return len(matches)
 
 
@@ -50,7 +48,7 @@ def SIFTMatching(img1, img2):
 
     # cv2.drawMatchesKnn expects list of lists as matches.
     img3 = cv2.drawMatchesKnn(img1, kp1, img2, kp2, good, 2)
-    #plt.imshow(img3), plt.show()
+
     return len(good)
 
 
@@ -72,7 +70,7 @@ def SURFMatching(img1, img2):
 
     # cv2.drawMatchesKnn expects list of lists as matches.
     img3 = cv2.drawMatchesKnn(img1, kp1, img2, kp2, good, 2)
-    #plt.imshow(img3), plt.show()
+
     return len(good)
 
 
@@ -110,7 +108,7 @@ def FLANNBASEDMaching(img1, img2):
                        matchesMask=matchesMask,
                        flags=0)
     img3 = cv2.drawMatchesKnn(img1, kp1, img2, kp2, matches, None, **draw_params)
-    plt.imshow(img3, ), plt.show()
+
 
 
 # have an error at opencv too
@@ -162,5 +160,3 @@ def HOMOGraphy(img1, img2):
                        flags=2)
 
     img3 = cv2.drawMatches(img1, kp1, img2, kp2, good, None, **draw_params)
-
-    plt.imshow(img3, 'gray'), plt.show()
