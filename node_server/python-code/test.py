@@ -7,6 +7,6 @@ if argv_length == 1:
 elif argv_length == 2:
     print('input image is ' + sys.argv[1])
 elif argv_length == 3:
-    print('input image is' + sys.argv[1] + ' : ' + sys.argv[2])
+    print('input image is ' + sys.argv[1] + ' : ' + sys.argv[2])
 else:
     print('wtf?')
