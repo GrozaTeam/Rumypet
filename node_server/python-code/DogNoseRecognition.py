@@ -150,6 +150,7 @@ if __name__ == "__main__":
     print(path_data)
 
     img_input = cv2.imread(path_input)
+    print(img_input)
     img_database = glob.glob(path_data)
     img_database.sort()
     start_time = time.time()
