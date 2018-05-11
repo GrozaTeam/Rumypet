@@ -17,9 +17,9 @@ router.get('/', function(req,res){
   });
 });
 router.get('/python', function(req, res) {
-  options.args[0] = 'dogImage1'
+  options.args[0] = 'dogImage1';
+  
   PythonShell.run('test.py', options, function (err, resultPython) {
-
     if (err) throw err;
     console.log('Results: %j', resultPython);
     console.log('Errors: %j', err);
