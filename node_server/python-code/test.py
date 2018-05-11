@@ -1,6 +1,5 @@
 import sys
 
-print(sys.version)
 argv_length = len(sys.argv)
 print('argv length', argv_length)
 if argv_length == 1:
