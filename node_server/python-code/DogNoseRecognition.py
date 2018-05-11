@@ -137,7 +137,7 @@ if __name__ == "__main__":
     img_dog_b.sort()
     start_time = time.time()
     average = comparing_folder(img_dog_a, img_dog_b)
-    print("평균은 : ", average)
+    print("Average : ", average)
     print("--- %s seconds ---" % (time.time() - start_time))
     '''
 
