@@ -32,7 +32,7 @@ def image_enhance(img):
     freq = medfreq * mask
     kx = 0.3
     ky = 0.3
-    # 원래는 0.65
+    # originally 0.65
     newim = ridge_filter(normim, orientim, freq, kx, ky)  # create gabor filter and do the actual filtering
 
     # g_kernel
