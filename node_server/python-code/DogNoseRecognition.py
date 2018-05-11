@@ -46,7 +46,7 @@ def pre_processing_method_test3(img):
     return img_filter
 
 
-# test4는 방향에 따라 너무 달라진다.
+# test4 differs for direction
 def pre_processing_method_test4(img):
 
     img_gray = Preprocessing.gray_scaling(img)
@@ -77,11 +77,6 @@ def comparing_folder(img_dog1, img_dog2):
                 score1 = Matching.SIFTMatching(match3, match4)
                 #score1 = Matching.ORBMatching(match3, match4)
                 #score1 = Matching.SURFMatching(match3, match4)
-
-                # 여기서 Matching 에서의 다양한 방법을 사용할 수 있습니다.
-                # Matching.py 에서  각 matching 방법에서
-                # plt.imshow(img3), plt.show()
-                # 위와같이 주석처리를 통해 시간을 알 수 있습니다.
 
                 print(i, " and ", j, " = ", score1)
                 score_total = score_total + score1

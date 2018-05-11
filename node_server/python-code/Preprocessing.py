@@ -73,14 +73,14 @@ def gabor_filter(img):
 
 
 def cropping(img):
-    # cv2.circle(이미지, (X축 위치, Y축 위치), 반지름, (R, G, B), 두께[음수면 안쪽부터 색칠])
+    # cv2.circle(image, (X, Y), radius, (R, G, B), Thinckness)
     img_crop = img
     cv2.circle(img_crop, (350, 450), 500, (0, 0, 255), 500)
     return img_crop
 
 
 def cropping2(img):
-    # cv2.circle(이미지, (원의 중심 : X축 위치, Y축 위치), 반지름, (R, G, B), 두께[ 반지름의 끝부터 두께만틈 : 음수면 안쪽부터 색칠])
+    # cv2.circle(image, (X, Y), radius, (R, G, B), Thickness)
     height, width = img.shape[:2]
     img_crop = cv2.copyMakeBorder(img, 0, 0, 0, 0, cv2.BORDER_CONSTANT, None)
     cv2.circle(img_crop, (int(height/2), int(width/2)), int(height), (0, 0, 255), int(width))
@@ -97,4 +97,3 @@ def cropping3(img):
 def resize(img, row, col):
     resize_img = cv2.resize(img, (row, col))
     return resize_img
-
