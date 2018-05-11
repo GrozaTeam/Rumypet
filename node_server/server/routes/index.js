@@ -8,7 +8,7 @@ var options = {
   pythonPath: '',
   pythonOptions: ['-u'],
   scriptPath: './python-code',
-  args: ['value1']
+  args: ['value1', 'value2']
 };
 router.get('/', function(req,res){
   res.render('start',{
@@ -17,9 +17,10 @@ router.get('/', function(req,res){
   });
 });
 router.get('/python', function(req, res) {
-  options.args[0] = 'dogImage1';
-  
-  PythonShell.run('test.py', options, function (err, resultPython) {
+  options.args[0] = 'inputImage.png';
+  options.args[1] = 'dog3';
+
+  PythonShell.run('DogNoseRecognition.py', options, function (err, resultPython) {
     if (err) throw err;
     console.log('Results: %j', resultPython);
     console.log('Errors: %j', err);
