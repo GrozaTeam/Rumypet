@@ -161,7 +161,7 @@ if __name__ == "__main__":
     img_database.sort()
     start_time = time.time()
     average_result = comparing_result(img_input, path_input, img_database)
-    print("평균은 : ", round(average_result, 3))
+    print("Average : ", round(average_result, 3))
     print("--- %s seconds ---" % round((time.time() - start_time), 5))
 
     if average_result > 50:
