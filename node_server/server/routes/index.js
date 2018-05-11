@@ -20,7 +20,7 @@ router.get('/python', function(req, res) {
   options.args[0] = 'inputImage.png';
   options.args[1] = 'dog3';
 
-  PythonShell.run('DogNoseRecognition.py', options, function (err, resultPython) {
+  PythonShell.run('test.py', options, function (err, resultPython) {
     if (err) throw err;
     console.log('Results: %j', resultPython);
     console.log('Errors: %j', err);
