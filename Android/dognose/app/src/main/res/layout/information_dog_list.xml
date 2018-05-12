@@ -78,23 +78,6 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/btn_test"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_marginLeft="1dp"
-                android:background="@color/colorMainDark">
-
-                <ImageView
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
-
-                    android:background="@drawable/profile_big" />
-
-            </LinearLayout>
-
         </LinearLayout>
     </LinearLayout>
 

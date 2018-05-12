@@ -140,6 +140,8 @@ router.get('/dogs/:id', function(req, res) {
           message: err.message
         });
       });
+    res.end(result);
+
   } else {
     res.status(401).json({
       message: 'Invalid Token !'

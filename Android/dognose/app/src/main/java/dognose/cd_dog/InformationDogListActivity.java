@@ -48,7 +48,7 @@ public class InformationDogListActivity extends AppCompatActivity {
     private ArrayList<Dog> dogArrayList;
     ListViewAdapter adapter;
     private ListView listViewDog;
-    private LinearLayout btnAdd, btnProfile, btnTest;
+    private LinearLayout btnAdd, btnProfile;
 
     private SharedPreferences mSharedPreferences;
     private CompositeSubscription mSubscriptions;
@@ -172,8 +172,6 @@ public class InformationDogListActivity extends AppCompatActivity {
         btnProfile = (LinearLayout) findViewById(R.id.btn_profile);
         btnAdd.setOnClickListener(listener);
         btnProfile.setOnClickListener(listener);
-        btnTest = (LinearLayout) findViewById(R.id.btn_test);
-        btnTest.setOnClickListener(listener);
 
         listViewDog.setOnItemClickListener(new ListView.OnItemClickListener(){
 
@@ -205,10 +203,6 @@ public class InformationDogListActivity extends AppCompatActivity {
                 case R.id.btn_profile:
                     Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
                     startActivity(intent);
-                    break;
-
-                case R.id.btn_test:
-
                     break;
 
                 default:
