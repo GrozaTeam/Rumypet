@@ -114,12 +114,12 @@ if __name__ == "__main__":
     f.close()
 
     if len(sys.argv) == 1:
-        path_input = "images/dog6/1.png"
-        path_data = "images/dog3/*.png"
+        path_input = "./public/images/dog6/1.png"
+        path_data = "./public/images/dog3/*.png"
 
     elif len(sys.argv) == 3:
-        path_input = "images/" + sys.argv[1]
-        path_data = "images/" + sys.argv[2] + "/*.png"
+        path_input = "./public/images/" + sys.argv[1]
+        path_data = "./public/images/" + sys.argv[2] + "/*.png"
 
     print(path_input)
     print(path_data)
