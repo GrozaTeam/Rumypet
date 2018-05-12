@@ -13,11 +13,6 @@ var config = require('../config/config.json');
 var registerDog = require('../functions/registerDog');
 var profileDog = require('../functions/profileDog');
 
-var multer = require('multer');
-var fileType = require('file-type');
-var fs = require('fs');
-
-
 router.get('/', function(req, res) {
   res.end('Welcome to Rumypet !');
 });
@@ -220,57 +215,6 @@ router.post('/users/:id/password', function(req, res) {
       });
   }
 });
-
-
-//----
-var upload = multer({
-  dest: 'images/',
-  limits: {
-    fileSize: 10000000,
-    files: 1
-  },
-  fileFilter: function(req, file, callback) {
-    console.log(file.originalname);
-
-    if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-      return callback(new Error('Only Images are allowed !'), false);
-    }
-
-    callback(null, true);
-  }
-}).single('image');
-
-router.post('/images/upload', function(req, res) {
-  console.log('uploading is listening');
-  upload(req, res, function(err) {
-    if (err) {
-      console.log(err);
-      res.status(400).json({
-        message: err.message
-      });
-    } else {
-      var path = '.public/images/${req.file.filename}';
-      res.status(200).json({
-        message: 'Image Uploaded Successfully !',
-        path: path
-      });
-    }
-  });
-});
-
-router.get('images/:imagename', function(req, res) {
-  console.log('image image');
-  var imagename = req.params.imagename;
-  var imagepath = __dirname + "/images/" + imagename;
-  var image = fs.readFileSync(imagepath);
-  var mime = fileType(image).mime;
-  res.writeHead(200, {
-    'Content-Type': mime
-  });
-  res.end(image, 'binary');
-});
-
-//----
 
 function checkToken(req) {
   var token = req.headers['x-access-token'];
