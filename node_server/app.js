@@ -26,6 +26,14 @@ app.use('/', index);
 app.use('/python', index);
 app.use('/api/v1', routes);
 
+app.use(function(err, req, res, next){
+    if (err.code == 'ENOENT') {
+        res.status(404).json({message: 'Image Not Found !'});
+    } else {
+        res.status(500).json({message:err.message});
+    }
+});
+
 module.exports = app;
 
 var server = app.listen(8080, function() {
