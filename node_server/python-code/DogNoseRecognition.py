@@ -99,52 +99,27 @@ def comparing_result(image_input, path_of_input, image_database):
 
 
 if __name__ == "__main__":
-    # OpenCV version
-    # print("OpenCV Version : " + cv2.__version__ + "\n")
-
     # 1) For Pre-Process Testing
     '''
     img1 = cv2.imread('images/etc/f_example1.png')
     img_test = pre_processing_method_test(Preprocessing.resize(img1, 400, 400))
     cv2.imshow("Pre-Processing", img_test)
     '''
-
-    # 2) Matching Result for two image
-    '''
-    img_db_dog = cv2.imread('images/dog6/4.PNG')
-    img_dog_1 = cv2.imread('images/dog5/1.PNG')
-    img_dog_2 = cv2.imread('images/dog5/2.PNG')
-    img_dog_3 = cv2.imread('images/dog5/3.PNG')
-    start_time = time.time()
-    comparing(img_db_dog, img_dog_1)
-    comparing(img_db_dog, img_dog_2)
-    comparing(img_db_dog, img_dog_3)
-    print("--- %s seconds ---" % (time.time() - start_time))
-    '''
-
-    # 3) Matching Result for two folders (dog1~dog5)
-    '''
-    img_dog_a = glob.glob('images/dog2/*.png')
-    img_dog_b = glob.glob('images/dog2/*.png')
-    img_dog_a.sort()
-    img_dog_b.sort()
-    start_time = time.time()
-    average = comparing_folder(img_dog_a, img_dog_b)
-    print("Average : ", average)
-    print("--- %s seconds ---" % (time.time() - start_time))
-    '''
-
     # 4) Recognition
     # Execution example)
     # python DogNoseRecognition inputImage.png dog3
+    f = open("images/test.txt", 'r')
+    line = f.readline()
+    print(line)
+    f.close()
 
     if len(sys.argv) == 1:
-        path_input = 'images/dog6/1.png'
-        path_data = 'images/dog3/*.png'
+        path_input = "images/dog6/1.png"
+        path_data = "images/dog3/*.png"
 
     elif len(sys.argv) == 3:
-        path_input = 'images/' + sys.argv[1]
-        path_data = 'images/' + sys.argv[2] + '/*.png'
+        path_input = "images/" + sys.argv[1]
+        path_data = "images/" + sys.argv[2] + "/*.png"
 
     print(path_input)
     print(path_data)
