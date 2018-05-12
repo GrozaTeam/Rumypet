@@ -108,7 +108,7 @@ if __name__ == "__main__":
     # 4) Recognition
     # Execution example)
     # python DogNoseRecognition inputImage.png dog3
-    f = open("test.txt", 'r')
+    f = open("./test.txt", 'r')
     line = f.readline()
     print(line)
     f.close()
