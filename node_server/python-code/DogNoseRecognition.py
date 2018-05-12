@@ -109,17 +109,19 @@ if __name__ == "__main__":
     # Execution example)
     # python DogNoseRecognition inputImage.png dog3
     f = open("./test.txt", 'r')
-    line = f.readline()
-    print(line)
+    while True:
+        line = f.readline()
+        if not line: break
+        print(line)
     f.close()
 
     if len(sys.argv) == 1:
-        path_input = "./public/images/dog6/1.png"
-        path_data = "./public/images/dog3/*.png"
+        path_input = "./public/images/data/dog6/1.png"
+        path_data = "./public/images/data/dog3/*.png"
 
     elif len(sys.argv) == 3:
-        path_input = "./public/images/" + sys.argv[1]
-        path_data = "./public/images/" + sys.argv[2] + "/*.png"
+        path_input = "./public/images/data/" + sys.argv[1]
+        path_data = "./public/images/data/" + sys.argv[2] + "/*.png"
 
     print(path_input)
     print(path_data)
