@@ -108,12 +108,6 @@ if __name__ == "__main__":
     # 4) Recognition
     # Execution example)
     # python DogNoseRecognition inputImage.png dog3
-    f = open("./test.txt", 'r')
-    while True:
-        line = f.readline()
-        if not line: break
-        print(line)
-    f.close()
 
     if len(sys.argv) == 1:
         path_input = "./public/images/data/dog6/1.png"
@@ -122,17 +116,11 @@ if __name__ == "__main__":
     elif len(sys.argv) == 3:
         path_input = "./public/images/data/" + sys.argv[1]
         path_data = "./public/images/data/" + sys.argv[2] + "/*.png"
-
-    print(path_input)
-    print(path_data)
-
     img_input = cv2.imread(path_input)
     img_database = glob.glob(path_data)
-    img_database.sort()
-    start_time = time.time()
+    # img_database.sort()
     average_result = comparing_result(img_input, path_input, img_database)
     print("Average : ", round(average_result, 3))
-    # print("--- %s seconds ---" % round((time.time() - start_time), 5))
 
     if average_result > 50:
         print('It is Same Dog')
