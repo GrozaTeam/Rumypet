@@ -14,6 +14,8 @@ var multer = require('multer');
 var registerDog = require('../functions/registerDog');
 var profileDog = require('../functions/profileDog');
 
+var uploadDogId = '';
+
 router.get('/', function(req, res) {
   res.end('Welcome to Rumypet !');
 });
@@ -219,7 +221,7 @@ router.post('/users/:id/password', function(req, res) {
 
 //----
 var upload = multer({
-  dest: './public/'+req.body.dogId+'/images/',
+  dest: './public/images/',
   limits: {
     fileSize: 10000000,
     files: 1
@@ -228,14 +230,13 @@ var upload = multer({
     if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
       return callback(new Error('Only Images are allowed !'), false);
     }
-
+    file.originalname = uploadDogId;
     callback(null, true);
   }
 }).single('image');
 
 router.post('/images/upload', function(req, res) {
-  var dogId = req.body.dogId;
-  console.log('uploading is listening');
+  uploadDogId = req.body.dogId;
   upload(req, res, function(err) {
     if (err) {
       console.log(err);
@@ -243,7 +244,7 @@ router.post('/images/upload', function(req, res) {
         message: err.message
       });
     } else {
-      var path = 'images/'+ dogId + '/' + req.file.filename;
+      var path = 'images/' + req.file.filename;
       res.status(200).json({
         message: 'Image Uploaded Successfully !',
         path: path
