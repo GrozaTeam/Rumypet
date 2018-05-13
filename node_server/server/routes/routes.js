@@ -15,7 +15,7 @@ var path = require('path');
 var registerDog = require('../functions/registerDog');
 var profileDog = require('../functions/profileDog');
 
-var uploadDogId = '';
+var dogId = ''
 
 router.get('/', function(req, res) {
   res.end('Welcome to Rumypet !');
@@ -73,7 +73,7 @@ router.post('/users', function(req, res) {
 });
 
 router.post('/dogs', function(req, res) {
-  var dogId = req.body.dogId;
+  dogId = req.body.dogId;
   var ownerId = req.body.ownerId;
   var dogName = req.body.dogName;
   var dogGender = req.body.dogGender;
@@ -227,7 +227,7 @@ var upload = multer({
       cb(null, './public/images/');
     },
     filename: function (req, file, cb) {
-      cb(null, ''+uploadDogId);
+      cb(null, new Date().valueOf() + dogId);
     }
   }),
   limits: {

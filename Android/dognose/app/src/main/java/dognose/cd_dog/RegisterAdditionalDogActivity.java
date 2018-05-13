@@ -193,18 +193,14 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
                 public void onResponse(Call<ImageResponse> call, retrofit2.Response<ImageResponse> response) {
 
                     if (response.isSuccessful()) {
-
                         ImageResponse responseBody = response.body();
                         mImageUrl = Constants.BASE_URL + responseBody.getPath();
 
                     } else {
-
                         ResponseBody errorBody = response.errorBody();
-
                         Gson gson = new Gson();
 
                         try {
-
                             ImageResponse errorResponse = gson.fromJson(errorBody.string(), ImageResponse.class);
                             Snackbar.make(findViewById(R.id.content), errorResponse.getMessage(),Snackbar.LENGTH_SHORT).show();
 
