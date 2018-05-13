@@ -42,8 +42,6 @@ var upload = multer({
     files: 1
   },
   fileFilter: function(req, file, callback) {
-    console.log(file.originalname);
-
     if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
       return callback(new Error('Only Images are allowed !'), false);
     }

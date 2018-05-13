@@ -39,13 +39,26 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Calendar;
 import java.util.Random;
 
 import dognose.cd_dog.model.Dog;
 import dognose.cd_dog.model.Res;
+import dognose.cd_dog.network.ImageResponse;
 import dognose.cd_dog.network.NetworkUtil;
+import dognose.cd_dog.network.RetrofitInterface;
+import dognose.cd_dog.utils.Constants;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.HttpException;
+import retrofit2.converter.gson.GsonConverterFactory;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
@@ -75,9 +88,14 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
     private String dogName="", species="", gender="", birth="";
     private ImageView imgDog, imgDogNose;
 
-    private String ownerId, ownerId_for_body,ownerName;
+    private String ownerId, ownerId_for_body, ownerName;
 
     private CompositeSubscription mSubscriptions;
+
+    private Uri imageUri;
+
+    private String mImageUrl = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,20 +154,109 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
             switch (requestCode) {
 
                 case GALLERY_CODE:
-                    sendPicture(data.getData()); //갤러리에서 가져오기
+                    showImage(data.getData());
+                    imageUri = data.getData();
                     break;
-
 
                 default:
                     break;
             }
-
         }
     }
+
+    private void uploadImage(Uri imgUri, Dog dogdb) {
+
+
+        try {
+            InputStream is = getContentResolver().openInputStream(imgUri);
+            byte[] imageBytes = getBytes(is);
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(Constants.BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+
+            RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
+
+            RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), imageBytes);
+
+            MultipartBody.Part body = MultipartBody.Part.createFormData("image", "image.jpg", requestFile);
+            Call<ImageResponse> call = retrofitInterface.uploadImage(body, dogdb);
+            call.enqueue(new Callback<ImageResponse>() {
+                @Override
+                public void onResponse(Call<ImageResponse> call, retrofit2.Response<ImageResponse> response) {
+
+                    if (response.isSuccessful()) {
+
+                        ImageResponse responseBody = response.body();
+                        mImageUrl = Constants.BASE_URL + responseBody.getPath();
+
+                    } else {
+
+                        ResponseBody errorBody = response.errorBody();
+
+                        Gson gson = new Gson();
+
+                        try {
+
+                            ImageResponse errorResponse = gson.fromJson(errorBody.string(), ImageResponse.class);
+                            Snackbar.make(findViewById(R.id.content), errorResponse.getMessage(),Snackbar.LENGTH_SHORT).show();
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ImageResponse> call, Throwable t) {
+                    Log.d("testPaeng: ", t.getLocalizedMessage());
+
+                }
+            });
+
+
+
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    private void showImage(Uri imgUri){
+        String imagePath = getRealPathFromURI(imgUri);
+        Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+        imgDog.setImageBitmap(bitmap);
+        imgDog.setBackground(null);
+
+    }
+
+    public byte[] getBytes(InputStream is) throws IOException {
+        ByteArrayOutputStream byteBuff = new ByteArrayOutputStream();
+
+        int buffSize = 1024;
+        byte[] buff = new byte[buffSize];
+
+        int len = 0;
+        while ((len = is.read(buff)) != -1) {
+            byteBuff.write(buff, 0, len);
+        }
+
+        return byteBuff.toByteArray();
+    }
+
 
     private void sendPicture(Uri imgUri) {
 
         String imagePath = getRealPathFromURI(imgUri); // path 경로
+
+        Bitmap bitmap = BitmapFactory.decodeFile(imagePath); //경로를 통해 비트맵으로 전환
+
+        imgDog.setImageBitmap(bitmap);//이미지 뷰에 비트맵 넣기
+        imgDog.setBackground(null);
+
+/*
+
         ExifInterface exif = null;
         try {
             exif = new ExifInterface(imagePath);
@@ -157,19 +264,14 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         int exifOrientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
-
-        Bitmap bitmap = BitmapFactory.decodeFile(imagePath); //경로를 통해 비트맵으로 전환
-
-        imgDog.setImageBitmap(bitmap);//이미지 뷰에 비트맵 넣기
-        imgDog.setBackground(null);
-
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+
         byte[] currentData = stream.toByteArray();
 
         //파일로 저장
         new RegisterAdditionalDogActivity.SaveImageTask().execute(currentData);
-
+*/
 
     }
 
@@ -201,6 +303,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
                         dogdb.setGender(gender);
                         dogdb.setBirth(birth);
                         dogdb.setSpecies(etSpecies.getSelectedItem().toString());
+                        uploadImage(imageUri, dogdb);
 
                         registerProgress(dogdb);
                         finish();
@@ -437,6 +540,8 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
         textChangedListener(etDogName);
         tvBirth.setOnClickListener(listener);
+
+
 
 
 

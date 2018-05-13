@@ -20,7 +20,6 @@ public class Dog implements Serializable {
     private String created_at;
     private String newPassword;
     private String token;
-    private Object dogImg;
 
 
     public void setDogId(String dogId){this.dogId = dogId; }
@@ -45,8 +44,6 @@ public class Dog implements Serializable {
         this.dogSpecies = dogSpecies;
     }
 
-    // public void setDogImg(JSONObject dogImg){ this.dogImg = dogImg; }
-
     public String getDogId() { return dogId; }
 
     public String getOwnerId() { return ownerId; }
@@ -68,8 +65,6 @@ public class Dog implements Serializable {
     public String getCreated_at() {
         return created_at;
     }
-
-    // public JSONObject getDogImg() { return dogImg; }
 
     public void setNewPassword(String newPassword) {
         this.newPassword = newPassword;
