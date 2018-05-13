@@ -221,7 +221,14 @@ router.post('/users/:id/password', function(req, res) {
 
 //----
 var upload = multer({
-  dest: './public/images/',
+  storage: multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './public/images/');
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname);
+    }
+  }),
   limits: {
     fileSize: 10000000,
     files: 1
