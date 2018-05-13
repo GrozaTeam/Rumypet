@@ -23,7 +23,6 @@ app.use('/api/v1',router);
 */
 
 app.use('/', index);
-app.use('/python', index);
 app.use('/api/v1', routes);
 
 app.use(function(err, req, res, next){
