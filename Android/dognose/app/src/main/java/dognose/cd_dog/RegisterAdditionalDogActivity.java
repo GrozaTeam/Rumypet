@@ -168,6 +168,10 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
 
         try {
+
+            String dogId = dogdb.getDogId();
+
+
             InputStream is = getContentResolver().openInputStream(imgUri);
             byte[] imageBytes = getBytes(is);
 
@@ -180,8 +184,10 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
             RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), imageBytes);
 
-            MultipartBody.Part body = MultipartBody.Part.createFormData("image", "image.jpg", requestFile);
+            MultipartBody.Part body = MultipartBody.Part.createFormData("image", dogId+".jpg", requestFile);
+
             Call<ImageResponse> call = retrofitInterface.uploadImage(body);
+
             call.enqueue(new Callback<ImageResponse>() {
                 @Override
                 public void onResponse(Call<ImageResponse> call, retrofit2.Response<ImageResponse> response) {

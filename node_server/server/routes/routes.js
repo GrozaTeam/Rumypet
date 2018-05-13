@@ -230,7 +230,6 @@ var upload = multer({
     if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
       return callback(new Error('Only Images are allowed !'), false);
     }
-    file.originalname = uploadDogId;
     callback(null, true);
   }
 }).single('image');
@@ -250,6 +249,7 @@ router.post('/images/upload', function(req, res) {
         path: path
       });
     }
+
   });
 });
 
