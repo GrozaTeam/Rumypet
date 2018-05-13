@@ -226,7 +226,7 @@ var upload = multer({
     destination: function (req, file, cb) {
       cb(null, './public/images/');
     },
-    originalname: function (req, file, cb) {
+    filename: function (req, file, cb) {
       cb(null, new Date().valueOf() + path.extname(file.originalname));
     }
   }),
