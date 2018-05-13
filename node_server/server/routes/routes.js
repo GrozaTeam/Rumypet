@@ -230,7 +230,7 @@ var upload = multer({
     },
     filename: function (req, file, cb) {
       console.log('dogUploadId2='+dogUploadId);
-      cb(null, new Date().valueOf() + path.extname(file.originalname) + dogUploadId);
+      cb(null, dogUploadId + path.extname(file.originalname));
     }
   }),
   limits: {
