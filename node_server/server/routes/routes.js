@@ -9,6 +9,7 @@ var login = require('../functions/login');
 var profile = require('../functions/profile');
 var password = require('../functions/password');
 var config = require('../config/config.json');
+var multer = require('multer');
 
 var registerDog = require('../functions/registerDog');
 var profileDog = require('../functions/profileDog');
