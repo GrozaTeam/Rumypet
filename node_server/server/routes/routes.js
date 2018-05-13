@@ -227,7 +227,7 @@ var upload = multer({
       cb(null, './public/images/');
     },
     filename: function (req, file, cb) {
-      cb(null, new Date().valueOf() + path.extname(file.originalname));
+      cb(null, uploadDogId);
     }
   }),
   limits: {
