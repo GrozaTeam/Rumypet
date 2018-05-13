@@ -36,7 +36,7 @@ router.get('/python', function(req, res) {
 
 //----
 var upload = multer({
-  dest: 'images/',
+  dest: './public/images/',
   limits: {
     fileSize: 10000000,
     files: 1
