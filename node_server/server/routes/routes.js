@@ -269,6 +269,7 @@ router.get('/images/:imagename', function(req, res) {
   console.log('imagename=' + imagename);
   // var imagepath = __dirname + "/images/" + imagename;
   var imagepath = "./public/images/dogs/" + imagename + ".jpg";
+  console.log('imagepath=' + imagepath);
   var image = fs.readFileSync(imagepath);
   var mime = fileType(image).mime;
   res.writeHead(200, {
