@@ -184,7 +184,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
             RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), imageBytes);
 
-            MultipartBody.Part body = MultipartBody.Part.createFormData("image", dogId+".jpg", requestFile);
+            MultipartBody.Part body = MultipartBody.Part.createFormData("image", "image.jpg", requestFile);
 
             Call<ImageResponse> call = retrofitInterface.uploadImage(body);
 

@@ -43,6 +43,6 @@ public interface RetrofitInterface {
     Observable<Res> resetPasswordFinish(@Path("email") String email, @Body User user);
 
     @Multipart
-    @POST("/images/upload")
+    @POST("images/upload")
     Call<ImageResponse> uploadImage(@Part MultipartBody.Part image);
 }
