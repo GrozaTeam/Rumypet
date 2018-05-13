@@ -122,7 +122,7 @@ public class InformationDogListActivity extends AppCompatActivity {
 
         for (Dog dogitem : dog){
             if(dogitem != null){
-                
+
                 Drawable d = null;
 
 
