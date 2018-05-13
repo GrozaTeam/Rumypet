@@ -34,7 +34,6 @@ public class Main extends AppCompatActivity {
         btnList.setOnClickListener(listener);
         btnSet.setOnClickListener(listener);
 
-
     }
 
     Button.OnClickListener listener = new Button.OnClickListener() {
