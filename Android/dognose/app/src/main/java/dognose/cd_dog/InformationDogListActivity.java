@@ -2,6 +2,7 @@ package dognose.cd_dog;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -121,8 +122,13 @@ public class InformationDogListActivity extends AppCompatActivity {
 
         for (Dog dogitem : dog){
             if(dogitem != null){
+                
+                Drawable d = null;
+
+
+                dogitem.setDogImage(d);
                 dogArrayList.add(dogitem);
-                adapter.addItemDog(null, dogitem.getName(), dogitem.getSpecies(), dogitem.getGender(), getAge(dogitem.getBirth()));
+                adapter.addItemDog(dogitem.getDogImage(), dogitem.getName(), dogitem.getSpecies(), dogitem.getGender(), getAge(dogitem.getBirth()));
                 dogNum += 1;
             }
         }

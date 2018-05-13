@@ -11,6 +11,8 @@ import java.io.Serializable;
  */
 
 public class Dog implements Serializable {
+
+
     private String dogId;
     private String ownerId;
     private String dogName;
@@ -20,6 +22,7 @@ public class Dog implements Serializable {
     private String created_at;
     private String newPassword;
     private String token;
+    private Drawable dogImage;
 
 
     public void setDogId(String dogId){this.dogId = dogId; }
@@ -44,6 +47,8 @@ public class Dog implements Serializable {
         this.dogSpecies = dogSpecies;
     }
 
+    public void setDogImage(Drawable dogImage) { this.dogImage = dogImage; }
+
     public String getDogId() { return dogId; }
 
     public String getOwnerId() { return ownerId; }
@@ -61,6 +66,8 @@ public class Dog implements Serializable {
     }
 
     public String getSpecies() { return dogSpecies; }
+
+    public Drawable getDogImage() { return dogImage; }
 
     public String getCreated_at() {
         return created_at;

@@ -164,14 +164,10 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
         }
     }
 
-    private void uploadImage(Uri imgUri, Dog dogdb) {
+    private void uploadImage(Uri imgUri) {
 
 
         try {
-
-            String dogId = dogdb.getDogId();
-
-
             InputStream is = getContentResolver().openInputStream(imgUri);
             byte[] imageBytes = getBytes(is);
 
@@ -308,7 +304,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
                         registerProgress(dogdb);
 
-                        uploadImage(imageUri, dogdb);
+                        uploadImage(imageUri);
 
                         finish();
                     }

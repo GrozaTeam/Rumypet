@@ -3,6 +3,7 @@ var router = express.Router();
 
 var auth = require('basic-auth');
 var jwt = require('jsonwebtoken');
+var fs = require('fs');
 
 var register = require('../functions/register');
 var login = require('../functions/login');
