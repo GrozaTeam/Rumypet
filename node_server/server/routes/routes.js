@@ -229,7 +229,7 @@ var upload = multer({
       cb(null, './public/images/dogs/');
     },
     filename: function (req, file, cb) {
-      console('dogUploadId2='+dogUploadId);
+      console.log('dogUploadId2='+dogUploadId);
       cb(null, new Date().valueOf() + path.extname(file.originalname) + dogUploadId);
     }
   }),
