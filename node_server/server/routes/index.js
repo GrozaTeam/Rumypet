@@ -36,7 +36,7 @@ router.get('/python', function(req, res) {
 
 //----
 var upload = multer({
-  dest: './public/images/',
+  dest: 'images/',
   limits: {
     fileSize: 10000000,
     files: 1
@@ -72,6 +72,7 @@ router.post('/images/upload', function(req, res) {
 
 router.get('/images/:imagename', function(req, res) {
   var imagename = req.params.imagename;
+  console.log('imagename=' + imagename);
   // var imagepath = "__dirname + ""/images/" + imagename;
   var imagepath = "./public/images/" + imagename;
   var image = fs.readFileSync(imagepath);
