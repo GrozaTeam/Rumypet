@@ -10,6 +10,7 @@ var profile = require('../functions/profile');
 var password = require('../functions/password');
 var config = require('../config/config.json');
 var multer = require('multer');
+var path = require('path');
 
 var registerDog = require('../functions/registerDog');
 var profileDog = require('../functions/profileDog');
@@ -226,7 +227,7 @@ var upload = multer({
       cb(null, './public/images/');
     },
     filename: function (req, file, cb) {
-      cb(null, 'hi');
+      cb(null, new Date().valueOf() + path.extname(file.originalname));
     }
   }),
   limits: {
