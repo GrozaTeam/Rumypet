@@ -15,7 +15,7 @@ var path = require('path');
 var registerDog = require('../functions/registerDog');
 var profileDog = require('../functions/profileDog');
 
-var dogId = ''
+var uploadDogId = '';
 
 router.get('/', function(req, res) {
   res.end('Welcome to Rumypet !');
@@ -73,7 +73,7 @@ router.post('/users', function(req, res) {
 });
 
 router.post('/dogs', function(req, res) {
-  dogId = req.body.dogId;
+  var dogId = req.body.dogId;
   var ownerId = req.body.ownerId;
   var dogName = req.body.dogName;
   var dogGender = req.body.dogGender;
@@ -224,10 +224,10 @@ router.post('/users/:id/password', function(req, res) {
 var upload = multer({
   storage: multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, './public/images/');
+      cb(null, './public/images/dogs/');
     },
     filename: function (req, file, cb) {
-      cb(null, new Date().valueOf() + dogId);
+      cb(null, new Date().valueOf() + path.extname(file.originalname));
     }
   }),
   limits: {
@@ -243,7 +243,6 @@ var upload = multer({
 }).single('image');
 
 router.post('/images/upload', function(req, res) {
-  uploadDogId = req.body.dogId;
   upload(req, res, function(err) {
     if (err) {
       console.log(err);
@@ -265,7 +264,7 @@ router.get('/images/:imagename', function(req, res) {
   var imagename = req.params.imagename;
   console.log('imagename=' + imagename);
   // var imagepath = __dirname + "/images/" + imagename;
-  var imagepath = "./public/images/" + imagename;
+  var imagepath = "./public/images/dogs/" + imagename;
   var image = fs.readFileSync(imagepath);
   var mime = fileType(image).mime;
   res.writeHead(200, {
