@@ -74,6 +74,8 @@ router.post('/users', function(req, res) {
 
 router.post('/dogs', function(req, res) {
   var dogId = req.body.dogId;
+  dogUploadId = dogId;
+  console.log('UploadId='+dogUploadId);
   var ownerId = req.body.ownerId;
   var dogName = req.body.dogName;
   var dogGender = req.body.dogGender;
@@ -227,7 +229,8 @@ var upload = multer({
       cb(null, './public/images/dogs/');
     },
     filename: function (req, file, cb) {
-      cb(null, new Date().valueOf() + path.extname(file.originalname));
+      console('dogUploadId2='+dogUploadId);
+      cb(null, new Date().valueOf() + path.extname(file.originalname) + dogUploadId);
     }
   }),
   limits: {

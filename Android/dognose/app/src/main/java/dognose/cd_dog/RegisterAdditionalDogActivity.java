@@ -305,9 +305,11 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
                         dogdb.setGender(gender);
                         dogdb.setBirth(birth);
                         dogdb.setSpecies(etSpecies.getSelectedItem().toString());
-                        uploadImage(imageUri, dogdb);
 
                         registerProgress(dogdb);
+
+                        uploadImage(imageUri, dogdb);
+
                         finish();
                     }
                     break;
