@@ -271,8 +271,9 @@ router.get('/images/:imagename', function(req, res) {
   var imagepath = "./public/images/dogs/" + imagename + ".jpg";
   console.log('imagepath=' + imagepath);
   var image = fs.readFileSync(imagepath);
-  var mime = fileType(image).mime;
+
   /*
+  var mime = fileType(image).mime;
   res.writeHead(200, {
     'Content-Type': mime
   });
