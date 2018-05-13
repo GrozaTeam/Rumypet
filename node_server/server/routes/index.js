@@ -61,7 +61,7 @@ router.post('/images/upload', function(req, res) {
         message: err.message
       });
     } else {
-      var path = '.public/images/' + req.file.filename;
+      var path = './public/images/' + req.file.filename;
       res.status(200).json({
         message: 'Image Uploaded Successfully !',
         path: path
@@ -72,7 +72,8 @@ router.post('/images/upload', function(req, res) {
 
 router.get('/images/:imagename', function(req, res) {
   var imagename = req.params.imagename;
-  var imagepath = __dirname + "/images/" + imagename;
+  // var imagepath = "__dirname + ""/images/" + imagename;
+  var imagepath = "./public/images/" + imagename;
   var image = fs.readFileSync(imagepath);
   var mime = fileType(image).mime;
   res.writeHead(200, {
