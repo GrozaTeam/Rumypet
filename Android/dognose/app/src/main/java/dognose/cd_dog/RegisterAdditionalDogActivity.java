@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -162,6 +163,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
         }
     }
 
+
     public InputStream Bitmap2InputStream(Bitmap bm) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
@@ -172,10 +174,24 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
     private void uploadImage(Uri imgUri) {
 
         try {
+            String imagePath = getRealPathFromURI(imgUri);
             InputStream is = getContentResolver().openInputStream(imgUri);
             Bitmap orgImage = BitmapFactory.decodeStream(is);
-            Bitmap resize = Bitmap.createScaledBitmap(orgImage, 300, 400, true);
-            InputStream is_result = Bitmap2InputStream(resize);
+            Bitmap resize = Bitmap.createScaledBitmap(orgImage, 300, 300, true);
+            ExifInterface exif = null;
+            try {
+                exif = new ExifInterface(imagePath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            int exifOrientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
+
+            Bitmap bitmapRotated = rotateBitmap(resize, exifOrientation);
+
+
+
+
+            InputStream is_result = Bitmap2InputStream(bitmapRotated);
 
             byte[] imageBytes = getBytes(is_result);
 
@@ -229,10 +245,70 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
     private void showImage(Uri imgUri){
         String imagePath = getRealPathFromURI(imgUri);
-        Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
-        imgDog.setImageBitmap(bitmap);
+        Bitmap orgImage = BitmapFactory.decodeFile(imagePath);
+        Bitmap resize = Bitmap.createScaledBitmap(orgImage, 300, 300, true);
+        // image rotation
+        ExifInterface exif = null;
+        try {
+            exif = new ExifInterface(imagePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int exifOrientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
+
+        Bitmap bitmapRotated = rotateBitmap(resize, exifOrientation);
+
+
+
+
+
+        imgDog.setImageBitmap(bitmapRotated);
         imgDog.setBackground(null);
 
+    }
+
+    // Image Rotation
+    // http://stickyny.tistory.com/95
+    public Bitmap rotateBitmap(Bitmap bitmap, int orientation){
+        Matrix matrix = new Matrix();
+        switch(orientation){
+            case ExifInterface.ORIENTATION_NORMAL:
+                return bitmap;
+            case ExifInterface.ORIENTATION_FLIP_HORIZONTAL:
+                matrix.setScale(-1,1);
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_180:
+                matrix.setRotate(180);
+                break;
+            case ExifInterface.ORIENTATION_FLIP_VERTICAL:
+                matrix.setRotate(180);
+                matrix.postScale(-1, 1);
+                break;
+            case ExifInterface.ORIENTATION_TRANSPOSE:
+                matrix.setRotate(90);
+                matrix.postScale(-1, 1);
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_90:
+                matrix.setRotate(90);
+                break;
+            case ExifInterface.ORIENTATION_TRANSVERSE:
+                matrix.setRotate(-90);
+                matrix.postScale(-1, 1);
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_270:
+                matrix.setRotate(-90);
+                break;
+            default:
+                return bitmap;
+        }
+        try{
+            Bitmap bmRotated = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix,true);
+            bitmap.recycle();
+            return bmRotated;
+        }catch(OutOfMemoryError e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public byte[] getBytes(InputStream is) throws IOException {
@@ -267,7 +343,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        int exifOrientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+        int exifOrientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
 
