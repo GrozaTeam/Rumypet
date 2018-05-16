@@ -34,6 +34,7 @@ import com.google.gson.GsonBuilder;
 
 import org.w3c.dom.Text;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -78,8 +79,6 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
     private static final int colorFemaleLight =  0XFFFFCCCC;
     private static final int colorFemaleDark = 0XFFFF5555;
 
-
-
     private EditText etDogName;
     private Spinner etSpecies;
     private TextView tvBirth;
@@ -87,13 +86,11 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
     // For database
     private String dogName="", species="", gender="", birth="";
     private ImageView imgDog, imgDogNose;
-
     private String ownerId, ownerId_for_body, ownerName;
 
     private CompositeSubscription mSubscriptions;
 
     private Uri imageUri;
-
     private String mImageUrl = "";
 
 
@@ -154,6 +151,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
             switch (requestCode) {
 
                 case GALLERY_CODE:
+
                     showImage(data.getData());
                     imageUri = data.getData();
                     break;
@@ -164,17 +162,28 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
         }
     }
 
-    private void uploadImage(Uri imgUri) {
+    public InputStream Bitmap2InputStream(Bitmap bm) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        InputStream is = new ByteArrayInputStream(baos.toByteArray());
+        return is;
+    }
 
+    private void uploadImage(Uri imgUri) {
 
         try {
             InputStream is = getContentResolver().openInputStream(imgUri);
-            byte[] imageBytes = getBytes(is);
+            Bitmap orgImage = BitmapFactory.decodeStream(is);
+            Bitmap resize = Bitmap.createScaledBitmap(orgImage, 300, 400, true);
+            InputStream is_result = Bitmap2InputStream(resize);
+
+            byte[] imageBytes = getBytes(is_result);
 
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(Constants.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
+
 
             RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
 
