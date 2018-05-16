@@ -259,9 +259,6 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
         Bitmap bitmapRotated = rotateBitmap(resize, exifOrientation);
 
 
-
-
-
         imgDog.setImageBitmap(bitmapRotated);
         imgDog.setBackground(null);
 

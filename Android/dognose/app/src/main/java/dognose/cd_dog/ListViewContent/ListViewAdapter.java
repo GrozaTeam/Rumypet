@@ -58,8 +58,6 @@ public class ListViewAdapter extends BaseAdapter {
         String iconUrl = listViewItem.getIconUrl();
         Glide.with(context).load(iconUrl).into(iconImageView);
 
-        //iconImageView.setImageDrawable(listViewItem.getIcon());
-
         nameTextView.setText(listViewItem.getNameStr());
         speciesTextView.setText(listViewItem.getSpeciesStr());
         genderTextView.setText(listViewItem.getGenderStr());

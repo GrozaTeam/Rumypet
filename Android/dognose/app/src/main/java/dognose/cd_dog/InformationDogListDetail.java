@@ -4,22 +4,34 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 import dognose.cd_dog.model.Dog;
+import dognose.cd_dog.utils.Constants;
 
 /**
  * Created by paeng on 2018. 3. 26..
@@ -32,6 +44,8 @@ public class InformationDogListDetail extends AppCompatActivity {
     private ArrayList<Dog> dogArrayList;
 
     private ImageButton btnBefore, btnAfter;
+
+    private ImageView imageInf;
 
     private Button btnMoreInfo;
 
@@ -65,8 +79,6 @@ public class InformationDogListDetail extends AppCompatActivity {
                     }else{
                         position +=1;
                         setInformation();
-                        Log.d("PaengPosition", String.valueOf(position));
-                        Log.d("PaengDogNum", String.valueOf(dogNum));
                     }
                     break;
 
@@ -76,7 +88,6 @@ public class InformationDogListDetail extends AppCompatActivity {
                     }else{
                         position -=1;
                         setInformation();
-                        Log.d("PaengPosition", String.valueOf(position));
                     }
                     break;
 
@@ -118,8 +129,11 @@ public class InformationDogListDetail extends AppCompatActivity {
         tvBirth.setText(dogArrayList.get(position).getBirth());
         tvAge.setText(getAge(dogArrayList.get(position).getBirth()));
 
-    }
+        String url = Constants.BASE_URL + "images/" + dogArrayList.get(position).getDogId();
+        Glide.with(this).load(url).into(imageInf);
 
+    }
+    
     private void bindingView(){
         tvName = (TextView)findViewById(R.id.info_name);
         tvGender = (TextView)findViewById(R.id.info_gender);
@@ -127,6 +141,7 @@ public class InformationDogListDetail extends AppCompatActivity {
         tvSpecies = (TextView)findViewById(R.id.info_species);
         tvAge = (TextView)findViewById(R.id.info_age);
         btnMoreInfo = (Button)findViewById(R.id.btn_moreinfo);
+        imageInf = (ImageView)findViewById(R.id.image_info);
 
         btnBefore = (ImageButton)findViewById(R.id.btn_before);
         btnAfter = (ImageButton)findViewById(R.id.btn_after);
