@@ -2,6 +2,9 @@ package dognose.cd_dog;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -19,6 +22,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -34,6 +40,8 @@ import retrofit2.adapter.rxjava.HttpException;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
+
+import static dognose.cd_dog.utils.Constants.BASE_URL;
 
 /**
  * Created by paeng on 2018. 3. 26..
@@ -56,6 +64,8 @@ public class InformationDogListActivity extends AppCompatActivity {
 
     private String mToken;
     private String mEmail;
+    private String imgUrl;
+    private Bitmap bitmap;
 
     private int dogNum = 0;
 
@@ -120,15 +130,16 @@ public class InformationDogListActivity extends AppCompatActivity {
         adapter = new ListViewAdapter();
         dogNum = 0;
 
+
         for (Dog dogitem : dog){
             if(dogitem != null){
 
-                Drawable d = null;
+                //http://ec2-13-209-70-175.ap-northeast-2.compute.amazonaws.com:8080/api/v1/images/DLGFDFXE
+                String url = Constants.BASE_URL + "images/" + dogitem.getDogId();
 
 
-                dogitem.setDogImage(d);
                 dogArrayList.add(dogitem);
-                adapter.addItemDog(dogitem.getDogImage(), dogitem.getName(), dogitem.getSpecies(), dogitem.getGender(), getAge(dogitem.getBirth()));
+                adapter.addItemDog(url, dogitem.getName(), dogitem.getSpecies(), dogitem.getGender(), getAge(dogitem.getBirth()));
                 dogNum += 1;
             }
         }
@@ -217,4 +228,5 @@ public class InformationDogListActivity extends AppCompatActivity {
             }
         }
     };
+
 }

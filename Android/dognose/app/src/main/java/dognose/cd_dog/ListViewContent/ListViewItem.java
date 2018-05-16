@@ -8,14 +8,14 @@ import android.graphics.drawable.Drawable;
 
 public class ListViewItem {
 
-    private Drawable iconDrawable ;
+    private String iconUrl ;
     private String nameStr ;
     private String speciesStr ;
     private String genderStr ;
     private String ageStr ;
 
-    public void setIcon(Drawable icon) {
-        iconDrawable = icon ;
+    public void setIconUrl(String icon) {
+        iconUrl = icon ;
     }
     public void setNameStr(String name) {
         nameStr = name ;
@@ -29,7 +29,7 @@ public class ListViewItem {
     public void setAgeStr(String age){
         ageStr = age ;
     }
-    public Drawable getIcon() { return this.iconDrawable ; }
+    public String getIconUrl() { return this.iconUrl ; }
     public String getSpeciesStr(){
         return this.speciesStr;
     }

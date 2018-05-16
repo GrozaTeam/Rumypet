@@ -2,12 +2,15 @@ package dognose.cd_dog.ListViewContent;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -52,7 +55,11 @@ public class ListViewAdapter extends BaseAdapter {
         ListViewItem listViewItem = listViewItemList.get(position);
 
 
-        iconImageView.setImageDrawable(listViewItem.getIcon());
+        String iconUrl = listViewItem.getIconUrl();
+        Glide.with(context).load(iconUrl).into(iconImageView);
+
+        //iconImageView.setImageDrawable(listViewItem.getIcon());
+
         nameTextView.setText(listViewItem.getNameStr());
         speciesTextView.setText(listViewItem.getSpeciesStr());
         genderTextView.setText(listViewItem.getGenderStr());
@@ -60,10 +67,10 @@ public class ListViewAdapter extends BaseAdapter {
 
         return convertView;
     }
-    public void addItemDog(Drawable icon, String name, String species, String gender, String age) {
+    public void addItemDog(String iconUrl, String name, String species, String gender, String age) {
         ListViewItem item = new ListViewItem();
 
-        item.setIcon(icon);
+        item.setIconUrl(iconUrl);
         item.setNameStr(name);
         item.setSpeciesStr(species);
         item.setGenderStr(gender);

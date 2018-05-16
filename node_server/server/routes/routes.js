@@ -266,18 +266,8 @@ router.post('/images/upload', function(req, res) {
 
 router.get('/images/:imagename', function(req, res) {
   var imagename = req.params.imagename;
-  console.log('imagename=' + imagename);
-  // var imagepath = __dirname + "/images/" + imagename;
   var imagepath = "./public/images/dogs/" + imagename + ".jpg";
-  console.log('imagepath=' + imagepath);
   var image = fs.readFileSync(imagepath);
-
-  /*
-  var mime = fileType(image).mime;
-  res.writeHead(200, {
-    'Content-Type': mime
-  });
-  */
   res.end(image, 'binary');
 });
 

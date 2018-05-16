@@ -213,9 +213,6 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
                 }
             });
 
-
-
-
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -312,7 +309,6 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
                 case R.id.btn_photo:
 
-                    // Toast.makeText(RegisterAdditionalDogActivity.this, "Coming Soon...", Toast.LENGTH_SHORT);
                     new AlertDialog.Builder(RegisterAdditionalDogActivity.this)
                             .setTitle("Select Upload Image")
                             .setPositiveButton("Select Album", albumListener)
