@@ -133,7 +133,7 @@ public class InformationDogListDetail extends AppCompatActivity {
         Glide.with(this).load(url).into(imageInf);
 
     }
-    
+
     private void bindingView(){
         tvName = (TextView)findViewById(R.id.info_name);
         tvGender = (TextView)findViewById(R.id.info_gender);

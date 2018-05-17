@@ -112,37 +112,6 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
         mSubscriptions.unsubscribe();
     }
 
-    private class SaveImageTask extends AsyncTask<byte[], Void, Void> {
-
-        @Override
-        protected Void doInBackground(byte[]... data) {
-            FileOutputStream outStream = null;
-
-            // Write to SD Card
-            try {
-                File sdCard = Environment.getExternalStorageDirectory();
-                File dir = new File (sdCard.getAbsolutePath() + "/RUMYPET");
-                dir.mkdirs();
-
-                String fileName = String.format(ownerId_for_body+"|doginalbum|.jpg" );
-                File outFile = new File(dir, fileName);
-
-                outStream = new FileOutputStream(outFile);
-                outStream.write(data[0]);
-                outStream.flush();
-                outStream.close();
-
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-            }
-            return null;
-        }
-    }
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -171,44 +140,41 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
         return is;
     }
 
-    private void uploadImage(Uri imgUri) {
+    private void uploadImage(Uri imgUri, int mode) {
 
         try {
-            String imagePath = getRealPathFromURI(imgUri);
-            InputStream is = getContentResolver().openInputStream(imgUri);
-            Bitmap orgImage = BitmapFactory.decodeStream(is);
-            Bitmap resize = Bitmap.createScaledBitmap(orgImage, 300, 300, true);
-            ExifInterface exif = null;
-            try {
-                exif = new ExifInterface(imagePath);
-            } catch (IOException e) {
-                e.printStackTrace();
+            Bitmap resultBitmap = null;
+            if(mode == 1){
+                String imagePath = getRealPathFromURI(imgUri);
+                InputStream is = getContentResolver().openInputStream(imgUri);
+                Bitmap orgImage = BitmapFactory.decodeStream(is);
+                Bitmap resize = Bitmap.createScaledBitmap(orgImage, 300, 300, true);
+                ExifInterface exif = null;
+                try {
+                    exif = new ExifInterface(imagePath);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                int exifOrientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
+
+                resultBitmap = rotateBitmap(resize, exifOrientation);
             }
-            int exifOrientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
-
-            Bitmap bitmapRotated = rotateBitmap(resize, exifOrientation);
-
-
+            else if(mode==2){
+                resultBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.img_dog_sample);
+            }
 
 
-            InputStream is_result = Bitmap2InputStream(bitmapRotated);
+            InputStream is_result = Bitmap2InputStream(resultBitmap);
 
             byte[] imageBytes = getBytes(is_result);
-
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(Constants.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
-
-
             RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
-
             RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), imageBytes);
-
             MultipartBody.Part body = MultipartBody.Part.createFormData("image", "image.jpg", requestFile);
-
             Call<ImageResponse> call = retrofitInterface.uploadImage(body);
-
             call.enqueue(new Callback<ImageResponse>() {
                 @Override
                 public void onResponse(Call<ImageResponse> call, retrofit2.Response<ImageResponse> response) {
@@ -257,7 +223,6 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
         int exifOrientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
 
         Bitmap bitmapRotated = rotateBitmap(resize, exifOrientation);
-
 
         imgDog.setImageBitmap(bitmapRotated);
         imgDog.setBackground(null);
@@ -322,36 +287,6 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
         return byteBuff.toByteArray();
     }
 
-
-    private void sendPicture(Uri imgUri) {
-
-        String imagePath = getRealPathFromURI(imgUri); // path 경로
-
-        Bitmap bitmap = BitmapFactory.decodeFile(imagePath); //경로를 통해 비트맵으로 전환
-
-        imgDog.setImageBitmap(bitmap);//이미지 뷰에 비트맵 넣기
-        imgDog.setBackground(null);
-
-/*
-
-        ExifInterface exif = null;
-        try {
-            exif = new ExifInterface(imagePath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        int exifOrientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-
-        byte[] currentData = stream.toByteArray();
-
-        //파일로 저장
-        new RegisterAdditionalDogActivity.SaveImageTask().execute(currentData);
-*/
-
-    }
-
     private String getRealPathFromURI(Uri contentUri) {
         int column_index=0;
         String[] proj = {MediaStore.Images.Media.DATA};
@@ -383,7 +318,14 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
                         registerProgress(dogdb);
 
-                        uploadImage(imageUri);
+                        if (imageUri == null){
+                            uploadImage(null, 2);
+
+                        }else{
+                            uploadImage(imageUri, 1);
+
+                        }
+
 
                         finish();
                     }
