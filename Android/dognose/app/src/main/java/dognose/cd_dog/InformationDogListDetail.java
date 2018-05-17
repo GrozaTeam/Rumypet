@@ -39,16 +39,12 @@ import dognose.cd_dog.utils.Constants;
 
 public class InformationDogListDetail extends AppCompatActivity {
 
+    private static final int GALLERY_CODE=1112;
     private int position, dogNum;
-
     private ArrayList<Dog> dogArrayList;
-
     private ImageButton btnBefore, btnAfter;
-
     private ImageView imageInf;
-
     private Button btnMoreInfo;
-
     private TextView tvName, tvSpecies, tvGender, tvBirth, tvAge;
 
     @Override
@@ -65,7 +61,27 @@ public class InformationDogListDetail extends AppCompatActivity {
         dogArrayList = (ArrayList<Dog>) intent.getSerializableExtra("dogSet");
         setInformation();
 
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if (resultCode == RESULT_OK) {
+
+            switch (requestCode) {
+
+                case GALLERY_CODE:
+
+                    //showImage(data.getData());
+                    //imageUri = data.getData();
+
+                    Log.d("PaengTest", "gallary");
+                    break;
+
+                default:
+                    break;
+            }
+        }
     }
 
     Button.OnClickListener listener = new Button.OnClickListener(){
@@ -100,7 +116,13 @@ public class InformationDogListDetail extends AppCompatActivity {
                     dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
-                            Toast.makeText(InformationDogListDetail.this, "Coming Soon...", Toast.LENGTH_LONG).show();
+                            new android.support.v7.app.AlertDialog.Builder(InformationDogListDetail.this)
+                                    .setTitle("Select Upload Image")
+                                    .setPositiveButton("Select Album", albumListener)
+                                    .setNegativeButton("Take Photo", cameraListener)
+                                    .setNeutralButton("Cancel", cancelListener)
+                                    .show();
+
                         }
                     }).setNegativeButton("Cancel ", new DialogInterface.OnClickListener() {
                         @Override
@@ -111,14 +133,45 @@ public class InformationDogListDetail extends AppCompatActivity {
 
                     final AlertDialog alert = dialog.create();
                     alert.show();
-
-
                     break;
 
                 default:
 
                     break;
             }
+        }
+    };
+
+    DialogInterface.OnClickListener cameraListener = new DialogInterface.OnClickListener(){
+
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            /*
+            Intent intentNosePhoto = new Intent(getApplicationContext(), CameraActivity_for_body.class);
+            String ownerId2 = ownerId + "|body|";
+            intentNosePhoto.putExtra("ownerId", ownerId2);
+            startActivityForResult(intentNosePhoto,1);
+            */
+        }
+    };
+
+    DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener(){
+
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+
+            Intent intent = new Intent(Intent.ACTION_PICK);
+            intent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            intent.setType("image/*");
+            startActivityForResult(intent, GALLERY_CODE);
+        }
+    };
+
+    DialogInterface.OnClickListener cancelListener = new DialogInterface.OnClickListener(){
+
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            dialog.dismiss();
         }
     };
 
