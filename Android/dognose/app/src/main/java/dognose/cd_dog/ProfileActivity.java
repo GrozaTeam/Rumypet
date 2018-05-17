@@ -1,9 +1,12 @@
 package dognose.cd_dog;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -11,11 +14,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
-
-import dognose.cd_dog.model.Res;
-import dognose.cd_dog.model.User;
-import dognose.cd_dog.network.NetworkUtil;
-import dognose.cd_dog.utils.Constants;
+import dognose.cd_dog.model.*;
+import dognose.cd_dog.utils.*;
+import dognose.cd_dog.network.*;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -28,7 +29,7 @@ import rx.subscriptions.CompositeSubscription;
 public class ProfileActivity extends AppCompatActivity{
 
     private TextView tvID, tvPw, tvName, tvPhone;
-
+    private Button btn_etProfile;
     private SharedPreferences mSharedPreferences;
     private CompositeSubscription mSubscriptions;
     private String mToken;
@@ -82,7 +83,23 @@ public class ProfileActivity extends AppCompatActivity{
             showSnackBarMessage("Network Error !");
         }
     }
+    Button.OnClickListener listener = new Button.OnClickListener() {
 
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.btn_edit_profile:
+
+                    Intent intent = new Intent(getApplicationContext(), editProfile.class);
+                    startActivity(intent);
+                    finish();
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    };
     private void showSnackBarMessage(String message){
         Toast.makeText(ProfileActivity.this, "Network Error!", Toast.LENGTH_SHORT).show();
 
@@ -94,6 +111,9 @@ public class ProfileActivity extends AppCompatActivity{
         tvPw = (TextView)findViewById(R.id.tv_pw);
         tvName = (TextView)findViewById(R.id.tv_name);
         tvPhone = (TextView)findViewById(R.id.tv_phone);
+        btn_etProfile = (Button)findViewById(R.id.btn_edit_profile);
+
+        btn_etProfile.setOnClickListener(listener);
     }
 
 }

@@ -15,17 +15,15 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.IOException;
-import dognose.cd_dog.model.Res;
-import dognose.cd_dog.model.User;
-import dognose.cd_dog.network.NetworkUtil;
+import dognose.cd_dog.model.*;
+import dognose.cd_dog.network.*;
 
 import retrofit2.adapter.rxjava.HttpException;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
-import static dognose.cd_dog.utils.Validation.validateEmail;
-import static
+import static dognose.cd_dog.utils.*;
 
 /**
  * Created by paeng on 2018. 3. 26..
@@ -57,11 +55,11 @@ public class editProfile extends AppCompatActivity {
             Toast.makeText(editProfile.this, "Please input id", Toast.LENGTH_SHORT).show();
             return false;
 
-        }else if(!validateEmail(id)){
+        }/*else if(!validateEmail(id)){
             Toast.makeText(editProfile.this, "Input ID into e-mail form", Toast.LENGTH_SHORT).show();
             return false;
 
-        }else if (pw.equals("")) {
+        }*/else if (pw.equals("")) {
             Toast.makeText(editProfile.this, "Please input password", Toast.LENGTH_SHORT).show();
             return false;
 
@@ -114,7 +112,7 @@ public class editProfile extends AppCompatActivity {
                         user.setPhone(ownerPhone);
 
                         mProgressbar.setVisibility(View.VISIBLE);
-                        registerProcess(user);
+                        editProcess(user);
                         finish();
                     }
 
@@ -131,7 +129,7 @@ public class editProfile extends AppCompatActivity {
         }
     };
 
-    private void registerProcess(User user) {
+    private void editProcess(User user) {
 
         mSubscriptions.add(NetworkUtil.getRetrofit().register(user)
                 .observeOn(AndroidSchedulers.mainThread())
