@@ -36,5 +36,5 @@ app.use(function(err, req, res, next){
 module.exports = app;
 
 var server = app.listen(8080, function() {
-    console.log('Express server listening on port 80');
+    console.log('Express server listening on port 8080');
 });
