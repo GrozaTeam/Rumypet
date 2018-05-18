@@ -334,7 +334,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
                 case R.id.btn_photo:
 
                     new AlertDialog.Builder(RegisterAdditionalDogActivity.this)
-                            .setTitle("Select Upload Image")
+                            .setTitle("Select way to Upload Image")
                             .setPositiveButton("Select Album", albumListener)
                             .setNegativeButton("Cancel", cancelListener)
                             .show();
@@ -342,12 +342,31 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
                 case R.id.btn_photo_nose:
                     // Toast.makeText(RegisterAdditionalDogActivity.this, "Coming Soon...", Toast.LENGTH_SHORT);
+                    android.app.AlertDialog.Builder dialog = new android.app.AlertDialog.Builder(RegisterAdditionalDogActivity.this);
+                    dialog.setCancelable(false);
+                    dialog.setTitle("You need Dog's nose Image");
+                    dialog.setMessage("For others to find your dog's owner, and for certification, we need your dog's nose image.\n" +
+                            "You have to take 3 pictures of your dog's nose. Please set your dog's nose in red circle.\n\n" +
+                            "Do you agree to take pictures?");
+                    dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            new AlertDialog.Builder(RegisterAdditionalDogActivity.this)
+                                    .setTitle("Select Way to Get Dog Nose Image")
+                                    .setNeutralButton("Album(TEST)", albumListener)
+                                    .setPositiveButton("Take Photo", cameraListener)
+                                    .setNegativeButton("Cancel", cancelListener)
+                                    .show();
+                        }
+                    }).setNegativeButton("Cancel ", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //Action for "Cancel".
+                        }
+                    });
 
-                    Intent intentNosePhoto2 = new Intent(getApplicationContext(), CameraActivity.class);
-                    ownerId = ownerId + "|reg|";
-                    intentNosePhoto2.putExtra("ownerId", ownerId);
-                    startActivityForResult(intentNosePhoto2,1);
-
+                    final android.app.AlertDialog alert = dialog.create();
+                    alert.show();
                     break;
 
                 case R.id.btn_gender_male:
@@ -371,8 +390,8 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
                     int todayMonth = calendarStart.get(Calendar.MONTH);
                     int todayDay = calendarStart.get(Calendar.DAY_OF_MONTH);
 
-                    DatePickerDialog dialog = new DatePickerDialog(RegisterAdditionalDogActivity.this, datePickListener, todayYear, todayMonth, todayDay);
-                    dialog.show();
+                    DatePickerDialog dialogDate = new DatePickerDialog(RegisterAdditionalDogActivity.this, datePickListener, todayYear, todayMonth, todayDay);
+                    dialogDate.show();
 
                     break;
 
@@ -416,12 +435,10 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener datePickListener = new DatePickerDialog.OnDateSetListener() {
 
         @Override
-
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
             monthOfYear++;
             String stringYear, stringMonth, stringDay;
             stringYear = Integer.toString(year);
-
             if (monthOfYear>0 && monthOfYear<10){
                 stringMonth = "0" + Integer.toString(monthOfYear);
             }else{
@@ -432,7 +449,6 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
             }else{
                 stringDay = Integer.toString(dayOfMonth);
             }
-
             birth = stringYear+stringMonth+stringDay;
             tvBirth.setText(stringYear+"."+stringMonth+"."+stringDay);
         }
@@ -454,25 +470,20 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
     private void handleError(Throwable error) {
 
         if (error instanceof HttpException) {
-
             Gson gson = new GsonBuilder().create();
             try {
-
                 String errorBody = ((HttpException) error).response().errorBody().string();
                 Res response = gson.fromJson(errorBody,Res.class);
                 showMessage(response.getMessage());
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else {
-
             showMessage("Network Error !");
         }
     }
 
     private void showMessage(String message) {
-
         Toast.makeText(RegisterAdditionalDogActivity.this, message, Toast.LENGTH_SHORT).show();
     }
 

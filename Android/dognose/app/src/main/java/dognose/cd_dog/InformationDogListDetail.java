@@ -75,7 +75,6 @@ public class InformationDogListDetail extends AppCompatActivity {
                     //showImage(data.getData());
                     //imageUri = data.getData();
 
-                    Log.d("PaengTest", "gallary");
                     break;
 
                 default:
