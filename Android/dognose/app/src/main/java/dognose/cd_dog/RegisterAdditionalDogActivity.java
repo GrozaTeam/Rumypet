@@ -1,6 +1,7 @@
 package dognose.cd_dog;
 
 import android.app.DatePickerDialog;
+import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
+import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -75,6 +77,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
     private static final int PICK_FROM_ALBUM = 1;
     private static final int GALLERY_CODE=1112;
+    private static final int GALLERY_MULTIPLE_CODE=1113;
     private static final int colorMaleLight = 0XFFCCCCFF;
     private static final int colorMaleDark = 0XFF5555FF;
     private static final int colorFemaleLight =  0XFFFFCCCC;
@@ -86,7 +89,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
     private Button btnRegister, btnPhoto, btnPhotoNose, btnGenderMale, btnGenderFemale;
     // For database
     private String dogName="", species="", gender="", birth="";
-    private ImageView imgDog, imgDogNose;
+    private ImageView imgDog, imgDogNose1, imgDogNose2, imgDogNose3;
     private String ownerId, ownerId_for_body, ownerName;
 
     private CompositeSubscription mSubscriptions;
@@ -121,9 +124,32 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
             switch (requestCode) {
 
                 case GALLERY_CODE:
-
                     showImage(data.getData());
                     imageUri = data.getData();
+                    break;
+
+                case GALLERY_MULTIPLE_CODE:
+                    Uri uri = data.getData();
+                    ClipData clipData = data.getClipData();
+                    for (int i=0;i<3;i++){
+                        if(i<clipData.getItemCount()){
+                            Uri urione = clipData.getItemAt(i).getUri();
+                            switch (i){
+                                case 0:
+                                    imgDogNose1.setImageURI(urione);
+                                    break;
+                                case 1:
+                                    imgDogNose2.setImageURI(urione);
+                                    break;
+
+                                case 2:
+                                    imgDogNose3.setImageURI(urione);
+                                    break;
+                            }
+                        }
+                    }
+
+
                     break;
 
                 default:
@@ -353,7 +379,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int id) {
                             new AlertDialog.Builder(RegisterAdditionalDogActivity.this)
                                     .setTitle("Select Way to Get Dog Nose Image")
-                                    .setNeutralButton("Album(TEST)", albumListener)
+                                    .setNeutralButton("Album(TEST)", albumMultipleListener)
                                     .setPositiveButton("Take Photo", cameraListener)
                                     .setNegativeButton("Cancel", cancelListener)
                                     .show();
@@ -421,6 +447,18 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
             intent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             intent.setType("image/*");
             startActivityForResult(intent, GALLERY_CODE);
+        }
+    };
+
+    DialogInterface.OnClickListener albumMultipleListener = new DialogInterface.OnClickListener(){
+
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+
+            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
+            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+            intent.setType("image/*");
+            startActivityForResult(intent, GALLERY_MULTIPLE_CODE);
         }
     };
 
@@ -567,7 +605,9 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
         btnGenderFemale.setOnClickListener(listener);
 
         imgDog = (ImageView) findViewById(R.id.img_photo);
-        imgDogNose = (ImageView) findViewById(R.id.img_photo_nose);
+        imgDogNose1 = (ImageView) findViewById(R.id.img_photo_nose1);
+        imgDogNose2 = (ImageView) findViewById(R.id.img_photo_nose2);
+        imgDogNose3 = (ImageView) findViewById(R.id.img_photo_nose3);
 
         textChangedListener(etDogName);
         tvBirth.setOnClickListener(listener);
