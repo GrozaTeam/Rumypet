@@ -296,6 +296,8 @@ router.post('/images/verification', function(req,res){
 
         // var result = 'resultPython';
         var result = JSON.stringify(resultPython);
+        var resultSplit = result.split('"');
+        console.log('result: ', resultSplit[1]);
 
         var path = 'images/' + req.file.filename;
         res.status(200).json({
