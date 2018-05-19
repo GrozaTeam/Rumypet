@@ -295,6 +295,7 @@ router.post('/images/verification', function(req,res){
         console.log('Errors: %j', err);
 
         // var result = 'resultPython';
+        console.log('type: ', typeof resultPython);
         var result = 'true';
 
         var path = 'images/' + req.file.filename;
