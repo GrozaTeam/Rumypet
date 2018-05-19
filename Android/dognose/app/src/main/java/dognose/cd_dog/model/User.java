@@ -38,6 +38,7 @@ public class User {
         return phone;
     }
 
+    public String getPassword() {return password; }
     public String getCreated_at() {
         return created_at;
     }

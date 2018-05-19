@@ -40,7 +40,6 @@ public class editProfile extends AppCompatActivity {
     private ProgressBar mProgressbar;
     private CompositeSubscription mSubscriptions;
     private SharedPreferences mSharedPreferences;
-    private CompositeSubscription mSubscriptions;
     private String mToken;
     private String mEmail;
 
@@ -75,23 +74,6 @@ public class editProfile extends AppCompatActivity {
         etOwnerPhone.setText(user.getPhone());
     }
 
-    private void handleError(Throwable error) {
-
-        if (error instanceof HttpException) {
-
-            Gson gson = new GsonBuilder().create();
-            try {
-                String errorBody = ((HttpException) error).response().errorBody().string();
-                Res response = gson.fromJson(errorBody,Res.class);
-                showSnackBarMessage(response.getMessage());
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            showSnackBarMessage("Network Error !");
-        }
-    }
     private boolean checkjoin() {
 
         if (id.equals("")) {
