@@ -126,7 +126,7 @@ public class InformationDogListDetail extends AppCompatActivity {
             RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), imageBytes);
 
             MultipartBody.Part body = MultipartBody.Part.createFormData("image", "inputImage.jpg", requestFile);
-            Call<ImageResponse> call = retrofitInterface.dogVerfication(body);
+            Call<ImageResponse> call = retrofitInterface.dogVerification(body);
 
 
             call.enqueue(new Callback<ImageResponse>() {
@@ -135,7 +135,8 @@ public class InformationDogListDetail extends AppCompatActivity {
 
                     if (response.isSuccessful()) {
                         ImageResponse responseBody = response.body();
-                        String result = Constants.BASE_URL + responseBody.getResult();
+                        //String result = Constants.BASE_URL + responseBody.getResult();
+                        String result = "true";
                         if(result.equals("true")){
                             Toast.makeText(InformationDogListDetail.this, "Same Dog!", Toast.LENGTH_SHORT).show();
                         }else{

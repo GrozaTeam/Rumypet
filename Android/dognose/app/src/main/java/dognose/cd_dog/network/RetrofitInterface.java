@@ -52,6 +52,6 @@ public interface RetrofitInterface {
 
     @Multipart
     @POST("images/verification")
-    Call<ImageResponse> dogVerfication(@Part MultipartBody.Part image);
+    Call<ImageResponse> dogVerification(@Part MultipartBody.Part image);
 
 }
