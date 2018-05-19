@@ -99,6 +99,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
     private int sequenceNose = 0;
     private String dogId = "";
+    private boolean dogNoseUpload = false;
 
 
     @Override
@@ -127,12 +128,11 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
             switch (requestCode) {
 
                 case GALLERY_CODE:
-                    showImage(data.getData());
+                    showImage(data.getData(), imgDog);
                     imageUri = data.getData();
                     break;
 
                 case GALLERY_MULTIPLE_CODE:
-                    Uri uri = data.getData();
                     ClipData clipData = data.getClipData();
                     for (int i=0;i<3;i++){
                         if(i<clipData.getItemCount()){
@@ -140,21 +140,22 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
                             switch (i){
                                 case 0:
-                                    imgDogNose1.setImageURI(urione);
                                     imageNoseUri1 = urione;
+                                    showImage(imageNoseUri1, imgDogNose1);
                                     break;
                                 case 1:
                                     imageNoseUri2 = urione;
-                                    imgDogNose2.setImageURI(urione);
+                                    showImage(imageNoseUri2, imgDogNose2);
 
                                     break;
                                 case 2:
                                     imageNoseUri3 = urione;
-                                    imgDogNose3.setImageURI(urione);
+                                    showImage(imageNoseUri3, imgDogNose3);
                                     break;
                             }
                         }
                     }
+                    dogNoseUpload = true;
                     break;
 
                 default:
@@ -205,15 +206,18 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
                     .build();
             RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
             RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), imageBytes);
-            MultipartBody.Part body = MultipartBody.Part.createFormData("image", "nose_"+Integer.toString(sequenceNose) +".jpg", requestFile);
-            sequenceNose++;
+
+            MultipartBody.Part body;
             Call<ImageResponse> call = null;
             if (mode == 1 || mode == 2){
+                body = MultipartBody.Part.createFormData("image", dogId +".jpg", requestFile);
                 call = retrofitInterface.uploadImage(body);
-
-            }else if (mode == 3){
+            }else if (mode ==3){
+                body = MultipartBody.Part.createFormData("image", "nose_"+Integer.toString(sequenceNose) +".jpg", requestFile);
+                sequenceNose++;
                 call = retrofitInterface.uploadImageNose(body);
             }
+
             call.enqueue(new Callback<ImageResponse>() {
                 @Override
                 public void onResponse(Call<ImageResponse> call, retrofit2.Response<ImageResponse> response) {
@@ -248,7 +252,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
         }
     }
 
-    private void showImage(Uri imgUri){
+    private void showImage(Uri imgUri, ImageView imgView){
         String imagePath = getRealPathFromURI(imgUri);
         Bitmap orgImage = BitmapFactory.decodeFile(imagePath);
         Bitmap resize = Bitmap.createScaledBitmap(orgImage, 300, 300, true);
@@ -263,8 +267,8 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
         Bitmap bitmapRotated = rotateBitmap(resize, exifOrientation);
 
-        imgDog.setImageBitmap(bitmapRotated);
-        imgDog.setBackground(null);
+        imgView.setImageBitmap(bitmapRotated);
+        imgView.setBackground(null);
 
     }
 
@@ -597,6 +601,10 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
             Toast.makeText(RegisterAdditionalDogActivity.this, "Enter Birth", Toast.LENGTH_SHORT).show();
             return false;
         }
+        else if (!dogNoseUpload){
+            Toast.makeText(RegisterAdditionalDogActivity.this, "Register your dog's nose", Toast.LENGTH_SHORT).show();
+            return false;
+        }
 
         else {
             return true;
@@ -627,6 +635,8 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
         textChangedListener(etDogName);
         tvBirth.setOnClickListener(listener);
+
+        dogNoseUpload = false;
 
 
 

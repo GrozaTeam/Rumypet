@@ -278,7 +278,6 @@ var upload_nose = multer({
       if(!fs.existsSync(folderPath)){
         fs.mkdirSync(folderPath);
       }
-      
       cb(null, folderPath+'/');
     },
     filename: function (req, file, cb) {
