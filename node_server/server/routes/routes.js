@@ -275,7 +275,7 @@ var upload_nose = multer({
   storage: multer.diskStorage({
     destination: function (req, file, cb) {
       var folderPath = './public/images/dogsnose/'+dogUploadId;
-      fso=new ActiveXObject('Scripting.FileSystemObject');
+      var fso = new ActiveXObject('Scripting.FileSystemObject');
 
       var folderexist=false;
       if(!fso.FolderExists(folderPath)){
