@@ -221,6 +221,8 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
                     if (response.isSuccessful()) {
                         ImageResponse responseBody = response.body();
                         mImageUrl = Constants.BASE_URL + responseBody.getPath();
+                        String result = responseBody.getResult();
+                        Log.d("TESTPAENG", result);
 
                     } else {
                         ResponseBody errorBody = response.errorBody();
