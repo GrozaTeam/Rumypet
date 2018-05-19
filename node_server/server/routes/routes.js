@@ -303,7 +303,7 @@ router.post('/images_nose/upload', function(req, res) {
   upload_nose(req, res, function(err) {
     if (err) {
       console.log(err);
-      res.status(404).json({
+      res.status(400).json({
         message: err.message
       });
     } else {
