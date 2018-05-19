@@ -275,7 +275,10 @@ var upload_nose = multer({
   storage: multer.diskStorage({
     destination: function (req, file, cb) {
       var folderPath = './public/images/dogsnose/'+dogUploadId;
-      fs.mkdir(folderPath);
+      if(!fs.existsSync(folderPath)){
+        fs.mkdirSync(folderPath);
+      }
+      
       cb(null, folderPath+'/');
     },
     filename: function (req, file, cb) {
