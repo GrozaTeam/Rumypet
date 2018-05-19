@@ -35,8 +35,6 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import org.w3c.dom.Text;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -68,6 +66,9 @@ import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
 import static android.app.Activity.RESULT_OK;
+import static dognose.cd_dog.utils.ImageTransformation.Bitmap2InputStream;
+import static dognose.cd_dog.utils.ImageTransformation.getBytes;
+import static dognose.cd_dog.utils.ImageTransformation.rotateBitmap;
 
 /**
  * Created by paeng on 2018. 3. 26..
@@ -165,12 +166,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
     }
 
 
-    public InputStream Bitmap2InputStream(Bitmap bm) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        InputStream is = new ByteArrayInputStream(baos.toByteArray());
-        return is;
-    }
+
 
     private void uploadImage(Uri imgUri, int mode) {
 
@@ -272,63 +268,6 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
     }
 
-    // Image Rotation
-    // http://stickyny.tistory.com/95
-    public Bitmap rotateBitmap(Bitmap bitmap, int orientation){
-        Matrix matrix = new Matrix();
-        switch(orientation){
-            case ExifInterface.ORIENTATION_NORMAL:
-                return bitmap;
-            case ExifInterface.ORIENTATION_FLIP_HORIZONTAL:
-                matrix.setScale(-1,1);
-                break;
-            case ExifInterface.ORIENTATION_ROTATE_180:
-                matrix.setRotate(180);
-                break;
-            case ExifInterface.ORIENTATION_FLIP_VERTICAL:
-                matrix.setRotate(180);
-                matrix.postScale(-1, 1);
-                break;
-            case ExifInterface.ORIENTATION_TRANSPOSE:
-                matrix.setRotate(90);
-                matrix.postScale(-1, 1);
-                break;
-            case ExifInterface.ORIENTATION_ROTATE_90:
-                matrix.setRotate(90);
-                break;
-            case ExifInterface.ORIENTATION_TRANSVERSE:
-                matrix.setRotate(-90);
-                matrix.postScale(-1, 1);
-                break;
-            case ExifInterface.ORIENTATION_ROTATE_270:
-                matrix.setRotate(-90);
-                break;
-            default:
-                return bitmap;
-        }
-        try{
-            Bitmap bmRotated = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix,true);
-            bitmap.recycle();
-            return bmRotated;
-        }catch(OutOfMemoryError e){
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public byte[] getBytes(InputStream is) throws IOException {
-        ByteArrayOutputStream byteBuff = new ByteArrayOutputStream();
-
-        int buffSize = 1024;
-        byte[] buff = new byte[buffSize];
-
-        int len = 0;
-        while ((len = is.read(buff)) != -1) {
-            byteBuff.write(buff, 0, len);
-        }
-
-        return byteBuff.toByteArray();
-    }
 
     private String getRealPathFromURI(Uri contentUri) {
         int column_index=0;
@@ -417,7 +356,6 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
                 case R.id.btn_gender_male:
                     gender = "Male";
-
                     btnGenderMale.setBackgroundColor(colorMaleDark);
                     btnGenderFemale.setBackgroundColor(colorFemaleLight);
 
@@ -425,7 +363,6 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
                 case R.id.btn_gender_female:
                     gender = "Female";
-
                     btnGenderMale.setBackgroundColor(colorMaleLight);
                     btnGenderFemale.setBackgroundColor(colorFemaleDark);
                     break;

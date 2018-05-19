@@ -222,28 +222,6 @@ router.post('/users/:id/password', function(req, res) {
   }
 });
 
-//----
-var upload = multer({
-  storage: multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, './public/images/dogs/');
-    },
-    filename: function (req, file, cb) {
-      cb(null, dogUploadId + path.extname(file.originalname));
-    }
-  }),
-  limits: {
-    fileSize: 10000000,
-    files: 1
-  },
-  fileFilter: function(req, file, callback) {
-    if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-      return callback(new Error('Only Images are allowed !'), false);
-    }
-    callback(null, true);
-  }
-}).single('image');
-
 router.post('/images/upload', function(req, res) {
   upload(req, res, function(err) {
     if (err) {
@@ -269,7 +247,66 @@ router.get('/images/:imagename', function(req, res) {
   res.end(image, 'binary');
 });
 
-//***
+
+
+
+router.post('/images/upload_nose', function(req, res) {
+  upload_nose(req, res, function(err) {
+    if (err) {
+      console.log(err);
+      res.status(400).json({
+        message: err.message
+      });
+    } else {
+      var path = 'images/' + req.file.filename;
+      res.status(200).json({
+        message: 'Nose Image Uploaded Successfully !',
+        path: path
+      });
+    }
+  });
+});
+
+router.post('/images/verification', function(req,res){
+  upload_input_image(req, res, function(err){
+    if(err){
+      console.log(err);
+      res.status(400).json({
+        message: err.message
+      });
+    }else{
+      var result = 'true';
+
+      res.status(200).json({
+        message: 'Nose Image Uploaded Successfully !',
+        path: path,
+        result: result
+      });
+    }
+
+  });
+});
+
+var upload = multer({
+  storage: multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './public/images/dogs/');
+    },
+    filename: function (req, file, cb) {
+      cb(null, dogUploadId + path.extname(file.originalname));
+    }
+  }),
+  limits: {
+    fileSize: 10000000,
+    files: 1
+  },
+  fileFilter: function(req, file, callback) {
+    if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+      return callback(new Error('Only Images are allowed !'), false);
+    }
+    callback(null, true);
+  }
+}).single('image');
 
 var upload_nose = multer({
   storage: multer.diskStorage({
@@ -296,25 +333,28 @@ var upload_nose = multer({
   }
 }).single('image');
 
-router.post('/images_nose/upload', function(req, res) {
-  upload_nose(req, res, function(err) {
-    if (err) {
-      console.log(err);
-      res.status(400).json({
-        message: err.message
-      });
-    } else {
-      var path = 'images/' + req.file.filename;
-      res.status(200).json({
-        message: 'Nose Image Uploaded Successfully !',
-        path: path
-      });
+
+var upload_input_image = multer({
+  storage: multer.diskStorage({
+    destination: function (req, file, cb) {
+      var folderPath = './public/images/inputimage/';
+      cb(null, folderPath);
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname);
     }
-
-  });
-});
-
-//----
+  }),
+  limits: {
+    fileSize: 10000000,
+    files: 1
+  },
+  fileFilter: function(req, file, callback) {
+    if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+      return callback(new Error('Only Images are allowed !'), false);
+    }
+    callback(null, true);
+  }
+}).single('image');
 
 function checkToken(req) {
   var token = req.headers['x-access-token'];

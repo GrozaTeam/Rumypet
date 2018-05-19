@@ -1,6 +1,5 @@
 package dognose.cd_dog.utils;
 
-
 import android.text.TextUtils;
 import android.util.Patterns;
 

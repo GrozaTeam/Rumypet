@@ -1,8 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var multer = require('multer');
-var fileType = require('file-type');
-var fs = require('fs');
 
 var PythonShell = require('python-shell');
 var resultPython;
