@@ -278,10 +278,10 @@ router.post('/images/verification', function(req,res){
       var resultVerification = 'true';
       res.status(200).json({
         message: 'Nose Image Uploaded Successfully !',
-        path: path
+        path: path,
+        result: resultVerification
       });
     }
-
   });
 });
 

@@ -61,8 +61,9 @@ public class InformationDogListDetail extends AppCompatActivity {
     private ArrayList<Dog> dogArrayList;
     private ImageButton btnBefore, btnAfter;
     private ImageView imageInf;
-    private Button btnMoreInfo;
+    private Button btnMoreInfo, btnTest;
     private TextView tvName, tvSpecies, tvGender, tvBirth, tvAge;
+    private Uri inputImageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,8 +89,8 @@ public class InformationDogListDetail extends AppCompatActivity {
             switch (requestCode) {
 
                 case GALLERY_CODE:
-                    Uri inputImageUri = data.getData();
-                    verification_process(inputImageUri);
+                    inputImageUri = data.getData();
+                    imageInf.setImageURI(inputImageUri);
 
                     break;
 
@@ -100,6 +101,7 @@ public class InformationDogListDetail extends AppCompatActivity {
     }
     private void verification_process(Uri imgUri){
         try{
+            Log.d("PaengTest","1");
             String imagePath = getRealPathFromURI(imgUri);
             InputStream is = getContentResolver().openInputStream(imgUri);
             Bitmap orgImage = BitmapFactory.decodeStream(is);
@@ -115,6 +117,8 @@ public class InformationDogListDetail extends AppCompatActivity {
             Bitmap resultBitmap = rotateBitmap(resize, exifOrientation);
 
             InputStream is_result = Bitmap2InputStream(resultBitmap);
+            Log.d("PaengTest","2");
+
 
             byte[] imageBytes = getBytes(is_result);
             Retrofit retrofit = new Retrofit.Builder()
@@ -124,8 +128,10 @@ public class InformationDogListDetail extends AppCompatActivity {
             RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
             RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), imageBytes);
 
-            MultipartBody.Part body = MultipartBody.Part.createFormData("image", "inputImage.jpg", requestFile);
+            MultipartBody.Part body = MultipartBody.Part.createFormData("image", "input_image.jpg", requestFile);
             Call<ImageResponse> call = retrofitInterface.dogVerification(body);
+
+
 
 
             call.enqueue(new Callback<ImageResponse>() {
@@ -134,8 +140,7 @@ public class InformationDogListDetail extends AppCompatActivity {
 
                     if (response.isSuccessful()) {
                         ImageResponse responseBody = response.body();
-                        //String result = Constants.BASE_URL + responseBody.getResult();
-                        String result = "true";
+                        String result = Constants.BASE_URL + responseBody.getResult();
                         if(result.equals("true")){
                             Toast.makeText(InformationDogListDetail.this, "Same Dog!", Toast.LENGTH_SHORT).show();
                         }else{
@@ -231,6 +236,12 @@ public class InformationDogListDetail extends AppCompatActivity {
                     alert.show();
                     break;
 
+                case R.id.btn_test:
+
+                    verification_process(inputImageUri);
+
+                    break;
+
                 default:
 
                     break;
@@ -297,6 +308,9 @@ public class InformationDogListDetail extends AppCompatActivity {
         btnBefore.setOnClickListener(listener);
         btnAfter.setOnClickListener(listener);
         btnMoreInfo.setOnClickListener(listener);
+
+        btnTest = (Button)findViewById(R.id.btn_test);
+        btnTest.setOnClickListener(listener);
 
     }
 
