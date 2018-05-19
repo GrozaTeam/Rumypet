@@ -61,7 +61,7 @@ public class InformationDogListDetail extends AppCompatActivity {
     private ArrayList<Dog> dogArrayList;
     private ImageButton btnBefore, btnAfter;
     private ImageView imageInf;
-    private Button btnMoreInfo, btnTest;
+    private Button btnMoreInfo;
     private TextView tvName, tvSpecies, tvGender, tvBirth, tvAge;
     private Uri inputImageUri;
 
@@ -89,8 +89,8 @@ public class InformationDogListDetail extends AppCompatActivity {
             switch (requestCode) {
 
                 case GALLERY_CODE:
-                    inputImageUri = data.getData();
-                    imageInf.setImageURI(inputImageUri);
+                    showImage(data.getData(), imageInf);
+                    verification_process(data.getData());
 
                     break;
 
@@ -99,12 +99,31 @@ public class InformationDogListDetail extends AppCompatActivity {
             }
         }
     }
+
+    private void showImage(Uri imgUri, ImageView imgView){
+        String imagePath = getRealPathFromURI(imgUri);
+        Bitmap orgImage = BitmapFactory.decodeFile(imagePath);
+        Bitmap resize = Bitmap.createScaledBitmap(orgImage, 300, 300, true);
+        // image rotation
+        ExifInterface exif = null;
+        try {
+            exif = new ExifInterface(imagePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int exifOrientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
+
+        Bitmap bitmapRotated = rotateBitmap(resize, exifOrientation);
+
+        imgView.setImageBitmap(bitmapRotated);
+        imgView.setBackground(null);
+
+    }
+
     private void verification_process(Uri imgUri){
         try{
-            Log.d("PaengTest","1");
             String imagePath = getRealPathFromURI(imgUri);
-            InputStream is = getContentResolver().openInputStream(imgUri);
-            Bitmap orgImage = BitmapFactory.decodeStream(is);
+            Bitmap orgImage = BitmapFactory.decodeFile(imagePath);
             Bitmap resize = Bitmap.createScaledBitmap(orgImage, 300, 300, true);
             ExifInterface exif = null;
             try {
@@ -116,8 +135,8 @@ public class InformationDogListDetail extends AppCompatActivity {
 
             Bitmap resultBitmap = rotateBitmap(resize, exifOrientation);
 
+
             InputStream is_result = Bitmap2InputStream(resultBitmap);
-            Log.d("PaengTest","2");
 
 
             byte[] imageBytes = getBytes(is_result);
@@ -128,11 +147,8 @@ public class InformationDogListDetail extends AppCompatActivity {
             RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
             RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), imageBytes);
 
-            MultipartBody.Part body = MultipartBody.Part.createFormData("image", "input_image.jpg", requestFile);
+            MultipartBody.Part body = MultipartBody.Part.createFormData("image", "input.jpg", requestFile);
             Call<ImageResponse> call = retrofitInterface.dogVerification(body);
-
-
-
 
             call.enqueue(new Callback<ImageResponse>() {
                 @Override
@@ -236,12 +252,6 @@ public class InformationDogListDetail extends AppCompatActivity {
                     alert.show();
                     break;
 
-                case R.id.btn_test:
-
-                    verification_process(inputImageUri);
-
-                    break;
-
                 default:
 
                     break;
@@ -308,9 +318,6 @@ public class InformationDogListDetail extends AppCompatActivity {
         btnBefore.setOnClickListener(listener);
         btnAfter.setOnClickListener(listener);
         btnMoreInfo.setOnClickListener(listener);
-
-        btnTest = (Button)findViewById(R.id.btn_test);
-        btnTest.setOnClickListener(listener);
 
     }
 

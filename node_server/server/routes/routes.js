@@ -274,12 +274,11 @@ router.post('/images/verification', function(req,res){
       res.status(400).json({
         message: err.message
       });
-    }else{
-      var resultVerification = 'true';
+    } else {
+      var path = 'images/' + req.file.filename;
       res.status(200).json({
         message: 'Nose Image Uploaded Successfully !',
-        path: path,
-        result: resultVerification
+        path: path
       });
     }
   });
