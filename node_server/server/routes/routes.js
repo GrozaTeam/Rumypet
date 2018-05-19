@@ -295,9 +295,10 @@ router.post('/images/verification', function(req,res){
         console.log('Errors: %j', err);
 
         // var result = 'resultPython';
-        var result = JSON.stringify(resultPython);
-        var resultSplit = result.split('"');
+        var resultString = JSON.stringify(resultPython);
+        var resultSplit = resultString.split('"');
         console.log('result:', resultSplit[1]);
+        var result = resultSplit[1];
 
         var path = 'images/' + req.file.filename;
         res.status(200).json({
