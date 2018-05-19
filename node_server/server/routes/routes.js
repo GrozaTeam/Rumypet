@@ -262,8 +262,7 @@ router.post('/images/upload_nose', function(req, res) {
       var result = 'true';
       res.status(200).json({
         message: 'Nose Image Uploaded Successfully !',
-        path: path,
-        result: result
+        path: path
       });
     }
   });
@@ -278,9 +277,11 @@ router.post('/images/verification', function(req,res){
       });
     } else {
       var path = 'images/' + req.file.filename;
+      var result = 'true';
       res.status(200).json({
         message: 'Nose Image Uploaded Successfully !',
-        path: path
+        path: path,
+        result: result
       });
     }
   });
