@@ -16,6 +16,16 @@ var path = require('path');
 var registerDog = require('../functions/registerDog');
 var profileDog = require('../functions/profileDog');
 
+var PythonShell = require('python-shell');
+var resultPython;
+var options = {
+  mode: 'text',
+  pythonPath: '',
+  pythonOptions: ['-u'],
+  scriptPath: './python-code',
+  args: ['value1', 'value2']
+};
+
 var uploadDogId = '';
 
 router.get('/', function(req, res) {
@@ -276,8 +286,18 @@ router.post('/images/verification', function(req,res){
         message: err.message
       });
     } else {
+      options.args[0] = 'input.jpg';
+      options.args[1] = 'dog3';
+
+      PythonShell.run('DogNoseRecognition.py', options, function (err, resultPython) {
+        if (err) throw err;
+        console.log('Results: %j', resultPython);
+        console.log('Errors: %j', err);
+      });
+
+      var result = resultPython;
+
       var path = 'images/' + req.file.filename;
-      var result = 'true';
       res.status(200).json({
         message: 'Nose Image Uploaded Successfully !',
         path: path,

@@ -89,7 +89,6 @@ public class InformationDogListDetail extends AppCompatActivity {
             switch (requestCode) {
 
                 case GALLERY_CODE:
-                    showImage(data.getData(), imageInf);
                     verification_process(data.getData());
 
                     break;
@@ -156,7 +155,8 @@ public class InformationDogListDetail extends AppCompatActivity {
 
                     if (response.isSuccessful()) {
                         ImageResponse responseBody = response.body();
-                        String result = Constants.BASE_URL + responseBody.getResult();
+                        String result = responseBody.getResult();
+                        Log.d("TESTPAENG", result);
                         if(result.equals("true")){
                             Toast.makeText(InformationDogListDetail.this, "Same Dog!", Toast.LENGTH_SHORT).show();
                         }else{

@@ -54,7 +54,7 @@ def comparing(img_dog1, img_dog2):
     match_dog1 = pre_processing_method_test3(Preprocessing.resize(img_dog1, 400, 400))
     match_dog2 = pre_processing_method_test3(Preprocessing.resize(img_dog2, 400, 400))
     score2 = Matching.SURFMatching(match_dog1, match_dog2)
-    print("score : ", score2)
+    # print("score : ", score2)
 
 
 # calculate the matching result of two image
@@ -71,7 +71,7 @@ def comparing_folder(img_dog1, img_dog2):
                 #score1 = Matching.ORBMatching(match3, match4)
                 #score1 = Matching.SURFMatching(match3, match4)
 
-                print(i, " and ", j, " = ", score1)
+                # print(i, " and ", j, " = ", score1)
                 score_total = score_total + score1
     score_average = score_total / (len(img_dog1) * len(img_dog2[:-1]))
     return score_average
@@ -91,7 +91,7 @@ def comparing_result(image_input, path_of_input, image_database):
             score_total = score_total + score_result
             img_num = img_num + 1
     if img_num == 0:
-        print('no image comes in')
+        # print('no image comes in')
         return -1
     else:
         score_average = score_total / (img_num)
@@ -114,19 +114,19 @@ if __name__ == "__main__":
         path_data = "./public/images/data/dog3/*.png"
 
     elif len(sys.argv) == 3:
-        path_input = "./public/images/data/" + sys.argv[1]
+        path_input = "./public/images/inputimage/" + sys.argv[1]
         path_data = "./public/images/data/" + sys.argv[2] + "/*.png"
     img_input = cv2.imread(path_input)
     img_database = glob.glob(path_data)
     # img_database.sort()
     average_result = comparing_result(img_input, path_input, img_database)
-    print("Average : ", round(average_result, 3))
+    # print("Average : ", round(average_result, 3))
 
     if average_result > 50:
-        print('It is Same Dog')
+        print('true')
     elif average_result == -1:
-        print('Some Error in input Image')
+        print('inputerror')
     else:
-        print('It is Different Dog')
+        print('false')
     cv2.waitKey(0)  # Waits forever for user to press any key
     cv2.destroyAllWindows()  # Closes displayed windows
