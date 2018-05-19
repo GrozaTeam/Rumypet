@@ -293,16 +293,17 @@ router.post('/images/verification', function(req,res){
         if (err) throw err;
         console.log('Results: %j', resultPython);
         console.log('Errors: %j', err);
+        var result = resultPython;
+
+        var path = 'images/' + req.file.filename;
+        res.status(200).json({
+          message: 'Verification Complete!',
+          path: path,
+          result: result
+        });
       });
 
-      var result = resultPython;
 
-      var path = 'images/' + req.file.filename;
-      res.status(200).json({
-        message: 'Nose Image Uploaded Successfully !',
-        path: path,
-        result: result
-      });
     }
   });
 });
