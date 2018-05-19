@@ -94,8 +94,11 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
     private CompositeSubscription mSubscriptions;
 
-    private Uri imageUri;
+    private Uri imageUri, imageNoseUri1, imageNoseUri2, imageNoseUri3;
     private String mImageUrl = "";
+
+    private int sequenceNose = 0;
+    private String dogId = "";
 
 
     @Override
@@ -138,16 +141,16 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
                             switch (i){
                                 case 0:
                                     imgDogNose1.setImageURI(urione);
-                                    uploadImage(urione, 3);
+                                    imageNoseUri1 = urione;
                                     break;
                                 case 1:
+                                    imageNoseUri2 = urione;
                                     imgDogNose2.setImageURI(urione);
-                                    uploadImage(urione, 3);
 
                                     break;
                                 case 2:
+                                    imageNoseUri3 = urione;
                                     imgDogNose3.setImageURI(urione);
-                                    uploadImage(urione, 3);
                                     break;
                             }
                         }
@@ -202,7 +205,8 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
                     .build();
             RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
             RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), imageBytes);
-            MultipartBody.Part body = MultipartBody.Part.createFormData("image", "image.jpg", requestFile);
+            MultipartBody.Part body = MultipartBody.Part.createFormData("image", dogId +"_"+Integer.toString(sequenceNose) +".jpg", requestFile);
+            sequenceNose++;
             Call<ImageResponse> call = null;
             if (mode == 1 || mode == 2){
                 call = retrofitInterface.uploadImage(body);
@@ -342,7 +346,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
                 case R.id.btn_register:
 
                     if (checkjoin()) {
-                        String dogId = getRandomString(8);
+                        dogId = getRandomString(8);
                         Dog dogdb = new Dog();
                         dogdb.setDogId(dogId);
                         dogdb.setOwnerId(ownerId);
@@ -358,10 +362,13 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
                         }else{
                             uploadImage(imageUri, 1);
-
                         }
 
+                        uploadImage(imageNoseUri1, 3);
+                        uploadImage(imageNoseUri2, 3);
+                        uploadImage(imageNoseUri3, 3);
 
+                        sequenceNose = 0;
                         finish();
                     }
                     break;
