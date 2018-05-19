@@ -156,7 +156,12 @@ public class InformationDogListDetail extends AppCompatActivity {
                     if (response.isSuccessful()) {
                         ImageResponse responseBody = response.body();
                         String result = responseBody.getResult();
+                        String message = responseBody.getMessage();
+                        String path = responseBody.getPath();
                         Log.d("TESTPAENG", result);
+                        Log.d("TESTPAENG", message);
+                        Log.d("TESTPAENG", path);
+
                         if(result.equals("true")){
                             Toast.makeText(InformationDogListDetail.this, "Same Dog!", Toast.LENGTH_SHORT).show();
                         }else{
