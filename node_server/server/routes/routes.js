@@ -274,6 +274,13 @@ router.get('/images/:imagename', function(req, res) {
 var upload_nose = multer({
   storage: multer.diskStorage({
     destination: function (req, file, cb) {
+      var folderPath = './public/images/dogsnose/'+dogUploadId;
+      fso=new ActiveXObject('Scripting.FileSystemObject');
+
+      var folderexist=false;
+      if(!fso.FolderExists(folderPath)){
+      fso.CreateFolder(folderPath);
+      }
       cb(null, './public/images/dogsnose/'+dogUploadId+'/');
     },
     filename: function (req, file, cb) {
