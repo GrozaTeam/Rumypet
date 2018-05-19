@@ -2,7 +2,9 @@ package dognose.cd_dog;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -23,7 +25,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
-import static dognose.cd_dog.utils.*;
+import dognose.cd_dog.utils.*;
 
 /**
  * Created by paeng on 2018. 3. 26..
@@ -35,9 +37,12 @@ public class editProfile extends AppCompatActivity {
     private Button btnEdit, btnCheckPhone;
     // For database
     private String id="",pw ="", newpw="", newpw2="", ownerName="", ownerPhone="";
-
     private ProgressBar mProgressbar;
     private CompositeSubscription mSubscriptions;
+    private SharedPreferences mSharedPreferences;
+    private CompositeSubscription mSubscriptions;
+    private String mToken;
+    private String mEmail;
 
     private TextView tvId;
 
@@ -47,8 +52,46 @@ public class editProfile extends AppCompatActivity {
         setContentView(R.layout.edit_profile);
         mSubscriptions = new CompositeSubscription();
         bindingView();
+        initSharedPreferences();
+        loadProfile();
+    }
+    private void initSharedPreferences() {
+
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mToken = mSharedPreferences.getString(Constants.TOKEN,"");
+        mEmail = mSharedPreferences.getString(Constants.EMAIL,"");
+    }
+    private void loadProfile() {
+
+        mSubscriptions.add(NetworkUtil.getRetrofit(mToken).getProfile(mEmail)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handleResponse,this::handleError));
+    }
+    private void handleResponse(User user) {
+
+        tvId.setText(user.getEmail());
+        etOwnerName.setText(user.getName());
+        etOwnerPhone.setText(user.getPhone());
     }
 
+    private void handleError(Throwable error) {
+
+        if (error instanceof HttpException) {
+
+            Gson gson = new GsonBuilder().create();
+            try {
+                String errorBody = ((HttpException) error).response().errorBody().string();
+                Res response = gson.fromJson(errorBody,Res.class);
+                showSnackBarMessage(response.getMessage());
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            showSnackBarMessage("Network Error !");
+        }
+    }
     private boolean checkjoin() {
 
         if (id.equals("")) {
@@ -110,9 +153,11 @@ public class editProfile extends AppCompatActivity {
                         user.setEmail(id);
                         user.setPassword(newpw);
                         user.setPhone(ownerPhone);
-
                         mProgressbar.setVisibility(View.VISIBLE);
                         editProcess(user);
+                        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                        startActivity(intent);
+                        finish();
                         finish();
                     }
 
@@ -220,7 +265,6 @@ public class editProfile extends AppCompatActivity {
         btnEdit = (Button) findViewById(R.id.btn_edit_profile);
         btnCheckPhone = (Button) findViewById(R.id.btn_check_phone);
         mProgressbar = (ProgressBar) findViewById(R.id.progress);
-
 
         btnEdit.setOnClickListener(listener);
         btnCheckPhone.setOnClickListener(listener);
