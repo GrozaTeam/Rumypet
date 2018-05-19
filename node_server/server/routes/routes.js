@@ -76,7 +76,6 @@ router.post('/users', function(req, res) {
 router.post('/dogs', function(req, res) {
   var dogId = req.body.dogId;
   dogUploadId = dogId;
-  console.log('UploadId='+dogUploadId);
   var ownerId = req.body.ownerId;
   var dogName = req.body.dogName;
   var dogGender = req.body.dogGender;
@@ -269,6 +268,50 @@ router.get('/images/:imagename', function(req, res) {
   var image = fs.readFileSync(imagepath);
   res.end(image, 'binary');
 });
+
+//***
+
+var upload_nose = multer({
+  storage: multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './public/images/dogsnose/'+dogUploadId+'/');
+    },
+    filename: function (req, file, cb) {
+      cb(null, dogUploadId+ Math.floor(Math.random()*10) + path.extname(file.originalname));
+    }
+  }),
+  limits: {
+    fileSize: 10000000,
+    files: 1
+  },
+  fileFilter: function(req, file, callback) {
+    if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+      return callback(new Error('Only Images are allowed !'), false);
+    }
+    callback(null, true);
+  }
+}).single('image');
+
+router.post('/images_nose/upload', function(req, res) {
+  upload_nose(req, res, function(err) {
+    if (err) {
+      console.log(err);
+      res.status(400).json({
+        message: err.message
+      });
+    } else {
+      var path = 'images/' + req.file.filename;
+      res.status(200).json({
+        message: 'Nose Image Uploaded Successfully !',
+        path: path
+      });
+    }
+
+  });
+});
+
+
+
 
 //----
 

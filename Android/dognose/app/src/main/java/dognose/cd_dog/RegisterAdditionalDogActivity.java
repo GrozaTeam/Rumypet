@@ -134,22 +134,24 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
                     for (int i=0;i<3;i++){
                         if(i<clipData.getItemCount()){
                             Uri urione = clipData.getItemAt(i).getUri();
+
                             switch (i){
                                 case 0:
                                     imgDogNose1.setImageURI(urione);
+                                    uploadImage(urione, 3);
                                     break;
                                 case 1:
                                     imgDogNose2.setImageURI(urione);
-                                    break;
+                                    uploadImage(urione, 3);
 
+                                    break;
                                 case 2:
                                     imgDogNose3.setImageURI(urione);
+                                    uploadImage(urione, 3);
                                     break;
                             }
                         }
                     }
-
-
                     break;
 
                 default:
@@ -170,7 +172,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
         try {
             Bitmap resultBitmap = null;
-            if(mode == 1){
+            if(mode == 1 || mode == 3){
                 String imagePath = getRealPathFromURI(imgUri);
                 InputStream is = getContentResolver().openInputStream(imgUri);
                 Bitmap orgImage = BitmapFactory.decodeStream(is);
@@ -185,6 +187,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
                 resultBitmap = rotateBitmap(resize, exifOrientation);
             }
+            // 이미지가 없는 경우
             else if(mode==2){
                 resultBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.img_dog_sample);
             }
@@ -200,7 +203,13 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
             RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
             RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), imageBytes);
             MultipartBody.Part body = MultipartBody.Part.createFormData("image", "image.jpg", requestFile);
-            Call<ImageResponse> call = retrofitInterface.uploadImage(body);
+            Call<ImageResponse> call = null;
+            if (mode == 1 || mode == 2){
+                call = retrofitInterface.uploadImage(body);
+
+            }else if (mode == 3){
+                call = retrofitInterface.uploadImageNose(body);
+            }
             call.enqueue(new Callback<ImageResponse>() {
                 @Override
                 public void onResponse(Call<ImageResponse> call, retrofit2.Response<ImageResponse> response) {

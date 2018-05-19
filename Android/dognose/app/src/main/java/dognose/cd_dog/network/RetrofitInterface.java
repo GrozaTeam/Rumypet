@@ -46,4 +46,8 @@ public interface RetrofitInterface {
     @POST("images/upload")
     Call<ImageResponse> uploadImage(@Part MultipartBody.Part image);
 
+    @Multipart
+    @POST("images_nose/upload")
+    Call<ImageResponse> uploadImageNose(@Part MultipartBody.Part image);
+
 }
