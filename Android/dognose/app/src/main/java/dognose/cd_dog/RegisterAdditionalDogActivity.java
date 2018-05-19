@@ -205,7 +205,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
                     .build();
             RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
             RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), imageBytes);
-            MultipartBody.Part body = MultipartBody.Part.createFormData("image", dogId +"_"+Integer.toString(sequenceNose) +".jpg", requestFile);
+            MultipartBody.Part body = MultipartBody.Part.createFormData("image", "nose_"+Integer.toString(sequenceNose) +".jpg", requestFile);
             sequenceNose++;
             Call<ImageResponse> call = null;
             if (mode == 1 || mode == 2){
