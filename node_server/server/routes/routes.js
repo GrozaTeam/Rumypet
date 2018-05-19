@@ -277,7 +277,7 @@ var upload_nose = multer({
       cb(null, './public/images/dogsnose/'+dogUploadId+'/');
     },
     filename: function (req, file, cb) {
-      cb(null, dogUploadId+ Math.floor(Math.random()*10) + path.extname(file.originalname));
+      cb(null, dogUploadId + path.extname(file.originalname));
     }
   }),
   limits: {
@@ -296,7 +296,7 @@ router.post('/images_nose/upload', function(req, res) {
   upload_nose(req, res, function(err) {
     if (err) {
       console.log(err);
-      res.status(400).json({
+      res.status(404).json({
         message: err.message
       });
     } else {
