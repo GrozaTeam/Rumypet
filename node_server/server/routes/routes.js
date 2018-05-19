@@ -295,13 +295,8 @@ router.post('/images/verification', function(req,res){
         console.log('Errors: %j', err);
 
         // var result = 'resultPython';
-        console.log('type: ', typeof resultPython);
-        var resultPython2 = JSON.stringify(resultPython);
-        console.log('type: ', typeof resultPython2);
-        console.log('resultpaeng: ', resultPython2);
+        var result = JSON.stringify(resultPython);
 
-
-        var result = 'true';
         var path = 'images/' + req.file.filename;
         res.status(200).json({
           message: 'Nose Image Uploaded Successfully!',
