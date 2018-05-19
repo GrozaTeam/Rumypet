@@ -100,7 +100,6 @@ public class InformationDogListDetail extends AppCompatActivity {
     }
     private void verification_process(Uri imgUri){
         try{
-            Bitmap resultBitmap = null;
             String imagePath = getRealPathFromURI(imgUri);
             InputStream is = getContentResolver().openInputStream(imgUri);
             Bitmap orgImage = BitmapFactory.decodeStream(is);
@@ -113,7 +112,7 @@ public class InformationDogListDetail extends AppCompatActivity {
             }
             int exifOrientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
 
-            resultBitmap = rotateBitmap(resize, exifOrientation);
+            Bitmap resultBitmap = rotateBitmap(resize, exifOrientation);
 
             InputStream is_result = Bitmap2InputStream(resultBitmap);
 

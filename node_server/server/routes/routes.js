@@ -269,14 +269,13 @@ router.post('/images/upload_nose', function(req, res) {
 
 router.post('/images/verification', function(req,res){
   upload_input_image(req, res, function(err){
-    if(err){
+    if (err) {
       console.log(err);
       res.status(400).json({
         message: err.message
       });
     }else{
       var resultVerification = 'true';
-
       res.status(200).json({
         message: 'Nose Image Uploaded Successfully !',
         path: path
