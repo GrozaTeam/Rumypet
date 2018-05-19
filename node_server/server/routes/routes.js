@@ -277,7 +277,7 @@ var upload_nose = multer({
       cb(null, './public/images/dogsnose/'+dogUploadId+'/');
     },
     filename: function (req, file, cb) {
-      cb(null, dogUploadId + path.extname(file.originalname));
+      cb(null, file.originalname + path.extname(file.originalname));
     }
   }),
   limits: {
@@ -310,11 +310,7 @@ router.post('/images_nose/upload', function(req, res) {
   });
 });
 
-
-
-
 //----
-
 
 function checkToken(req) {
   var token = req.headers['x-access-token'];
