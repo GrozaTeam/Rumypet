@@ -283,26 +283,19 @@ router.post('/images/verification', function(req,res){
         message: err.message
       });
     } else {
-      console.log("test", req.file.originalname);
       var dogId = req.file.originalname.split('.');
-
       options.args[0] = dogId[0];
-
       PythonShell.run('DogNoseRecognition.py', options, function (err, resultPython) {
         if (err) throw err;
         var resultString = JSON.stringify(resultPython);
-        console.log('result String :', resultString);
         var resultSplit = resultString.split('"');
-        console.log('result:', resultSplit[1]);
         var result = resultSplit[1];
-
         var path = 'images/' + req.file.filename;
         res.status(200).json({
           message: 'Nose Image Uploaded Successfully!',
           path: path,
           result: result
         });
-
       });
     }
   });
