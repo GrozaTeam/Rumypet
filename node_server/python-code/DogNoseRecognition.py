@@ -113,9 +113,9 @@ if __name__ == "__main__":
         path_input = "./public/images/data/dog6/1.png"
         path_data = "./public/images/data/dog3/*.png"
 
-    elif len(sys.argv) == 3:
-        path_input = "./public/images/inputimage/" + sys.argv[1]
-        path_data = "./public/images/data/" + sys.argv[2] + "/*.png"
+    elif len(sys.argv) == 2:
+        path_input = "./public/images/inputimage/" + sys.argv[1] + ".jpg"
+        path_data = "./public/images/dogsnose/" + sys.argv[1] + "/*.jpg"
     img_input = cv2.imread(path_input)
     img_database = glob.glob(path_data)
     # img_database.sort()

@@ -22,6 +22,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -64,6 +65,7 @@ public class InformationDogListDetail extends AppCompatActivity {
     private Button btnMoreInfo;
     private TextView tvName, tvSpecies, tvGender, tvBirth, tvAge;
     private Uri inputImageUri;
+    private ProgressBar mprogressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +91,7 @@ public class InformationDogListDetail extends AppCompatActivity {
             switch (requestCode) {
 
                 case GALLERY_CODE:
+                    mprogressBar.setVisibility(View.VISIBLE);
                     verification_process(data.getData());
 
                     break;
@@ -163,6 +166,8 @@ public class InformationDogListDetail extends AppCompatActivity {
                         Log.d("TESTPAENG", result);
                         Log.d("TESTPAENG", message);
                         Log.d("TESTPAENG", path);
+
+                        mprogressBar.setVisibility(View.GONE);
 
                         if(result.equals("true")){
                             Toast.makeText(InformationDogListDetail.this, "Same Dog!", Toast.LENGTH_SHORT).show();
@@ -319,6 +324,7 @@ public class InformationDogListDetail extends AppCompatActivity {
         tvAge = (TextView)findViewById(R.id.info_age);
         btnMoreInfo = (Button)findViewById(R.id.btn_moreinfo);
         imageInf = (ImageView)findViewById(R.id.image_info);
+        mprogressBar = (ProgressBar)findViewById(R.id.progress_bar);
 
         btnBefore = (ImageButton)findViewById(R.id.btn_before);
         btnAfter = (ImageButton)findViewById(R.id.btn_after);

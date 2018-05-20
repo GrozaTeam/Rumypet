@@ -23,7 +23,7 @@ var options = {
   pythonPath: '',
   pythonOptions: ['-u'],
   scriptPath: './python-code',
-  args: ['value1', 'value2']
+  args: ['value1']
 };
 
 var uploadDogId = '';
@@ -257,9 +257,6 @@ router.get('/images/:imagename', function(req, res) {
   res.end(image, 'binary');
 });
 
-
-
-
 router.post('/images/upload_nose', function(req, res) {
   upload_nose(req, res, function(err) {
     if (err) {
@@ -287,8 +284,9 @@ router.post('/images/verification', function(req,res){
       });
     } else {
       console.log("test", req.file.originalname);
-      options.args[0] = 'input.jpg';
-      options.args[1] = 'dog3';
+      var dogId = req.file.originalname.split('.');
+
+      options.args[0] = dogId[0];
 
       PythonShell.run('DogNoseRecognition.py', options, function (err, resultPython) {
         if (err) throw err;
@@ -297,6 +295,7 @@ router.post('/images/verification', function(req,res){
 
         // var result = 'resultPython';
         var resultString = JSON.stringify(resultPython);
+        console.log('result String :', resultString);
         var resultSplit = resultString.split('"');
         console.log('result:', resultSplit[1]);
         var result = resultSplit[1];
