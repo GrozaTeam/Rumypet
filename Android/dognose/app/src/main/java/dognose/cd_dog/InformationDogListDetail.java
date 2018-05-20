@@ -121,6 +121,8 @@ public class InformationDogListDetail extends AppCompatActivity {
 
     private void verification_process(Uri imgUri){
         try{
+            String dogId = dogArrayList.get(position).getDogId();
+
             String imagePath = getRealPathFromURI(imgUri);
             Bitmap orgImage = BitmapFactory.decodeFile(imagePath);
             Bitmap resize = Bitmap.createScaledBitmap(orgImage, 300, 300, true);
@@ -146,7 +148,7 @@ public class InformationDogListDetail extends AppCompatActivity {
             RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
             RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), imageBytes);
 
-            MultipartBody.Part body = MultipartBody.Part.createFormData("image", "input.jpg", requestFile);
+            MultipartBody.Part body = MultipartBody.Part.createFormData("image", dogId + ".jpg", requestFile);
             Call<ImageResponse> call = retrofitInterface.dogVerification(body);
 
             call.enqueue(new Callback<ImageResponse>() {

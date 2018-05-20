@@ -286,6 +286,7 @@ router.post('/images/verification', function(req,res){
         message: err.message
       });
     } else {
+      console.log("test", req.file.originalname);
       options.args[0] = 'input.jpg';
       options.args[1] = 'dog3';
 
