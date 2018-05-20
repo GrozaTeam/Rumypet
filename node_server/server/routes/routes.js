@@ -290,10 +290,6 @@ router.post('/images/verification', function(req,res){
 
       PythonShell.run('DogNoseRecognition.py', options, function (err, resultPython) {
         if (err) throw err;
-        console.log('Results: %j', resultPython);
-        console.log('Errors: %j', err);
-
-        // var result = 'resultPython';
         var resultString = JSON.stringify(resultPython);
         console.log('result String :', resultString);
         var resultSplit = resultString.split('"');

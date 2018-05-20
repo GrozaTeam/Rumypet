@@ -128,5 +128,6 @@ if __name__ == "__main__":
         print('inputerror')
     else:
         print('false')
+    print("Average : ", round(average_result, 3))
     cv2.waitKey(0)  # Waits forever for user to press any key
     cv2.destroyAllWindows()  # Closes displayed windows
