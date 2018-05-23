@@ -116,8 +116,10 @@ if __name__ == "__main__":
     elif len(sys.argv) == 3:
         mode = sys.argv[1]
         path_input = "./public/images/inputimage/input.jpg"
+    else:
+        print('error')
 
-    if eq(mode, "1"):
+    if eq(mode, '1'):
         path_data = "./public/images/dogsnose/" + sys.argv[2] + "/*.jpg"
         img_input = cv2.imread(path_input)
         img_database = glob.glob(path_data)
@@ -131,6 +133,8 @@ if __name__ == "__main__":
         else:
             print('false')
         print("Average : ", round(average_result, 3))
-        cv2.waitKey(0)  # Waits forever for user to press any key
-        cv2.destroyAllWindows()  # Closes displayed windows
+
     elif eq(mode, "2"):
+
+    cv2.waitKey(0)  # Waits forever for user to press any key
+    cv2.destroyAllWindows()  # Closes displayed windows
