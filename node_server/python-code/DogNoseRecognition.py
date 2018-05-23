@@ -121,6 +121,7 @@ if __name__ == "__main__":
 
     if eq(mode, '1'):
         path_data = "./public/images/dogsnose/" + sys.argv[2] + "/*.jpg"
+        print(path_data)
         img_input = cv2.imread(path_input)
         img_database = glob.glob(path_data)
         # img_database.sort()
