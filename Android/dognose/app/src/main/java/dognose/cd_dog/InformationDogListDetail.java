@@ -66,6 +66,7 @@ public class InformationDogListDetail extends AppCompatActivity {
     private TextView tvName, tvSpecies, tvGender, tvBirth, tvAge;
     private Uri inputImageUri;
     private ProgressBar mprogressBar;
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +79,7 @@ public class InformationDogListDetail extends AppCompatActivity {
         Intent intent = getIntent();
         position = Integer.parseInt(intent.getStringExtra("position"));
         dogNum = Integer.parseInt(intent.getStringExtra("dogNum"));
+        userId = intent.getStringExtra("userId");
         dogArrayList = (ArrayList<Dog>) intent.getSerializableExtra("dogSet");
         setInformation();
 
@@ -100,26 +102,6 @@ public class InformationDogListDetail extends AppCompatActivity {
                     break;
             }
         }
-    }
-
-    private void showImage(Uri imgUri, ImageView imgView){
-        String imagePath = getRealPathFromURI(imgUri);
-        Bitmap orgImage = BitmapFactory.decodeFile(imagePath);
-        Bitmap resize = Bitmap.createScaledBitmap(orgImage, 300, 300, true);
-        // image rotation
-        ExifInterface exif = null;
-        try {
-            exif = new ExifInterface(imagePath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        int exifOrientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
-
-        Bitmap bitmapRotated = rotateBitmap(resize, exifOrientation);
-
-        imgView.setImageBitmap(bitmapRotated);
-        imgView.setBackground(null);
-
     }
 
     private void verification_process(Uri imgUri){
@@ -151,7 +133,7 @@ public class InformationDogListDetail extends AppCompatActivity {
             RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
             RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), imageBytes);
 
-            MultipartBody.Part body = MultipartBody.Part.createFormData("image", dogId + ".jpg", requestFile);
+            MultipartBody.Part body = MultipartBody.Part.createFormData("image", "input.jpg", requestFile);
             Call<ImageResponse> call = retrofitInterface.dogVerification(body);
 
             call.enqueue(new Callback<ImageResponse>() {
@@ -163,16 +145,24 @@ public class InformationDogListDetail extends AppCompatActivity {
                         String result = responseBody.getResult();
                         String message = responseBody.getMessage();
                         String path = responseBody.getPath();
-                        Log.d("TESTPAENG", result);
-                        Log.d("TESTPAENG", message);
-                        Log.d("TESTPAENG", path);
 
                         mprogressBar.setVisibility(View.GONE);
 
                         if(result.equals("true")){
-                            Toast.makeText(InformationDogListDetail.this, "Same Dog!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(InformationDogListDetail.this, "Verification Success!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(InformationDogListDetail.this, InformationDogListDetailDetail.class);
+                            intent.putExtra("dogId", dogArrayList.get(position).getDogId());
+                            intent.putExtra("dogName", dogArrayList.get(position).getName());
+                            intent.putExtra("dogGender", dogArrayList.get(position).getGender());
+                            intent.putExtra("dogSpecies", dogArrayList.get(position).getSpecies());
+                            intent.putExtra("dogBirth", dogArrayList.get(position).getBirth());
+                            intent.putExtra("dogAge", getAge(dogArrayList.get(position).getBirth()));
+
+                            intent.putExtra("userId", userId);
+
+                             startActivity(intent);
                         }else{
-                            Toast.makeText(InformationDogListDetail.this, "Different Dog!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(InformationDogListDetail.this, "Verification Failed!", Toast.LENGTH_SHORT).show();
 
                         }
 

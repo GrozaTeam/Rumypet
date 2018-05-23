@@ -64,8 +64,6 @@ public class InformationDogListActivity extends AppCompatActivity {
 
     private String mToken;
     private String mEmail;
-    private String imgUrl;
-    private Bitmap bitmap;
 
     private int dogNum = 0;
 
@@ -199,6 +197,7 @@ public class InformationDogListActivity extends AppCompatActivity {
                 intent.putExtra("position", String.valueOf(position));
                 intent.putExtra("dogSet", dogArrayList);
                 intent.putExtra("dogNum", String.valueOf(dogNum));
+                intent.putExtra("userId", ownerId);
                 startActivity(intent);
 
 

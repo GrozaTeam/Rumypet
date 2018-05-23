@@ -23,7 +23,7 @@ var options = {
   pythonPath: '',
   pythonOptions: ['-u'],
   scriptPath: './python-code',
-  args: ['value1']
+  args: ['value1', 'value2']
 };
 
 var uploadDogId = '';
@@ -284,7 +284,10 @@ router.post('/images/verification', function(req,res){
       });
     } else {
       var dogId = req.file.originalname.split('.');
-      options.args[0] = dogId[0];
+      // Mode 1 : Verification
+      options.args[0] = "1";
+      options.args[1] = dogId[0];
+
       PythonShell.run('DogNoseRecognition.py', options, function (err, resultPython) {
         if (err) throw err;
         var resultString = JSON.stringify(resultPython);

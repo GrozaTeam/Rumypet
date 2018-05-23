@@ -113,21 +113,24 @@ if __name__ == "__main__":
         path_input = "./public/images/data/dog6/1.png"
         path_data = "./public/images/data/dog3/*.png"
 
-    elif len(sys.argv) == 2:
-        path_input = "./public/images/inputimage/" + sys.argv[1] + ".jpg"
-        path_data = "./public/images/dogsnose/" + sys.argv[1] + "/*.jpg"
-    img_input = cv2.imread(path_input)
-    img_database = glob.glob(path_data)
-    # img_database.sort()
-    average_result = comparing_result(img_input, path_input, img_database)
-    # print("Average : ", round(average_result, 3))
+    elif len(sys.argv) == 3:
+        mode = sys.argv[1]
+        path_input = "./public/images/inputimage/input.jpg"
 
-    if average_result > 50:
-        print('true')
-    elif average_result == -1:
-        print('inputerror')
-    else:
-        print('false')
-    print("Average : ", round(average_result, 3))
-    cv2.waitKey(0)  # Waits forever for user to press any key
-    cv2.destroyAllWindows()  # Closes displayed windows
+    if eq(mode, "1"):
+        path_data = "./public/images/dogsnose/" + sys.argv[2] + "/*.jpg"
+        img_input = cv2.imread(path_input)
+        img_database = glob.glob(path_data)
+        # img_database.sort()
+        average_result = comparing_result(img_input, path_input, img_database)
+        # print("Average : ", round(average_result, 3))
+        if average_result > 50:
+            print('true')
+        elif average_result == -1:
+            print('inputerror')
+        else:
+            print('false')
+        print("Average : ", round(average_result, 3))
+        cv2.waitKey(0)  # Waits forever for user to press any key
+        cv2.destroyAllWindows()  # Closes displayed windows
+    elif eq(mode, "2"):

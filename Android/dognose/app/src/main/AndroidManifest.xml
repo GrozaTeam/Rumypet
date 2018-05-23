@@ -48,6 +48,7 @@
         <activity android:name=".LoginActivity"/>
         <activity android:name=".RegisterAdditionalDogActivity"/>
         <activity android:name=".InformationDogListDetail"/>
+        <activity android:name=".InformationDogListDetailDetail"/>
         <activity android:name=".ProfileActivity"/>
 
     </application>
