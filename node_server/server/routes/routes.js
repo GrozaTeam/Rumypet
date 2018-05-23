@@ -284,7 +284,8 @@ router.post('/images/verification', function(req,res){
       });
     } else {
       var dogId = req.file.originalname.split('.');
-      console.log('filename', req.file.name);
+      console.log('filename', req.file.filename);
+      console.log('fieldname', req.file.fieldname);
       // Mode 1 : Verification
       options.args[0] = "1";
       options.args[1] = dogId[0];
