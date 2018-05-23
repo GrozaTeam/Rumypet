@@ -294,6 +294,7 @@ router.post('/images/verification', function(req,res){
         var resultSplit = resultString.split('"');
         var result = resultSplit[1];
         var path = 'images/' + req.file.filename;
+        console.log(resultPython);
         res.status(200).json({
           message: 'Nose Image Uploaded Successfully!',
           path: path,
