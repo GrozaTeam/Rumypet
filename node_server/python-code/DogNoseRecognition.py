@@ -135,6 +135,7 @@ if __name__ == "__main__":
         print("Average : ", round(average_result, 3))
 
     elif eq(mode, "2"):
+        print("mode two")
 
     cv2.waitKey(0)  # Waits forever for user to press any key
     cv2.destroyAllWindows()  # Closes displayed windows
