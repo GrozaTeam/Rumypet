@@ -133,7 +133,7 @@ public class InformationDogListDetail extends AppCompatActivity {
             RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
             RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), imageBytes);
 
-            MultipartBody.Part body = MultipartBody.Part.createFormData("image", "input.jpg", requestFile);
+            MultipartBody.Part body = MultipartBody.Part.createFormData("image", dogId + ".jpg", requestFile);
             Call<ImageResponse> call = retrofitInterface.dogVerification(body);
 
             call.enqueue(new Callback<ImageResponse>() {

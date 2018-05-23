@@ -115,7 +115,7 @@ if __name__ == "__main__":
 
     elif len(sys.argv) == 3:
         mode = sys.argv[1]
-        path_input = "./public/images/inputimage/input.jpg"
+        path_input = "./public/images/inputimage/"+ sys.argv[2] + ".jpg"
     else:
         print('error')
 
