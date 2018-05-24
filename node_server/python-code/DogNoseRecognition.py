@@ -109,11 +109,12 @@ def comparing_result_identification(path_of_input, path_of_database):
     image_dic = {}
 
     image_database_folder = glob.glob(path_of_database)
-    print('folder', image_database_folder)
+    print(image_database_folder)
     for dog_path in image_database_folder:
         image_database.append(glob.glob(dog_path + '/*.jpg'))
+        print(dog_path + '/*.jpg')
     image_database.sort()
-    print('image database', image_database)
+    print(image_database)
 
     '''
 
