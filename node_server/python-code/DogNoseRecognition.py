@@ -131,12 +131,7 @@ def comparing_result_identification(path_of_input, path_of_database):
     return result
 
 if __name__ == "__main__":
-    # 1) For Pre-Process Testing
-    '''
-    img1 = cv2.imread('images/etc/f_example1.png')
-    img_test = pre_processing_method_test(Preprocessing.resize(img1, 400, 400))
-    cv2.imshow("Pre-Processing", img_test)
-    '''
+
     # 4) Recognition
     # Execution example)
     # python DogNoseRecognition inputImage.png dog3
@@ -151,14 +146,11 @@ if __name__ == "__main__":
     else:
         print('error')
 
-    average_result = 0;
-
     # Mode 1 : Verification
     if eq(mode, '1'):
         path_input = "./public/images/inputimage/"+ sys.argv[2] + ".jpg"
         path_data = "./public/images/dogsnose/" + sys.argv[2] + "/*.jpg"
-
-        avarage_result = comparing_result_verification(path_input, path_data)
+        average_result = comparing_result_verification(path_input, path_data)
         # print("Average : ", round(average_result, 3))
         if average_result > 50:
             print('true')
