@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import dognose.cd_dog.ListViewContent.ListViewAdapter;
+import dognose.cd_dog.ListViewContent.ListViewAdapterCandidate;
 import dognose.cd_dog.model.Dog;
 import dognose.cd_dog.model.Res;
 import dognose.cd_dog.network.NetworkUtil;
@@ -38,7 +39,8 @@ public class FindDogCandidateActivity extends AppCompatActivity {
     private ArrayList<Dog> dogArrayList;
 
     private ListView listViewDog;
-    private ListViewAdapter adapter;
+    private ListViewAdapterCandidate adapter;
+    private int rank_dog;
 
 
     @Override
@@ -49,25 +51,18 @@ public class FindDogCandidateActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String result = intent.getStringExtra("result");
         String[] dogIds = result.split(":");
+        rank_dog = 1;
 
         dogArrayList = new ArrayList<Dog>();
-        adapter = new ListViewAdapter();
-
-        adapter.addItemDog(null, "nameTest", "jindo", "Male", "1");
-
+        adapter = new ListViewAdapterCandidate();
 
         loadDogProfile(dogIds[0]);
         loadDogProfile(dogIds[1]);
-        Log.d("PaengTest", dogIds[0]);
-        Log.d("PaengTest", dogIds[1]);
+        loadDogProfile(dogIds[2]);
+
+        rank_dog = 1;
 
 
-
-    }
-    @Override
-    protected void onResume(){
-        super.onResume();
-        listViewDog.setAdapter(adapter);
     }
 
 
@@ -83,8 +78,9 @@ public class FindDogCandidateActivity extends AppCompatActivity {
 
         dogArrayList.add(dog);
         String url = Constants.BASE_URL + "images/" + dog.getDogId();
-        adapter.addItemDog(url, dog.getName(), dog.getSpecies(), dog.getGender(), getAge(dog.getBirth()));
-
+        adapter.addItemDogCandidate(String.valueOf(rank_dog), url, dog.getName(), dog.getSpecies(), dog.getGender(), getAge(dog.getBirth()));
+        Log.d("TestPaeng", String.valueOf(rank_dog)+":"+dog.getName());
+        rank_dog++;
         listViewDog.setAdapter(adapter);
 
 
