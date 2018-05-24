@@ -125,18 +125,15 @@ def comparing_result_identification(path_of_input, path_of_database):
             score_total = score_total + score_result
         image_score.append(score_total)
         image_dic[dog_id[4]] = score_total
-        print('id :', dog_id[4], ' : ', score_total)
+        # print('id :', dog_id[4], ' : ', score_total)
 
     # print('score total : ', image_dic)
-
-    winner_score = 0
-    winner_id = ''
-    for dog in image_dic:
-        if winner_score < image_dic[dog]:
-            winner_score = image_dic[dog]
-            winner_id = dog
-
-    return winner_id
+    result = ''
+    for y, v in sorted(image_dic.items(), key=lambda image_dic: image_dic[1], reverse=True):
+        print(y, v)
+        result += y+':'
+    print(result)
+    return result
 
 if __name__ == "__main__":
     # 1) For Pre-Process Testing
@@ -179,7 +176,7 @@ if __name__ == "__main__":
         path_input = "./public/images/inputimage/"+ sys.argv[2] + ".jpg"
         path_data = './public/images/dogsnose/*'
         whose_dog = comparing_result_identification(path_input, path_data)
-        print('whose dog:', whose_dog)
+        print(whose_dog)
 
     cv2.waitKey(0)  # Waits forever for user to press any key
     cv2.destroyAllWindows()  # Closes displayed windows
