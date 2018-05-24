@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">RUMYPET</string>
+
+    <string name="find_dog_desc">Hello there! this is Rumypet\n\nIf you have a abandoned dog and don\'t know whose dog it is, we have a perfect tool to find the owner.\n\nYou will going to take three pictures of the dog\'s nose. Please set your dog\'s nose in a red circle, if the picture is good, we will suggest the candidate of the dog.\n\n\nWill you try?"</string>
 </resources>

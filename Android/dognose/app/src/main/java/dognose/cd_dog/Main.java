@@ -51,30 +51,10 @@ public class Main extends AppCompatActivity {
                     break;
 
                 case R.id.btn_find:
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(Main.this);
-                    dialog.setCancelable(false);
-                    dialog.setTitle("Find the dog");
-                    dialog.setMessage("We will find the dog's information by dog's nose. So you need to take three pictures of the dog.\n\nWill you try it?");
-                    dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-
-                            Intent intentNosePhoto = new Intent(getApplicationContext(), CameraActivity.class);
-                            String ownerId = "temp|find|";
-                            intentNosePhoto.putExtra("ownerId", ownerId);
-                            startActivityForResult(intentNosePhoto,1);
-
-                        }
-                    }).setNegativeButton("Cancel ", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            //Action for "Cancel".
-                        }
-                    });
-
-                    final AlertDialog alert = dialog.create();
-                    alert.show();
+                    Intent intent = new Intent(getApplicationContext(), FindDogActivity.class);
+                    startActivity(intent);
                     break;
+
                 case R.id.btn_list:
                     //Intent intentList = new Intent(getApplicationContext(), DBChecker.class);
                     //startActivity(intentList);

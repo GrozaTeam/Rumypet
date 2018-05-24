@@ -50,6 +50,9 @@
         <activity android:name=".InformationDogListDetail"/>
         <activity android:name=".InformationDogListDetailDetail"/>
         <activity android:name=".ProfileActivity"/>
+        <activity android:name=".FindDogActivity"/>
+        <activity android:name=".FindDogProgressActivity"/>
+
 
     </application>
 
