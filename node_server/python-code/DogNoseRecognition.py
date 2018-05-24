@@ -125,10 +125,10 @@ def comparing_result_identification(path_of_input, path_of_database):
             score_result = Matching.SIFTMatching(match_input, match_db)
             score_total = score_total + score_result
         image_score.append(score_total)
-        image_dic[dog_id[2]] = score_total
-        print('score : ', score_total)
+        image_dic[dog_id[4]] = score_total
+        # print('score : ', score_total)
 
-    print('score total : ', image_dic)
+    # print('score total : ', image_dic)
 
     winner_score = 0
     winner_id = ''
@@ -138,7 +138,6 @@ def comparing_result_identification(path_of_input, path_of_database):
             winner_id = dog
 
     return winner_id
-
 
 if __name__ == "__main__":
     # 1) For Pre-Process Testing
