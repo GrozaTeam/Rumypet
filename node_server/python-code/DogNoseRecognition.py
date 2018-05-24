@@ -78,7 +78,6 @@ def comparing_folder(img_dog1, img_dog2):
 
 
 def comparing_result(path_of_input, path_of_database):
-
     image_input = cv2.imread(path_of_input)
     image_database = glob.glob(path_of_database)
     image_database.sort()
@@ -112,8 +111,6 @@ def comparing_result_identification(path_of_input, path_of_database):
     for dog_path in image_database_folder:
         image_database.append(glob.glob(dog_path + '/*.jpg'))
     image_database.sort()
-
-
 
     for dog_datas in image_database:
         score_total = 0
@@ -153,6 +150,8 @@ if __name__ == "__main__":
 
     else:
         print('error')
+
+    average_result = 0;
 
     # Mode 1 : Verification
     if eq(mode, '1'):

@@ -1,22 +1,34 @@
 package dognose.cd_dog;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import pub.devrel.easypermissions.EasyPermissions;
+
 public class Main extends AppCompatActivity {
 
 
     private LinearLayout btnAdd, btnInf, btnFind, btnList, btnSet;
+    private String[] galleryPermissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        if (EasyPermissions.hasPermissions(this, galleryPermissions)) {
+            Log.d("Rumypet", "Have Permission");
+        } else {
+            EasyPermissions.requestPermissions(this, "Access for storage",
+                    101, galleryPermissions);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main);
         bindingView();
