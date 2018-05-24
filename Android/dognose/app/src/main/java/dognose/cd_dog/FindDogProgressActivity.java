@@ -89,8 +89,6 @@ public class FindDogProgressActivity extends AppCompatActivity {
                     if (response.isSuccessful()) {
                         ImageResponse responseBody = response.body();
                         String result = responseBody.getResult();
-                        String message = responseBody.getMessage();
-                        String path = responseBody.getPath();
 
 
 

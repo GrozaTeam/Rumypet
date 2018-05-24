@@ -330,6 +330,7 @@ router.post('/images/identification', function(req,res){
         var result = resultSplit[1];
         var path = 'images/' + req.file.filename;
         console.log(resultPython);
+        console.log('result: ' + result);
         res.status(200).json({
           message: 'Nose Image Uploaded Successfully!',
           path: path,
