@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -41,7 +44,7 @@ public class FindDogCandidateActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_find_dog_progress);
+        setContentView(R.layout.layout_find_dog_candidate);
         bindingView();
         Intent intent = getIntent();
         String result = intent.getStringExtra("result");
@@ -50,11 +53,21 @@ public class FindDogCandidateActivity extends AppCompatActivity {
         dogArrayList = new ArrayList<Dog>();
         adapter = new ListViewAdapter();
 
+        adapter.addItemDog(null, "nameTest", "jindo", "Male", "1");
+
+
         loadDogProfile(dogIds[0]);
         loadDogProfile(dogIds[1]);
+        Log.d("PaengTest", dogIds[0]);
+        Log.d("PaengTest", dogIds[1]);
 
+
+
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
         listViewDog.setAdapter(adapter);
-
     }
 
 
@@ -71,6 +84,8 @@ public class FindDogCandidateActivity extends AppCompatActivity {
         dogArrayList.add(dog);
         String url = Constants.BASE_URL + "images/" + dog.getDogId();
         adapter.addItemDog(url, dog.getName(), dog.getSpecies(), dog.getGender(), getAge(dog.getBirth()));
+
+        listViewDog.setAdapter(adapter);
 
 
 
@@ -113,8 +128,24 @@ public class FindDogCandidateActivity extends AppCompatActivity {
 
 
     private void bindingView(){
-        listViewDog = (ListView)findViewById(R.id.listview_dog);
+        listViewDog = (ListView)findViewById(R.id.list_view_dog);
         mSubscriptions = new CompositeSubscription();
+
+        listViewDog.setOnItemClickListener(new ListView.OnItemClickListener(){
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                /*
+                Intent intent = new Intent(getApplicationContext(), InformationDogListDetail.class);
+                intent.putExtra("position", String.valueOf(position));
+                intent.putExtra("dogSet", dogArrayList);
+                intent.putExtra("dogNum", String.valueOf(dogNum));
+                intent.putExtra("userId", ownerId);
+                startActivity(intent);
+                */
+
+            }
+        });
 
 
 

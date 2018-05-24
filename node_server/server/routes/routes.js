@@ -16,6 +16,8 @@ var path = require('path');
 var registerDog = require('../functions/registerDog');
 var profileDog = require('../functions/profileDog');
 
+var getDogById = require('../functions/getDogById');
+
 var PythonShell = require('python-shell');
 var resultPython;
 var options = {
@@ -138,7 +140,17 @@ router.get('/users/:id', function(req, res) {
 });
 
 router.get('/dog/:id', function(req, res){
-
+  getDogById.getDogProfile(req.params.id)
+    .then(function(result){
+      console.log("dogID = " + req.params.id);
+      res.json(result);
+    })
+    .catch(function(err){
+      console.log('dog err : '+err);
+      res.status(err.status).json({
+        mesage: err.message
+      });
+    });
 });
 
 router.get('/dogs/:id', function(req, res) {

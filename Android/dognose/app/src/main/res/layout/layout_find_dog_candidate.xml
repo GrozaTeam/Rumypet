@@ -27,13 +27,19 @@
 
 
         <ListView
-            android:id="@+id/listview_dog"
+            android:id="@+id/list_view_dog"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:choiceMode="singleChoice"
             android:divider="#F3F3E6"
             android:dividerHeight="1.5dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="10dp">
+
+        </LinearLayout>
 
 
     </LinearLayout>
