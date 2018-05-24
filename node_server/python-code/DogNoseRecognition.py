@@ -77,7 +77,11 @@ def comparing_folder(img_dog1, img_dog2):
     return score_average
 
 
-def comparing_result(image_input, path_of_input, image_database):
+def comparing_result(path_of_input, path_of_database):
+
+    image_input = cv2.imread(path_of_input)
+    image_database = glob.glob(path_of_database)
+    image_database.sort()
     score_total = 0
     img_num = 0
     for i in image_database:
@@ -87,15 +91,52 @@ def comparing_result(image_input, path_of_input, image_database):
             match_input = pre_processing_method(Preprocessing.resize(image_input, 400, 400))
             match_db = pre_processing_method(Preprocessing.resize(cv2.imread(i), 400, 400))
             score_result = Matching.SIFTMatching(match_input, match_db)
-            # print(i, " = ", score_result)
+            print(i, " = ", score_result)
             score_total = score_total + score_result
             img_num = img_num + 1
     if img_num == 0:
-        # print('no image comes in')
+        print('no image comes in')
         return -1
     else:
-        score_average = score_total / (img_num)
+        score_average = score_total / img_num
         return score_average
+
+
+def comparing_result_identification(path_of_input, path_of_database):
+    image_input = cv2.imread(path_of_input)
+    image_database = []
+    image_score = []
+    image_dic = {}
+
+    image_database_folder = glob.glob(path_of_database)
+    for dog_path in image_database_folder:
+        image_database.append(glob.glob(dog_path + '/*.png'))
+    image_database.sort()
+
+    for dog_datas in image_database:
+        score_total = 0
+        dog_id = dog_datas[0].split('/')
+        for dog_data in dog_datas:
+            print(dog_data)
+            match_input = pre_processing_method(Preprocessing.resize(image_input, 400, 400))
+            match_db = pre_processing_method(Preprocessing.resize(cv2.imread(dog_data), 400, 400))
+            score_result = Matching.SIFTMatching(match_input, match_db)
+            score_total = score_total + score_result
+        image_score.append(score_total)
+        image_dic[dog_id[2]] = score_total
+        print('score : ', score_total)
+
+    print('score total : ', image_dic)
+
+    winner_score = 0
+    winner_id = ''
+    for dog in image_dic:
+        if winner_score < image_dic[dog]:
+            winner_score = image_dic[dog]
+            winner_id = dog
+
+    return winner_id
+
 
 
 if __name__ == "__main__":
@@ -115,16 +156,16 @@ if __name__ == "__main__":
 
     elif len(sys.argv) == 3:
         mode = sys.argv[1]
-        path_input = "./public/images/inputimage/"+ sys.argv[2] + ".jpg"
+
     else:
         print('error')
 
+    # Mode 1 : Verification
     if eq(mode, '1'):
+        path_input = "./public/images/inputimage/"+ sys.argv[2] + ".jpg"
         path_data = "./public/images/dogsnose/" + sys.argv[2] + "/*.jpg"
-        img_input = cv2.imread(path_input)
-        img_database = glob.glob(path_data)
-        # img_database.sort()
-        average_result = comparing_result(img_input, path_input, img_database)
+
+        avarage_result = comparing_result(path_input, path_data)
         # print("Average : ", round(average_result, 3))
         if average_result > 50:
             print('true')
@@ -134,8 +175,12 @@ if __name__ == "__main__":
             print('false')
         print("Average : ", round(average_result, 3))
 
-    elif eq(mode, "2"):
-        print("mode two")
+    # Mode 2 : Identification
+    elif eq(mode, '2'):
+        path_input = "./public/images/inputimage/"+ sys.argv[2] + ".jpg"
+        path_data = './public/images/dogs/*'
+        whose_dog = comparing_result_identification(path_input, path_data)
+        print('whose dog:', whose_dog)
 
     cv2.waitKey(0)  # Waits forever for user to press any key
     cv2.destroyAllWindows()  # Closes displayed windows

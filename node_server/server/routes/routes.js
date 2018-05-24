@@ -308,6 +308,38 @@ router.post('/images/verification', function(req,res){
   });
 });
 
+router.post('/images/identification', function(req,res){
+  upload_input_image(req, res, function(err){
+    if (err) {
+      console.log(err);
+      res.status(400).json({
+        message: err.message
+      });
+    } else {
+      // input.jpg
+      var dogId = req.file.originalname.split('.');
+      // Mode 2 : Identification
+      options.args[0] = "2";
+      // input
+      options.args[1] = dogId[0];
+
+      PythonShell.run('DogNoseRecognition.py', options, function (err, resultPython) {
+        if (err) throw err;
+        var resultString = JSON.stringify(resultPython);
+        var resultSplit = resultString.split('"');
+        var result = resultSplit[1];
+        var path = 'images/' + req.file.filename;
+        console.log(resultPython);
+        res.status(200).json({
+          message: 'Nose Image Uploaded Successfully!',
+          path: path,
+          result: result
+        });
+      });
+    }
+  });
+});
+
 var upload = multer({
   storage: multer.diskStorage({
     destination: function (req, file, cb) {
