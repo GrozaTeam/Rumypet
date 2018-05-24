@@ -119,14 +119,13 @@ def comparing_result_identification(path_of_input, path_of_database):
         score_total = 0
         dog_id = dog_datas[0].split('/')
         for dog_data in dog_datas:
-            print(dog_data)
             match_input = pre_processing_method(Preprocessing.resize(image_input, 400, 400))
             match_db = pre_processing_method(Preprocessing.resize(cv2.imread(dog_data), 400, 400))
             score_result = Matching.SIFTMatching(match_input, match_db)
             score_total = score_total + score_result
         image_score.append(score_total)
         image_dic[dog_id[4]] = score_total
-        # print('score : ', score_total)
+        print('id :', dog_id[4], ' : ', score_total)
 
     # print('score total : ', image_dic)
 
