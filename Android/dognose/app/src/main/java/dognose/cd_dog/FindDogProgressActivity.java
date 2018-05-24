@@ -89,8 +89,11 @@ public class FindDogProgressActivity extends AppCompatActivity {
                     if (response.isSuccessful()) {
                         ImageResponse responseBody = response.body();
                         String result = responseBody.getResult();
-
-
+                        Log.d("TestPaeng", result);
+                        Intent intentCandidate = new Intent(FindDogProgressActivity.this, FindDogCandidateActivity.class);
+                        intentCandidate.putExtra("result", result);
+                        startActivity(intentCandidate);
+                        finish();
 
                     } else {
                         ResponseBody errorBody = response.errorBody();

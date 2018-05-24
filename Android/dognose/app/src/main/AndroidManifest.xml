@@ -52,6 +52,7 @@
         <activity android:name=".ProfileActivity"/>
         <activity android:name=".FindDogActivity"/>
         <activity android:name=".FindDogProgressActivity"/>
+        <activity android:name=".FindDogCandidateActivity"/>
 
 
     </application>

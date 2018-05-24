@@ -137,6 +137,10 @@ router.get('/users/:id', function(req, res) {
   }
 });
 
+router.get('/dog/:id', function(req, res){
+  
+});
+
 router.get('/dogs/:id', function(req, res) {
   if (checkToken(req)) {
     console.log("id == " + req.params.id);
@@ -386,7 +390,6 @@ var upload_nose = multer({
     callback(null, true);
   }
 }).single('image');
-
 
 var upload_input_image = multer({
   storage: multer.diskStorage({
