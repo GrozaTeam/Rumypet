@@ -109,14 +109,11 @@ def comparing_result_identification(path_of_input, path_of_database):
     image_dic = {}
 
     image_database_folder = glob.glob(path_of_database)
-    print(image_database_folder)
     for dog_path in image_database_folder:
         image_database.append(glob.glob(dog_path + '/*.jpg'))
-        print(dog_path + '/*.jpg')
     image_database.sort()
-    print(image_database)
 
-    '''
+
 
     for dog_datas in image_database:
         score_total = 0
@@ -141,8 +138,6 @@ def comparing_result_identification(path_of_input, path_of_database):
             winner_id = dog
 
     return winner_id
-    '''
-    return 0
 
 
 if __name__ == "__main__":
