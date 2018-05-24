@@ -90,7 +90,7 @@ def comparing_result_verification(path_of_input, path_of_database):
             match_input = pre_processing_method(Preprocessing.resize(image_input, 400, 400))
             match_db = pre_processing_method(Preprocessing.resize(cv2.imread(i), 400, 400))
             score_result = Matching.SIFTMatching(match_input, match_db)
-            print(i, " = ", score_result)
+            # print(i, " = ", score_result)
             score_total = score_total + score_result
             img_num = img_num + 1
     if img_num == 0:
