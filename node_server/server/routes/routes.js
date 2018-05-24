@@ -138,7 +138,7 @@ router.get('/users/:id', function(req, res) {
 });
 
 router.get('/dog/:id', function(req, res){
-  
+
 });
 
 router.get('/dogs/:id', function(req, res) {
@@ -301,7 +301,6 @@ router.post('/images/verification', function(req,res){
         var resultSplit = resultString.split('"');
         var result = resultSplit[1];
         var path = 'images/' + req.file.filename;
-        console.log(resultPython);
         res.status(200).json({
           message: 'Nose Image Uploaded Successfully!',
           path: path,

@@ -77,7 +77,7 @@ def comparing_folder(img_dog1, img_dog2):
     return score_average
 
 
-def comparing_result(path_of_input, path_of_database):
+def comparing_result_verification(path_of_input, path_of_database):
     image_input = cv2.imread(path_of_input)
     image_database = glob.glob(path_of_database)
     image_database.sort()
@@ -158,7 +158,7 @@ if __name__ == "__main__":
         path_input = "./public/images/inputimage/"+ sys.argv[2] + ".jpg"
         path_data = "./public/images/dogsnose/" + sys.argv[2] + "/*.jpg"
 
-        avarage_result = comparing_result(path_input, path_data)
+        avarage_result = comparing_result_verification(path_input, path_data)
         # print("Average : ", round(average_result, 3))
         if average_result > 50:
             print('true')
