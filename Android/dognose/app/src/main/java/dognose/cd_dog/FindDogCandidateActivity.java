@@ -56,6 +56,8 @@ public class FindDogCandidateActivity extends AppCompatActivity {
         dogArrayList = new ArrayList<Dog>();
         adapter = new ListViewAdapterCandidate();
 
+        Log.d("doglist", dogIds[0]+"__"+dogIds[1]+"__"+dogIds[2]);
+
         loadDogProfile(dogIds[0]);
         loadDogProfile(dogIds[1]);
         loadDogProfile(dogIds[2]);
