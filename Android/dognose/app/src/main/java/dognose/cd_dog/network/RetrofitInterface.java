@@ -9,6 +9,7 @@ import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -57,6 +58,7 @@ public interface RetrofitInterface {
     @POST("images/verification")
     Call<ImageResponse> dogVerification(@Part MultipartBody.Part image);
 
+    @Headers({"CONNECT_TIMEOUT:20000", "READ_TIMEOUT:20000", "WRITE_TIMEOUT:20000"})
     @Multipart
     @POST("images/identification")
     Call<ImageResponse> dogIdentification(@Part MultipartBody.Part image);

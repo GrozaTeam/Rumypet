@@ -19,12 +19,14 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+import java.util.concurrent.TimeUnit;
 
 import dognose.cd_dog.network.ImageResponse;
 import dognose.cd_dog.network.RetrofitInterface;
 import dognose.cd_dog.utils.Constants;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -73,15 +75,21 @@ public class FindDogProgressActivity extends AppCompatActivity {
             Bitmap resultBitmap = rotateBitmap(resize, exifOrientation);
             InputStream is_result = Bitmap2InputStream(resultBitmap);
             byte[] imageBytes = getBytes(is_result);
+            OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                    .connectTimeout(1, TimeUnit.MINUTES)
+                    .readTimeout(30, TimeUnit.SECONDS)
+                    .writeTimeout(15, TimeUnit.SECONDS)
+                    .build();
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(Constants.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
+                    .client(okHttpClient)
                     .build();
             RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
             RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), imageBytes);
             MultipartBody.Part body = MultipartBody.Part.createFormData("image",  "input.jpg", requestFile);
-            Call<ImageResponse> call = retrofitInterface.dogIdentification(body);
 
+            Call<ImageResponse> call = retrofitInterface.dogIdentification(body);
             call.enqueue(new Callback<ImageResponse>() {
                 @Override
                 public void onResponse(Call<ImageResponse> call, retrofit2.Response<ImageResponse> response) {

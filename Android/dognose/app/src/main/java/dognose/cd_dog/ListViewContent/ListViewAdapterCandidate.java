@@ -61,7 +61,7 @@ public class ListViewAdapterCandidate extends BaseAdapter {
 
         String rank = listViewItem.getRank();
         if (rank.equals("1")){
-            rankImageView.setImageResource(R.drawable.rank_1);
+            rankImageView.setImageResource(R.drawable.rank_1_200);
         }else if(rank.equals("2")){
             rankImageView.setImageResource(R.drawable.rank_2);
         }else if(rank.equals("3")) {

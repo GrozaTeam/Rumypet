@@ -8,14 +8,21 @@
         android:id="@+id/img_rank"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="2"/>
+        android:layout_weight="3"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.2">
+
+    </LinearLayout>
 
 
     <ImageView
         android:id="@+id/img_dog"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="3.8"/>
+        android:layout_weight="3.6"/>
 
     <LinearLayout
         android:layout_width="0dp"
@@ -27,7 +34,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="6"
+        android:layout_weight="3"
         android:orientation="vertical">
 
 
@@ -39,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Name : "
-                android:textSize="20dp"
+                android:textSize="12dp"
                 android:textColor="#000000"
                 android:gravity="center|left"/>
 
@@ -48,7 +55,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textSize="20dp"
+                android:textSize="12dp"
                 android:gravity="center|left"/>
 
         </LinearLayout>
@@ -60,7 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Species : "
-                android:textSize="20dp"
+                android:textSize="12dp"
                 android:textColor="#000000"
                 android:gravity="center|left"/>
 
@@ -69,7 +76,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textSize="15dp"
+                android:textSize="9dp"
                 android:gravity="center|left"/>
 
         </LinearLayout>
@@ -82,7 +89,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Gender : "
-                android:textSize="20dp"
+                android:textSize="12dp"
                 android:textColor="#000000"
                 android:gravity="center|left"/>
 
@@ -91,7 +98,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textSize="20dp"
+                android:textSize="12dp"
                 android:gravity="center|left"/>
 
         </LinearLayout>
@@ -103,7 +110,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Age : "
-                android:textSize="20dp"
+                android:textSize="12dp"
                 android:textColor="#000000"
                 android:gravity="center|left"/>
 
@@ -112,7 +119,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textSize="20dp"
+                android:textSize="12dp"
                 android:gravity="center|left"/>
 
         </LinearLayout>
