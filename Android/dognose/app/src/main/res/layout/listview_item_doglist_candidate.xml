@@ -4,11 +4,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/img_rank"
+
+
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="3"/>
+        android:layout_weight="2.1">
+
+        <ImageView
+            android:id="@+id/img_rank"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+
 
     <LinearLayout
         android:layout_width="0dp"
@@ -22,19 +33,20 @@
         android:id="@+id/img_dog"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="3.6"/>
+        android:layout_weight="3.1"/>
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.2">
+        android:layout_weight="0.6">
 
     </LinearLayout>
 
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="3"
+        android:layout_weight="4"
         android:orientation="vertical">
 
 
