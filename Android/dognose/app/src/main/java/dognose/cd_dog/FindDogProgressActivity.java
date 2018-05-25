@@ -89,7 +89,7 @@ public class FindDogProgressActivity extends AppCompatActivity {
                     if (response.isSuccessful()) {
                         ImageResponse responseBody = response.body();
                         String result = responseBody.getResult();
-                        Log.d("TestPaeng", result);
+                        Log.d("testResult", result);
                         Intent intentCandidate = new Intent(FindDogProgressActivity.this, FindDogCandidateActivity.class);
                         intentCandidate.putExtra("result", result);
                         startActivity(intentCandidate);
@@ -111,7 +111,7 @@ public class FindDogProgressActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<ImageResponse> call, Throwable t) {
-                    Log.d("testPaeng: ", t.getLocalizedMessage());
+                    Log.d("testServerPaeng: ", t.getLocalizedMessage());
 
                 }
             });

@@ -339,6 +339,7 @@ router.post('/images/identification', function(req,res){
       PythonShell.run('DogNoseRecognition.py', options, function (err, resultPython) {
         if (err) throw err;
         var resultString = JSON.stringify(resultPython);
+        console.log('resultstring' + resultString);
         var resultSplit = resultString.split('"');
         var result = resultSplit[1];
         var path = 'images/' + req.file.filename;
