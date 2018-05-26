@@ -1,9 +1,12 @@
 package dognose.cd_dog;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +36,7 @@ public class ProfileActivity extends AppCompatActivity{
     private CompositeSubscription mSubscriptions;
     private String mToken;
     private String mEmail;
+    private Button btnEditProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,12 +92,33 @@ public class ProfileActivity extends AppCompatActivity{
 
     }
 
+    Button.OnClickListener listener = new Button.OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.btn_edit_profile:
+
+                    Intent intent = new Intent(getApplicationContext(), EditProfile.class);
+                    startActivity(intent);
+                    finish();
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    };
+
 
     private void bindingView(){
         tvID = (TextView)findViewById(R.id.tv_id);
         tvPw = (TextView)findViewById(R.id.tv_pw);
         tvName = (TextView)findViewById(R.id.tv_name);
         tvPhone = (TextView)findViewById(R.id.tv_phone);
+        btnEditProfile = (Button)findViewById(R.id.btn_edit_profile);
+        btnEditProfile.setOnClickListener(listener);
+
     }
 
 }
