@@ -19,11 +19,11 @@ exports.registerUser = (name, email, password, phone) =>
 
 		newUser.save()
 
-		.then(() => {
+		.then(function(){
 			resolve({ status: 201, message: 'User Registered Sucessfully !' });
 		})
 
-		.catch(err => {
+		.catch(function(err){
 
 			if (err.code == 11000) {
 
