@@ -3,6 +3,7 @@ package dognose.cd_dog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -64,13 +65,18 @@ public class FindDogCandidateActivity extends AppCompatActivity {
 
 
         loadDogProfile(dogId_split_1[0]);
-        loadDogProfile(dogId_split_2[0]);
-        loadDogProfile(dogId_split_3[0]);
-/*
-        loadDogProfile(dogids[0]);
-        loadDogProfile(dogIds[1]);
-        loadDogProfile(dogIds[2]);
-*/
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                loadDogProfile(dogId_split_2[0]);
+            }
+        }, 1000);
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                loadDogProfile(dogId_split_3[0]);
+            }
+        }, 1000);
 
         rank_dog = 1;
 
@@ -143,15 +149,14 @@ public class FindDogCandidateActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                /*
-                Intent intent = new Intent(getApplicationContext(), InformationDogListDetail.class);
-                intent.putExtra("position", String.valueOf(position));
-                intent.putExtra("dogSet", dogArrayList);
-                intent.putExtra("dogNum", String.valueOf(dogNum));
-                intent.putExtra("userId", ownerId);
-                startActivity(intent);
-                */
+                Intent intent = new Intent(FindDogCandidateActivity.this, FindDogDetailActivity.class);
+                intent.putExtra("ownerId", dogArrayList.get(position).getOwnerId());
+                intent.putExtra("dogId", dogArrayList.get(position).getDogId());
+                intent.putExtra("dogName", dogArrayList.get(position).getName());
+                intent.putExtra("dogGender", dogArrayList.get(position).getGender());
+                intent.putExtra("dogSpecies", dogArrayList.get(position).getSpecies());
 
+                startActivity(intent);
             }
         });
 

@@ -31,8 +31,12 @@ public interface RetrofitInterface {
     @GET("users/{email}")
     Observable<User> getProfile(@Path("email") String email);
 
+    @GET("users_inf/{email}")
+    Observable<User> getUserProfile(@Path("email") String email);
+
     @GET("dogs/{ownerId}")
     Observable<Dog[]> getDogProfiles(@Path("ownerId") String ownerId);
+
 
     @GET("dog/{dogId}")
     Observable<Dog> getDogProfile(@Path("dogId") String dogId);
@@ -62,5 +66,6 @@ public interface RetrofitInterface {
     @Multipart
     @POST("images/identification")
     Call<ImageResponse> dogIdentification(@Part MultipartBody.Part image);
+
 
 }

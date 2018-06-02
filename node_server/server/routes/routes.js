@@ -139,6 +139,18 @@ router.get('/users/:id', function(req, res) {
   }
 });
 
+router.get('users_inf/:id', function(req, res){
+  profile.getProfile(req.params.id)
+  .then(function(result){
+    res.json(result);
+  })
+  .catch(function(err){
+    res.status(err.status).json({
+      message: err.message
+    });
+  });
+});
+
 router.get('/dog/:id', function(req, res){
   getDogById.getDogProfile(req.params.id)
     .then(function(result){
