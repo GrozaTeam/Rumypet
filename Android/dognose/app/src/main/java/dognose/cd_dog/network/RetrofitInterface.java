@@ -31,15 +31,15 @@ public interface RetrofitInterface {
     @GET("users/{email}")
     Observable<User> getProfile(@Path("email") String email);
 
-    @GET("users_inf/{email}")
+    @GET("user/{email}")
     Observable<User> getUserProfile(@Path("email") String email);
+
+    @GET("dog/{dogId}")
+    Observable<Dog> getDogProfile(@Path("dogId") String dogId);
 
     @GET("dogs/{ownerId}")
     Observable<Dog[]> getDogProfiles(@Path("ownerId") String ownerId);
 
-
-    @GET("dog/{dogId}")
-    Observable<Dog> getDogProfile(@Path("dogId") String dogId);
 
     @PUT("users/{email}")
     Observable<Res> changePassword(@Path("email") String email, @Body User user);

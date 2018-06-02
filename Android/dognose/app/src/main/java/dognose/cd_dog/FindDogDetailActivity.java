@@ -30,17 +30,13 @@ public class FindDogDetailActivity extends AppCompatActivity {
 
     private String dogId, dogName, dogSpecies, dogGender, ownerId;
     private TextView tvInfoName, tvInfoGender, tvInfoSpecies, tvInfoOwnerName, tvInfoOwnerPhone, tvInfoOwnerEmail;
-    private SharedPreferences mSharedPreferences;
     private CompositeSubscription mSubscriptions;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_find_dog_detail);
-        getIntentData();
         bindingView();
-
-        mSubscriptions = new CompositeSubscription();
-
+        getIntentData();
         loadProfile();
 
     }
@@ -66,7 +62,7 @@ public class FindDogDetailActivity extends AppCompatActivity {
             Gson gson = new GsonBuilder().create();
             try {
                 String errorBody = ((HttpException) error).response().errorBody().string();
-                Res response = gson.fromJson(errorBody,Res.class);
+                Res response = gson.fromJson(errorBody, dognose.cd_dog.model.Res.class);
                 showSnackBarMessage(response.getMessage());
 
             } catch (IOException e) {
@@ -100,7 +96,13 @@ public class FindDogDetailActivity extends AppCompatActivity {
         tvInfoName.setText(dogName);
         tvInfoSpecies.setText(dogSpecies);
         tvInfoGender.setText(dogGender);
+        mSubscriptions = new CompositeSubscription();
 
+    }
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        mSubscriptions.unsubscribe();
     }
 
 

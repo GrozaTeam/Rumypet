@@ -35,7 +35,6 @@ import rx.subscriptions.CompositeSubscription;
 
 public class FindDogCandidateActivity extends AppCompatActivity {
 
-    private SharedPreferences mSharedPreferences;
     private CompositeSubscription mSubscriptions;
     private ArrayList<Dog> dogArrayList;
 
@@ -97,7 +96,6 @@ public class FindDogCandidateActivity extends AppCompatActivity {
         dogArrayList.add(dog);
         String url = Constants.BASE_URL + "images/" + dog.getDogId();
         adapter.addItemDogCandidate(String.valueOf(rank_dog), url, dog.getName(), dog.getSpecies(), dog.getGender(), getAge(dog.getBirth()));
-        Log.d("TestPaeng", String.valueOf(rank_dog)+":"+dog.getName());
         rank_dog++;
         listViewDog.setAdapter(adapter);
 
