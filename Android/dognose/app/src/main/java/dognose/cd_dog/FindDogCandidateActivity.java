@@ -50,7 +50,7 @@ public class FindDogCandidateActivity extends AppCompatActivity {
         bindingView();
         Intent intent = getIntent();
         String result = intent.getStringExtra("result");
-        String[] dogIds = result.split(":");
+        String[] dogIds = result.split("/");
         rank_dog = 1;
 
         dogArrayList = new ArrayList<Dog>();
@@ -58,9 +58,9 @@ public class FindDogCandidateActivity extends AppCompatActivity {
 
         Log.d("doglist", dogIds[0]+"__"+dogIds[1]+"__"+dogIds[2]);
 
-        String[] dogId_split_1 = dogIds[0].split("/");
-        String[] dogId_split_2 = dogIds[1].split("/");
-        String[] dogId_split_3 = dogIds[2].split("/");
+        String[] dogId_split_1 = dogIds[0].split(":");
+        String[] dogId_split_2 = dogIds[1].split(":");
+        String[] dogId_split_3 = dogIds[2].split(":");
 
 
         loadDogProfile(dogId_split_1[0]);
