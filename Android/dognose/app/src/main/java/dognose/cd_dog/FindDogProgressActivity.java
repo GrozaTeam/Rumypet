@@ -53,11 +53,7 @@ public class FindDogProgressActivity extends AppCompatActivity {
         setContentView(R.layout.layout_find_dog_progress);
         bindingView();
 
-
         identification_process(imageNoseUri[0]);
-
-
-
     }
     private void identification_process(Uri imgUri){
 
@@ -123,8 +119,6 @@ public class FindDogProgressActivity extends AppCompatActivity {
 
                 }
             });
-
-
         }catch (IOException e){
             e.printStackTrace();
         }

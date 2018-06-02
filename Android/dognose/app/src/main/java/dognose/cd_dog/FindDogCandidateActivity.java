@@ -58,9 +58,19 @@ public class FindDogCandidateActivity extends AppCompatActivity {
 
         Log.d("doglist", dogIds[0]+"__"+dogIds[1]+"__"+dogIds[2]);
 
-        loadDogProfile(dogIds[0]);
+        String[] dogId_split_1 = dogIds[0].split("/");
+        String[] dogId_split_2 = dogIds[1].split("/");
+        String[] dogId_split_3 = dogIds[2].split("/");
+
+
+        loadDogProfile(dogId_split_1[0]);
+        loadDogProfile(dogId_split_2[0]);
+        loadDogProfile(dogId_split_3[0]);
+/*
+        loadDogProfile(dogids[0]);
         loadDogProfile(dogIds[1]);
         loadDogProfile(dogIds[2]);
+*/
 
         rank_dog = 1;
 

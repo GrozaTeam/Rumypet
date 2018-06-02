@@ -127,7 +127,7 @@ def comparing_result_identification(path_of_input, path_of_database):
     # print('score total : ', image_dic)
     result = ''
     for y, v in sorted(image_dic.items(), key=lambda image_dic: image_dic[1], reverse=True):
-        result += y+':'
+        result += y+'/'+v+':'
     return result
 
 if __name__ == "__main__":
