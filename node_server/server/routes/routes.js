@@ -145,6 +145,7 @@ router.get('users_inf/:id', function(req, res){
     res.json(result);
   })
   .catch(function(err){
+    console.log('user err : ' + err);
     res.status(err.status).json({
       message: err.message
     });

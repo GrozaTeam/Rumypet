@@ -52,7 +52,7 @@ public class FindDogDetailActivity extends AppCompatActivity {
                 .subscribe(this::handleResponse,this::handleError));
     }
     private void handleResponse(User user) {
-        
+
         tvInfoOwnerName.setText(user.getName());
         tvInfoOwnerPhone.setText(user.getPhone());
         tvInfoOwnerEmail.setText(user.getEmail());
