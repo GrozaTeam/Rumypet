@@ -142,10 +142,11 @@ router.get('/users/:id', function(req, res) {
 router.get('users_inf/:id', function(req, res){
   profile.getProfile(req.params.id)
   .then(function(result){
+    console.log('user load result : ' + result);
     res.json(result);
   })
   .catch(function(err){
-    console.log('user err : ' + err);
+    console.log('user load err : ' + err);
     res.status(err.status).json({
       message: err.message
     });
