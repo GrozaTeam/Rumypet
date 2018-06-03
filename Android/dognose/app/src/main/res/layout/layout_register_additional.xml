@@ -304,6 +304,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text="Register Photo"
+                        android:textSize="10dp"
                         android:background="@drawable/bg_roundcorner_main_dark" />
 
 
@@ -320,6 +321,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text="Register Nose"
+                        android:textSize="10dp"
                         android:background="@drawable/bg_roundcorner_main_dark" />
 
 

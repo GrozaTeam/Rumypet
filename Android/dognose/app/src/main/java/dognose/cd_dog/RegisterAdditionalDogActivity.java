@@ -76,8 +76,8 @@ import static dognose.cd_dog.utils.ImageTransformation.rotateBitmap;
 
 public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
-    private static final int PICK_FROM_ALBUM = 1;
     private static final int GALLERY_CODE=1112;
+    private static final int RECORD_CODE=1114;
     private static final int GALLERY_MULTIPLE_CODE=1113;
     private static final int colorMaleLight = 0XFFCCCCFF;
     private static final int colorMaleDark = 0XFF5555FF;
@@ -128,6 +128,17 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
             switch (requestCode) {
 
+                case RECORD_CODE:
+                    String[] imageNoseRecorded = new String[3];
+                    imageNoseRecorded[0] = "content://media/external/images/media/41666";
+                    imageNoseRecorded[1] = "content://media/external/images/media/41665";
+                    imageNoseRecorded[2] = "content://media/external/images/media/41664";
+                    imageNoseUri1 = Uri.parse(imageNoseRecorded[0]);
+                    imageNoseUri2 = Uri.parse(imageNoseRecorded[1]);
+                    imageNoseUri3 = Uri.parse(imageNoseRecorded[2]);
+
+                    break;
+
                 case GALLERY_CODE:
                     showImage(data.getData(), imgDog);
                     imageUri = data.getData();
@@ -147,7 +158,6 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
                                 case 1:
                                     imageNoseUri2 = urione;
                                     showImage(imageNoseUri2, imgDogNose2);
-
                                     break;
                                 case 2:
                                     imageNoseUri3 = urione;
@@ -388,10 +398,15 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
         @Override
         public void onClick(DialogInterface dialog, int which) {
+            /*
             Intent intentNosePhoto = new Intent(getApplicationContext(), CameraActivity_for_body.class);
             String ownerId2 = ownerId + "|body|";
             intentNosePhoto.putExtra("ownerId", ownerId2);
             startActivityForResult(intentNosePhoto,1);
+            */
+            Intent intentRecord = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+            intentRecord.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 5);
+            startActivityForResult(intentRecord, RECORD_CODE);
         }
     };
 

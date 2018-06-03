@@ -29,7 +29,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
-/**
+/*
  * Created by paeng on 2018. 5. 25..
  */
 
@@ -55,8 +55,6 @@ public class FindDogCandidateActivity extends AppCompatActivity {
 
         dogArrayList = new ArrayList<Dog>();
         adapter = new ListViewAdapterCandidate();
-
-        Log.d("doglist", dogIds[0]+"__"+dogIds[1]+"__"+dogIds[2]);
 
         String[] dogId_split_1 = dogIds[0].split(":");
         String[] dogId_split_2 = dogIds[1].split(":");

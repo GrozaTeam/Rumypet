@@ -160,7 +160,7 @@ public class CameraActivity extends AppCompatActivity{
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    button.setEnabled(false);
+                button.setEnabled(false);
                 camera.takePicture(shutterCallback, rawCallback, jpegCallback);
                 if(count ==2){
                     Button bt = (Button)findViewById(R.id.btnCapture);

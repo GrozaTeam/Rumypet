@@ -20,6 +20,7 @@ public class FindDogActivity extends AppCompatActivity {
     private Button btnFind;
     private static final int CAMERA_CODE=1111;
     private static final int GALLERY_CODE=1112;
+    private static final int RECORD_CODE=1113;
 
 
     @Override
@@ -38,6 +39,16 @@ public class FindDogActivity extends AppCompatActivity {
 
             switch (requestCode) {
                 case CAMERA_CODE:
+                    break;
+                case RECORD_CODE:
+                    String[] imageNoseRecorded = new String[3];
+                    imageNoseRecorded[0] = "content://media/external/images/media/41666";
+                    imageNoseRecorded[1] = "content://media/external/images/media/41665";
+                    imageNoseRecorded[2] = "content://media/external/images/media/41664";
+                    Intent intentRecord = new Intent(FindDogActivity.this, FindDogProgressActivity.class);
+                    intentRecord.putExtra("input_dog", imageNoseRecorded);
+                    startActivity(intentRecord);
+                    finish();
 
                     break;
 
@@ -54,7 +65,6 @@ public class FindDogActivity extends AppCompatActivity {
                                     break;
                                 case 1:
                                     imageNose[1] = urione.toString();
-
                                     break;
                                 case 2:
                                     imageNose[2] = urione.toString();
@@ -62,6 +72,7 @@ public class FindDogActivity extends AppCompatActivity {
                             }
                         }
                     }
+                    Log.d("TestPaengRecord", imageNose[0]+":"+imageNose[1]+":"+imageNose[2]);
 
                     Intent intent = new Intent(FindDogActivity.this, FindDogProgressActivity.class);
                     intent.putExtra("input_dog", imageNose);
@@ -78,7 +89,9 @@ public class FindDogActivity extends AppCompatActivity {
 
         @Override
         public void onClick(DialogInterface dialog, int which) {
-
+            Intent intentRecord = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+            intentRecord.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 5);
+            startActivityForResult(intentRecord, RECORD_CODE);
         }
     };
 

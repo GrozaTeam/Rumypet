@@ -44,7 +44,7 @@
                     android:background="#F9F9F1" />
 
                 <ImageView
-                    android:id="@+id/image_info"
+                    android:id="@+id/img_dog"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.4"
@@ -177,7 +177,7 @@
                         android:layout_weight="0.5"
                         android:textColor="#000000"
                         android:gravity="center|left"
-                        android:textSize="20dp"
+                        android:textSize="18dp"
                         android:focusable="false"/>
 
                     <TextView
@@ -187,7 +187,7 @@
                         android:layout_weight="0.5"
                         android:textColor="#000000"
                         android:gravity="center|left"
-                        android:textSize="20dp"
+                        android:textSize="18dp"
                         android:focusable="false"/>
 
                     <TextView
@@ -197,7 +197,7 @@
                         android:layout_weight="0.5"
                         android:textColor="#000000"
                         android:gravity="center|left"
-                        android:textSize="20dp"
+                        android:textSize="12dp"
                         android:focusable="false"/>
 
                     <TextView
@@ -207,7 +207,7 @@
                         android:layout_weight="0.5"
                         android:textColor="#000000"
                         android:gravity="center|left"
-                        android:textSize="20dp"
+                        android:textSize="14dp"
                         android:focusable="false"/>
 
                     <TextView
@@ -217,7 +217,7 @@
                         android:layout_weight="0.5"
                         android:textColor="#000000"
                         android:gravity="center|left"
-                        android:textSize="20dp"
+                        android:textSize="14dp"
                         android:focusable="false"/>
 
                     <TextView
@@ -227,7 +227,7 @@
                         android:layout_weight="0.5"
                         android:textColor="#000000"
                         android:gravity="center|left"
-                        android:textSize="20dp"
+                        android:textSize="14dp"
                         android:focusable="false"/>
 
 
@@ -258,7 +258,7 @@
                 </LinearLayout>
 
                 <Button
-                    android:id="@+id/btn_moreinfo"
+                    android:id="@+id/btn_call"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="5"

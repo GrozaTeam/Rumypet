@@ -6,4 +6,5 @@
     <color name="colorMainLight">#F9F9F1</color>
     <color name="colorMainDark">#F3F3E6</color>
     <color name="colorMainButton">#EBBC9E</color>
+    <color name="colorRed">#CC0000</color>
 </resources>
