@@ -38,9 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etId, etPw;
     private String id, pw;
     private TextView tvSignUp;
-
     private ProgressBar mProgressBar;
-
     private CompositeSubscription mSubscriptions;
     private SharedPreferences mSharedPreferences;
 
@@ -48,9 +46,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_login);
-
         bindingView();
-
         mSubscriptions = new CompositeSubscription();
         initSharedPreferences();
     }
@@ -83,10 +79,8 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString(Constants.TOKEN,response.getToken());
         editor.putString(Constants.EMAIL,response.getMessage());
         editor.apply();
-
         Intent intent = new Intent(getApplicationContext(), InformationDogListActivity.class);
         startActivity(intent);
-
         etId.setText(null);
         etPw.setText(null);
         finish();

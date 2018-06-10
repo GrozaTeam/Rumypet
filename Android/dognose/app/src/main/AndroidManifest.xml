@@ -37,13 +37,15 @@
         </activity>
 
         <activity android:name=".Main"/>
-        <activity android:name=".CameraActivity"/>
-        <activity android:name=".CameraActivity_for_find"/>
-        <activity android:name=".CameraActivity_for_body"/>
+        <activity android:name=".Camera.CameraActivity"/>
+        <activity android:name=".Camera.CameraActivity_for_find"/>
+        <activity android:name=".Camera.CameraActivity_for_body"/>
+        <activity android:name=".Camera.RecordActivity"/>
+
 
         <activity android:name=".InformationDogListActivity"/>
         <activity android:name=".RegisterActivity"/>
-        <activity android:name=".DBChecker"/>
+        <activity android:name=".InnerDB.DBChecker"/>
         <activity android:name=".LoginActivity"/>
         <activity android:name=".RegisterAdditionalDogActivity"/>
         <activity android:name=".InformationDogListDetail"/>
@@ -53,7 +55,6 @@
         <activity android:name=".FindDogProgressActivity"/>
         <activity android:name=".FindDogCandidateActivity"/>
         <activity android:name=".FindDogDetailActivity"/>
-        <activity android:name=".RecordActivity"/>
 
     </application>
 </manifest>

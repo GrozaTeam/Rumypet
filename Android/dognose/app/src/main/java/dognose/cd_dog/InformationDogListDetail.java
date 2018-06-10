@@ -1,13 +1,11 @@
 package dognose.cd_dog;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,12 +14,9 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,7 +46,7 @@ import static dognose.cd_dog.utils.ImageTransformation.Bitmap2InputStream;
 import static dognose.cd_dog.utils.ImageTransformation.getBytes;
 import static dognose.cd_dog.utils.ImageTransformation.rotateBitmap;
 
-/**
+/*
  * Created by paeng on 2018. 3. 26..
  */
 
@@ -64,8 +59,7 @@ public class InformationDogListDetail extends AppCompatActivity {
     private ImageView imageInf;
     private Button btnMoreInfo;
     private TextView tvName, tvSpecies, tvGender, tvBirth, tvAge;
-    private Uri inputImageUri;
-    private ProgressBar mprogressBar;
+    private ProgressBar mProgressBar;
     private String userId;
 
     @Override
@@ -93,7 +87,7 @@ public class InformationDogListDetail extends AppCompatActivity {
             switch (requestCode) {
 
                 case GALLERY_CODE:
-                    mprogressBar.setVisibility(View.VISIBLE);
+                    mProgressBar.setVisibility(View.VISIBLE);
                     verification_process(data.getData());
 
                     break;
@@ -145,9 +139,7 @@ public class InformationDogListDetail extends AppCompatActivity {
                         String result = responseBody.getResult();
                         String message = responseBody.getMessage();
                         String path = responseBody.getPath();
-
-                        mprogressBar.setVisibility(View.GONE);
-
+                        mProgressBar.setVisibility(View.GONE);
                         if(result.equals("true")){
                             Toast.makeText(InformationDogListDetail.this, "Verification Success!", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(InformationDogListDetail.this, InformationDogListDetailDetail.class);
@@ -314,7 +306,7 @@ public class InformationDogListDetail extends AppCompatActivity {
         tvAge = (TextView)findViewById(R.id.info_age);
         btnMoreInfo = (Button)findViewById(R.id.btn_moreinfo);
         imageInf = (ImageView)findViewById(R.id.image_info);
-        mprogressBar = (ProgressBar)findViewById(R.id.progress_bar);
+        mProgressBar = (ProgressBar)findViewById(R.id.progress_bar);
 
         btnBefore = (ImageButton)findViewById(R.id.btn_before);
         btnAfter = (ImageButton)findViewById(R.id.btn_after);

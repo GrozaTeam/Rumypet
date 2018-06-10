@@ -91,7 +91,8 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
     // For database
     private String dogName="", species="", gender="", birth="";
     private ImageView imgDog, imgDogNose1, imgDogNose2, imgDogNose3;
-    private String ownerId, ownerId_for_body, ownerName;
+    private String ownerId;
+    public String ownerName;
 
     private CompositeSubscription mSubscriptions;
 
@@ -341,15 +342,14 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
                     dialog.setCancelable(false);
                     dialog.setTitle("You need Dog's nose Image");
                     dialog.setMessage("For others to find your dog's owner, and for certification, we need your dog's nose image.\n" +
-                            "You have to take 3 pictures of your dog's nose. Please set your dog's nose in red circle.\n\n" +
-                            "Do you agree to take pictures?");
+                            "You have select 3 images of your dog's nose from your gallery. \n\n" +
+                            "Do you agree to select images?");
                     dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
                             new AlertDialog.Builder(RegisterAdditionalDogActivity.this)
                                     .setTitle("Select Way to Get Dog Nose Image")
                                     .setNeutralButton("Album(TEST)", albumMultipleListener)
-                                    .setPositiveButton("Take Photo", cameraListener)
                                     .setNegativeButton("Cancel", cancelListener)
                                     .show();
                         }
@@ -398,12 +398,6 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
         @Override
         public void onClick(DialogInterface dialog, int which) {
-            /*
-            Intent intentNosePhoto = new Intent(getApplicationContext(), CameraActivity_for_body.class);
-            String ownerId2 = ownerId + "|body|";
-            intentNosePhoto.putExtra("ownerId", ownerId2);
-            startActivityForResult(intentNosePhoto,1);
-            */
             Intent intentRecord = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
             intentRecord.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 5);
             startActivityForResult(intentRecord, RECORD_CODE);
