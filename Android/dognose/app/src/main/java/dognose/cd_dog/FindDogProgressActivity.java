@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -46,14 +47,27 @@ public class FindDogProgressActivity extends AppCompatActivity {
 
     private String[] imageNose;
     private Uri[] imageNoseUri;
+    private boolean errorUpload = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_find_dog_progress);
         bindingView();
+        if (errorUpload){
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    Toast.makeText(FindDogProgressActivity.this, "No Dog found, if this thing happen recursively,\nplease try again with uploading from the gallery.", Toast.LENGTH_LONG).show();
+                    finish();
+                }
+            }, 10000);
 
-        identification_process(imageNoseUri[0]);
+        }
+        else{
+            identification_process(imageNoseUri[0]);
+
+        }
     }
     private void identification_process(Uri imgUri){
 
@@ -142,9 +156,18 @@ public class FindDogProgressActivity extends AppCompatActivity {
         imageNoseUri = new Uri[3];
         Intent intent = getIntent();
         imageNose = intent.getStringArrayExtra("input_dog");
+        Log.d("testPaengFind", imageNose[0]);
+        if (imageNose[0].equals("content://video0")){
+            Log.d("testPaengFind", imageNose[0]+"hihi");
+            errorUpload = true;
 
-        for (int i=0;i<3;i++){
-            imageNoseUri[i] = Uri.parse(imageNose[i]);
+        }else{
+            for (int i=0;i<3;i++){
+                imageNoseUri[i] = Uri.parse(imageNose[i]);
+                errorUpload = false;
+            }
         }
+
+
     }
 }

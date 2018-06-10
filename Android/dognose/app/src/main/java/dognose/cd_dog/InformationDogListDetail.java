@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -29,6 +30,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import dognose.cd_dog.Camera.CameraActivity_for_body;
 import dognose.cd_dog.model.Dog;
 import dognose.cd_dog.network.ImageResponse;
 import dognose.cd_dog.network.RetrofitInterface;
@@ -53,6 +55,7 @@ import static dognose.cd_dog.utils.ImageTransformation.rotateBitmap;
 public class InformationDogListDetail extends AppCompatActivity {
 
     private static final int GALLERY_CODE=1112;
+    private static final int PHOTO_CODE=1111;
     private int position, dogNum;
     private ArrayList<Dog> dogArrayList;
     private ImageButton btnBefore, btnAfter;
@@ -89,6 +92,26 @@ public class InformationDogListDetail extends AppCompatActivity {
                 case GALLERY_CODE:
                     mProgressBar.setVisibility(View.VISIBLE);
                     verification_process(data.getData());
+
+                    break;
+                default:
+                    break;
+            }
+        }
+        else if(resultCode == RESULT_CANCELED){
+            switch (requestCode) {
+
+                case PHOTO_CODE:
+                    mProgressBar.setVisibility(View.VISIBLE);
+
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        public void run() {
+                            mProgressBar.setVisibility(View.GONE);
+                            Toast.makeText(InformationDogListDetail.this, "Invalid Image\nWe recommend you to upload dog's nose image from gallery", Toast.LENGTH_LONG).show();
+
+                        }
+                    }, 5000);
 
                     break;
 
@@ -223,14 +246,14 @@ public class InformationDogListDetail extends AppCompatActivity {
                     AlertDialog.Builder dialog = new AlertDialog.Builder(InformationDogListDetail.this);
                     dialog.setCancelable(false);
                     dialog.setTitle("You need Certification");
-                    dialog.setMessage("If you want to see the detail Information of this dog, You need certification of your dog by picuture of dog's nose.\n\nDo you want to see it?");
+                    dialog.setMessage("If you want to see the detail Information of this dog, You need certification of your dog by image of dog's nose.\n\nDo you want to see it?");
                     dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
                             new android.support.v7.app.AlertDialog.Builder(InformationDogListDetail.this)
                                     .setTitle("Select Upload Image")
                                     .setPositiveButton("Select Album", albumListener)
-                                    .setNegativeButton("Take Photo", cameraListener)
+                                    .setNegativeButton("Take Picture", cameraListener)
                                     .setNeutralButton("Cancel", cancelListener)
                                     .show();
 
@@ -257,12 +280,12 @@ public class InformationDogListDetail extends AppCompatActivity {
 
         @Override
         public void onClick(DialogInterface dialog, int which) {
-            /*
+
             Intent intentNosePhoto = new Intent(getApplicationContext(), CameraActivity_for_body.class);
-            String ownerId2 = ownerId + "|body|";
+            String ownerId2 = userId + "|body|";
             intentNosePhoto.putExtra("ownerId", ownerId2);
-            startActivityForResult(intentNosePhoto,1);
-            */
+            startActivityForResult(intentNosePhoto, PHOTO_CODE);
+
         }
     };
 

@@ -42,9 +42,9 @@ public class FindDogActivity extends AppCompatActivity {
                     break;
                 case RECORD_CODE:
                     String[] imageNoseRecorded = new String[3];
-                    imageNoseRecorded[0] = "content://media/external/images/media/41666";
-                    imageNoseRecorded[1] = "content://media/external/images/media/41665";
-                    imageNoseRecorded[2] = "content://media/external/images/media/41664";
+                    imageNoseRecorded[0] = "content://video0";
+                    imageNoseRecorded[1] = "content://video1";
+                    imageNoseRecorded[2] = "content://video2";
                     Intent intentRecord = new Intent(FindDogActivity.this, FindDogProgressActivity.class);
                     intentRecord.putExtra("input_dog", imageNoseRecorded);
                     startActivity(intentRecord);
@@ -124,9 +124,9 @@ public class FindDogActivity extends AppCompatActivity {
             public void onClick(View v) {
                 new android.support.v7.app.AlertDialog.Builder(FindDogActivity.this)
                         .setTitle("Select Upload Image")
-                        .setPositiveButton("Take Photo", cameraListener)
+                        .setPositiveButton("Take Video", cameraListener)
                         .setNegativeButton("Cancel", cancelListener)
-                        .setNeutralButton("Select Album(TEST)", albumListener)
+                        .setNeutralButton("Select Album", albumListener)
                         .show();
             }
         });

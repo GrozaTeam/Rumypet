@@ -165,7 +165,7 @@ public class CameraActivity_for_body extends AppCompatActivity{
             public void onClick(View v) {
                     button.setEnabled(false);
                 camera.takePicture(shutterCallback, rawCallback, jpegCallback);
-                if(count ==2){
+                if(count ==0){
                     Button bt = (Button)findViewById(R.id.btnCapture);
                     bt.setText("FINISH");
 
@@ -180,7 +180,7 @@ public class CameraActivity_for_body extends AppCompatActivity{
                 class splashhandler implements Runnable{
                     public void run()	{
                         button.setEnabled(true); // 클릭 유효화
-                        if (count == 3) {
+                        if (count == 1) {
                             Intent returnIntent = new Intent();
                             setResult(Activity.RESULT_CANCELED, returnIntent);
                             count = 0;

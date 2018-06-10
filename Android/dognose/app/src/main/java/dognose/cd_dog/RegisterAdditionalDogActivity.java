@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -28,6 +29,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -92,7 +94,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
     private String dogName="", species="", gender="", birth="";
     private ImageView imgDog, imgDogNose1, imgDogNose2, imgDogNose3;
     private String ownerId;
-    public String ownerName;
+    protected String ownerName;
 
     private CompositeSubscription mSubscriptions;
 
@@ -102,6 +104,8 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
     private int sequenceNose = 0;
     private String dogId = "";
     private boolean dogNoseUpload = false;
+
+    private ProgressBar pb1, pb2;
 
 
     @Override
@@ -130,6 +134,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
             switch (requestCode) {
 
                 case RECORD_CODE:
+                    /*
                     String[] imageNoseRecorded = new String[3];
                     imageNoseRecorded[0] = "content://media/external/images/media/41666";
                     imageNoseRecorded[1] = "content://media/external/images/media/41665";
@@ -137,6 +142,16 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
                     imageNoseUri1 = Uri.parse(imageNoseRecorded[0]);
                     imageNoseUri2 = Uri.parse(imageNoseRecorded[1]);
                     imageNoseUri3 = Uri.parse(imageNoseRecorded[2]);
+                    */
+                    pb2.setVisibility(View.VISIBLE);
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        public void run() {
+                            dogNoseUpload = false;
+                            Toast.makeText(RegisterAdditionalDogActivity.this, "Invalid Video\n\nWe recommend you to upload dog's nose from gallery", Toast.LENGTH_LONG).show();
+                            pb2.setVisibility(View.GONE);
+                        }
+                    }, 2000);
 
                     break;
 
@@ -146,6 +161,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
                     break;
 
                 case GALLERY_MULTIPLE_CODE:
+                    pb2.setVisibility(View.VISIBLE);
                     ClipData clipData = data.getClipData();
                     for (int i=0;i<3;i++){
                         if(i<clipData.getItemCount()){
@@ -168,6 +184,7 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
                         }
                     }
                     dogNoseUpload = true;
+                    pb2.setVisibility(View.GONE);
                     break;
 
                 default:
@@ -175,9 +192,6 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
             }
         }
     }
-
-
-
 
     private void uploadImage(Uri imgUri, int mode) {
 
@@ -279,7 +293,6 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
     }
 
-
     private String getRealPathFromURI(Uri contentUri) {
         int column_index=0;
         String[] proj = {MediaStore.Images.Media.DATA};
@@ -290,7 +303,6 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
         return cursor.getString(column_index);
     }
-
 
     Button.OnClickListener listener = new Button.OnClickListener() {
 
@@ -317,7 +329,6 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
                         }else{
                             uploadImage(imageUri, 1);
                         }
-
                         uploadImage(imageNoseUri1, 3);
                         uploadImage(imageNoseUri2, 3);
                         uploadImage(imageNoseUri3, 3);
@@ -337,19 +348,19 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
                     break;
 
                 case R.id.btn_photo_nose:
-                    // Toast.makeText(RegisterAdditionalDogActivity.this, "Coming Soon...", Toast.LENGTH_SHORT);
                     android.app.AlertDialog.Builder dialog = new android.app.AlertDialog.Builder(RegisterAdditionalDogActivity.this);
                     dialog.setCancelable(false);
                     dialog.setTitle("You need Dog's nose Image");
                     dialog.setMessage("For others to find your dog's owner, and for certification, we need your dog's nose image.\n" +
-                            "You have select 3 images of your dog's nose from your gallery. \n\n" +
-                            "Do you agree to select images?");
+                            "You have to take 5 seconds video of your dog's nose. Or select 3 noses from your gallery.\n\n" +
+                            "Do you agree to do this?");
                     dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
                             new AlertDialog.Builder(RegisterAdditionalDogActivity.this)
                                     .setTitle("Select Way to Get Dog Nose Image")
-                                    .setNeutralButton("Album(TEST)", albumMultipleListener)
+                                    .setNeutralButton("Select Album", albumMultipleListener)
+                                    .setPositiveButton("Take Video", cameraListener)
                                     .setNegativeButton("Cancel", cancelListener)
                                     .show();
                         }
@@ -582,6 +593,9 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
         textChangedListener(etDogName);
         tvBirth.setOnClickListener(listener);
 
+        pb1 = (ProgressBar) findViewById(R.id.pb_1);
+        pb2 = (ProgressBar) findViewById(R.id.pb_2);
+
         dogNoseUpload = false;
 
 
@@ -589,7 +603,5 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
 
 
     }
-
-
 
 }

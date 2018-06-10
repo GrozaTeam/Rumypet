@@ -53,7 +53,6 @@ public class InformationDogListActivity extends AppCompatActivity {
     private TextView tvOwnerId;
 
     // Dog list 들을 위한 ListView
-
     private ArrayList<Dog> dogArrayList;
     ListViewAdapter adapter;
     private ListView listViewDog;
@@ -76,7 +75,6 @@ public class InformationDogListActivity extends AppCompatActivity {
         initSharedPreferences();
         loadProfile();
         loadDogProfile();
-
     }
 
     @Override
@@ -84,12 +82,12 @@ public class InformationDogListActivity extends AppCompatActivity {
         super.onResume();
         loadDogProfile();
     }
-
     @Override
     protected void onDestroy(){
         super.onDestroy();
         mSubscriptions.unsubscribe();
     }
+
 
     private void initSharedPreferences() {
 
@@ -134,7 +132,6 @@ public class InformationDogListActivity extends AppCompatActivity {
 
                 //http://ec2-13-209-70-175.ap-northeast-2.compute.amazonaws.com:8080/api/v1/images/DLGFDFXE
                 String url = Constants.BASE_URL + "images/" + dogitem.getDogId();
-
 
                 dogArrayList.add(dogitem);
                 adapter.addItemDog(url, dogitem.getName(), dogitem.getSpecies(), dogitem.getGender(), getAge(dogitem.getBirth()));
@@ -185,6 +182,7 @@ public class InformationDogListActivity extends AppCompatActivity {
         listViewDog = (ListView)findViewById(R.id.lv_dog);
         btnAdd = (LinearLayout) findViewById(R.id.btn_add_dog);
         btnProfile = (LinearLayout) findViewById(R.id.btn_profile);
+
         btnAdd.setOnClickListener(listener);
         btnProfile.setOnClickListener(listener);
 
@@ -199,7 +197,6 @@ public class InformationDogListActivity extends AppCompatActivity {
                 intent.putExtra("dogNum", String.valueOf(dogNum));
                 intent.putExtra("userId", ownerId);
                 startActivity(intent);
-
 
             }
         });
@@ -217,6 +214,7 @@ public class InformationDogListActivity extends AppCompatActivity {
                     break;
 
                 case R.id.btn_profile:
+                    Log.d("dog number", String.valueOf(dogNum));
                     Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
                     startActivity(intent);
                     break;
