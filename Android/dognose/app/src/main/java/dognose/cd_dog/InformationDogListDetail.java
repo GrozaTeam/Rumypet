@@ -175,7 +175,7 @@ public class InformationDogListDetail extends AppCompatActivity {
 
                             intent.putExtra("userId", userId);
 
-                             startActivity(intent);
+                            startActivity(intent);
                         }else{
                             Toast.makeText(InformationDogListDetail.this, "Verification Failed!", Toast.LENGTH_SHORT).show();
 

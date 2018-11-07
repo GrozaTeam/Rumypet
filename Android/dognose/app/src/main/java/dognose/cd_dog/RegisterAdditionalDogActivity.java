@@ -597,11 +597,5 @@ public class RegisterAdditionalDogActivity extends AppCompatActivity {
         pb2 = (ProgressBar) findViewById(R.id.pb_2);
 
         dogNoseUpload = false;
-
-
-
-
-
     }
-
 }

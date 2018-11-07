@@ -7,8 +7,8 @@ exports.registerDog = (dogId, ownerId, dogName, dogGender, dogSpecies, dogBirth)
 		function(resolve,reject){
 
 	 	var newDog = new dog({
-      dogId: dogId,
-      ownerId: ownerId,
+      		dogId: dogId,
+      		ownerId: ownerId,
 			dogName: dogName,
 			dogGender: dogGender,
 			dogSpecies: dogSpecies,

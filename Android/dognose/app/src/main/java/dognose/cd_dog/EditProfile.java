@@ -140,7 +140,6 @@ public class EditProfile extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
                         startActivity(intent);
                         finish();
-                        finish();
                     }
 
                     break;
