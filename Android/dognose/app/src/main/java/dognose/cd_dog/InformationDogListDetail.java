@@ -163,6 +163,7 @@ public class InformationDogListDetail extends AppCompatActivity {
                         String message = responseBody.getMessage();
                         String path = responseBody.getPath();
                         mProgressBar.setVisibility(View.GONE);
+                        Log.d("TESTPAENG", result);
                         if(result.equals("true")){
                             Toast.makeText(InformationDogListDetail.this, "Verification Success!", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(InformationDogListDetail.this, InformationDogListDetailDetail.class);
