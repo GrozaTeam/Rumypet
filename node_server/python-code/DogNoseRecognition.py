@@ -137,6 +137,8 @@ if __name__ == "__main__":
     # Execution example)
     # python DogNoseRecognition inputImage.png dog3
 
+    print("ver:", sys.version)
+
     if len(sys.argv) == 1:
         path_input = "./public/images/data/dog6/1.png"
         path_data = "./public/images/data/dog3/*.png"
