@@ -15,7 +15,7 @@ app.set('views', path.join(__dirname, 'server/views/pages'));
 app.set('view engine', 'ejs');
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/node-login');
+mongoose.connect('mongodb://localhost:27017/rumypet');
 
 /*
 require('./server/routes/routes')(router);
