@@ -181,7 +181,7 @@
 
                         android:background="@android:color/background_light"
                         android:gravity="center_vertical|center"
-                        android:textSize="25sp" />
+                        android:textSize="20sp" />
 
                 </LinearLayout>
 
@@ -212,7 +212,7 @@
                         android:layout_weight="0.5"
                         android:background="@android:color/background_light"
                         android:gravity="center_vertical|center"
-                        android:textSize="25sp" />
+                        android:textSize="20sp" />
 
                     <Button
                         android:id="@+id/btn_check_phone"

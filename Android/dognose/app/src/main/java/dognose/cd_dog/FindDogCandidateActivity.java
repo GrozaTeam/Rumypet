@@ -68,7 +68,7 @@ public class FindDogCandidateActivity extends AppCompatActivity {
             public void run() {
                 loadDogProfile(dogId_split_2[0]);
             }
-        }, 1000);
+        }, 500);
         handler.postDelayed(new Runnable() {
             public void run() {
                 loadDogProfile(dogId_split_3[0]);
