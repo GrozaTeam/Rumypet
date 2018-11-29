@@ -256,7 +256,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:background="@drawable/img_dognose" />
+                                android:background="@drawable/bg_roundcorner_main_dark" />
 
 
                         </LinearLayout>
@@ -304,7 +304,8 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text="Register Photo"
-                        android:textSize="10dp"
+                        android:textStyle="bold"
+                        android:textSize="11dp"
                         android:background="@drawable/bg_roundcorner_main_dark" />
 
 
@@ -321,7 +322,8 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text="Register Nose"
-                        android:textSize="10dp"
+                        android:textStyle="bold"
+                        android:textSize="11dp"
                         android:background="@drawable/bg_roundcorner_main_dark" />
 
 

@@ -60,6 +60,8 @@ public class FindDogCandidateActivity extends AppCompatActivity {
         String[] dogId_split_2 = dogIds[1].split(":");
         String[] dogId_split_3 = dogIds[2].split(":");
 
+        Log.d("testResultFinal", dogId_split_1[0]+"//"+dogId_split_2[0]+"//"+dogId_split_3[0]);
+
 
         loadDogProfile(dogId_split_1[0]);
 
@@ -77,11 +79,10 @@ public class FindDogCandidateActivity extends AppCompatActivity {
 
         rank_dog = 1;
 
-
     }
 
 
-    private void loadDogProfile(String dogId){
+    private synchronized void loadDogProfile(String dogId){
 
         mSubscriptions.add(NetworkUtil.getRetrofit().getDogProfile(dogId)
                 .observeOn(AndroidSchedulers.mainThread())
