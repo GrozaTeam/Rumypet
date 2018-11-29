@@ -97,8 +97,6 @@ public class FindDogCandidateActivity extends AppCompatActivity {
         rank_dog++;
         listViewDog.setAdapter(adapter);
 
-
-
     }
 
     private void handleError(Throwable error) {
@@ -136,7 +134,6 @@ public class FindDogCandidateActivity extends AppCompatActivity {
     }
 
 
-
     private void bindingView(){
         listViewDog = (ListView)findViewById(R.id.list_view_dog);
         mSubscriptions = new CompositeSubscription();
@@ -155,10 +152,8 @@ public class FindDogCandidateActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
-
     }
+
     @Override
     protected void onDestroy(){
         super.onDestroy();
